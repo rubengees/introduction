@@ -1,4 +1,4 @@
-# Introduction
+# Introduction [ ![Download](https://api.bintray.com/packages/rubengees/maven/Introduction/images/download.svg) ](https://bintray.com/rubengees/maven/Introduction/_latestVersion)
 
 Show a beautiful Intro to your users with ease.
 
