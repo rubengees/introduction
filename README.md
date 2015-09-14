@@ -9,7 +9,9 @@ Show a beautiful Intro to your users with ease.
 Add this to your build.gradle:
 
 ```groovy
-compile 'com.rubengees:introduction:1.0@aar'
+dependencies {
+    compile 'com.rubengees:introduction:1.0@aar'
+}
 ```
 
 If that doesn't work, look if there is a new version and the Readme was not updated yet.
