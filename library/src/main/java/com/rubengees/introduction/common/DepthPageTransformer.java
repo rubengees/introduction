@@ -12,6 +12,8 @@
  *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
+ *
+ *   Taken from: <a href="http://developer.android.com/training/animation/screen-slide.html">Android Developers</a>
  */
 
 package com.rubengees.introduction.common;
@@ -21,7 +23,6 @@ import android.view.View;
 
 /**
  * An Animator for the ViewPager.
- * Taken from: <a href="http://developer.android.com/training/animation/screen-slide.html">Android Developers</a>
  *
  * @author Ruben Gees
  */
