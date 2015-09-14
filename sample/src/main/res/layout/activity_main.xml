@@ -60,5 +60,11 @@
             android:layout_height="wrap_content"
             android:onClick="OnRequestPermissionClick"
             android:text="Permission request" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="OnTextFromResourcesClick"
+            android:text="Text from resources" />
     </LinearLayout>
 </ScrollView>

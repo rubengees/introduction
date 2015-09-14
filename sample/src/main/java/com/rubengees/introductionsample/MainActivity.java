@@ -57,6 +57,22 @@ public class MainActivity extends AppCompatActivity {
         return result;
     }
 
+    private List<Slide> generateResourceSlides() {
+        List<Slide> result = new ArrayList<>();
+
+        result.add(new Slide().withTitleResource(R.string.slide_title).
+                withDescriptionResource(R.string.slide_description).withColorResource(R.color.green)
+                .withImageResource(R.drawable.image1));
+        result.add(new Slide().withTitleResource(R.string.slide_gif)
+                .withDescriptionResource(R.string.slide_gif_description)
+                .withColorResource(R.color.indigo).withImageResource(R.drawable.image3));
+        result.add(new Slide().withTitleResource(R.string.slide_option)
+                .withOption(new Option(R.string.slide_option_description, true))
+                .withColorResource(R.color.orange).withImageResource(R.drawable.image2));
+
+        return result;
+    }
+
     public void onDefaultClick(View view) {
         new IntroductionBuilder(this).withSlides(generateSlides()).introduceMyself();
     }
@@ -88,6 +104,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void onFullscreenClick(View view) {
         new IntroductionBuilder(this).withSlides(generateSlides())
+                .withStyle(IntroductionBuilder.STYLE_FULLSCREEN).introduceMyself();
+    }
+
+    public void OnTextFromResourcesClick(View view) {
+        new IntroductionBuilder(this).withSlides(generateResourceSlides())
                 .withStyle(IntroductionBuilder.STYLE_FULLSCREEN).introduceMyself();
     }
 

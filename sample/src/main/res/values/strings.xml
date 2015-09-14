@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">IntroductionSample</string>
+    <string name="slide_title">Title</string>
+    <string name="slide_description">Description</string>
+    <string name="slide_gif">Gif</string>
+    <string name="slide_gif_description">This is a Gif</string>
+    <string name="slide_option">Option</string>
+    <string name="slide_option_description">This is an option</string>
 </resources>
