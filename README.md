@@ -6,7 +6,7 @@ Show a beautiful Intro to your users with ease.
 
 ### Include in your Project
 
-Add this to your build.gradle.
+Add this to your build.gradle:
 
 ```groovy
 compile 'com.rubengees:introduction:1.0@aar'
