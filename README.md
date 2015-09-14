@@ -2,6 +2,8 @@
 
 Show a beautiful Intro to your users with ease.
 
+![](art/screenshot_gallery.png)
+
 ### Include in your Project
 
 TODO
