@@ -6,7 +6,20 @@ Show a beautiful Intro to your users with ease.
 
 ### Include in your Project
 
-TODO
+Add this to your build.gradle.
+
+```groovy
+compile 'com.rubengees:introduction:1.0@aar'
+```
+
+If that doesn't work, look if there is a new version and the Readme was not updated yet.
+If there is no new version and it still doesn't work, try to add this to your build.gradle:
+
+```groovy
+repositories {
+    maven { url  "http://dl.bintray.com/rubengees/maven" }
+}
+```
 
 ### Usage
 
