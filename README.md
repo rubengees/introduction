@@ -2,13 +2,13 @@
 
 Show a beautiful Intro to your users with ease.
 
-### Add to your Project
+### Include in your Project
 
 TODO
 
 ### Usage
 
-Create an `IntroductionBuilder` like the follwing:
+Create an `IntroductionBuilder` like the following:
 
 ```
 new IntroductionBuilder(this) //this is the Activity you want to start from.
@@ -89,7 +89,7 @@ This will add the GIF, which will be automatically played when the users navigat
 ##### Runtime Premissions
 
 Android Marshmallow introduced Runtime Permissions, which can be requested easily with this lib.
-To do that you can add a global listener like the following:
+To do that, you can add a global listener like the following:
 
 ```
 new IntroductionBuilder(this).withSlides(slides)
