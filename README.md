@@ -4,6 +4,157 @@ Show a beautiful Intro to your users with ease.
 
 ### Add to your Project
 
+TODO
+
 ### Usage
 
+Create an `IntroductionBuilder` like the follwing:
+
+```
+new IntroductionBuilder(this) //this is the Activity you want to start from.
+```
+
+Then add some Slides to your Introduction:
+
+```
+new IntroductionBuilder(this).withSlides(generateSlides())
+```
+
+```
+ private List<Slide> generateSlides() {
+      List<Slide> result = new ArrayList<>();
+
+       result.add(new Slide().withTitle("Some title").withDescription("Some description").
+               withColorResource(R.color.green).withImageResource(R.drawable.myImage));
+       result.add(new Slide().withTitle("Another title").withDescription("Another description")
+               .withColorResource(R.color.indigo).withImageResource(R.drawable.myImage2));
+
+       return result;
+    }
+```
+
+Finally introduce yourself!
+
+```
+new IntroductionBuilder(this).withSlides(generateSlides()).introduceMyself();
+```
+
+That was easy right?
+
+You can do many customizations, which will be covered by the following.
+
+##### Options
+
+You can let the user make decisions, which you can use like settings.
+To do that you add an Option to your slide:
+
+```
+new Slide().withTitle("Feature is doing something").withOption(new Option("Enable the feature"))
+          .withColorResource(R.color.orange).withImageResource(R.drawable.image));
+```
+
+When the user completes the intro, you will receive the selected Options in `onActivityResult`. 
+To read the result:
+
+```
+@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+     if (requestCode == IntroductionBuilder.INTRODUCTION_REQUEST_CODE &&
+            resultCode == RESULT_OK) {
+         String result = "User chose: ";
+
+         for (Option option : data.<Option>getParcelableArrayListExtra(IntroductionActivity.
+                 OPTION_RESULT)) {
+            result += option.getPosition() //The position of the Slide
+                       + (option.isActivated() ? " enabled" : " disabled");
+        }
+     }
+}
+```
+
+The constant value of the requst is 32142, so don't use that yourself.
+It is possible that the user cancels the intro. If that happens, the resultCode is `RESULT_CANCELLED` and no Options are passed back.
+
+##### Use Gifs as images
+
+This library supports GIFs. Just add them like normal drawables:
+
+```
+result.add(new Slide().withTitle("Some title").withDescription("Some description").
+               withColorResource(R.color.green).withImageResource(R.drawable.myGIF));
+```
+
+This will add the GIF, which will be automatically played when the users navigates to the Slide.
+
+##### Runtime Premissions
+
+Android Marshmallow introduced Runtime Permissions, which can be requested easily with this lib.
+To do that you can add a global listener like the following:
+
+```
+new IntroductionBuilder(this).withSlides(slides)
+                .withOnSlideChangedListener(new IntroductionConfiguration.OnSlideChangedListener() {
+                    @Override
+                    public void onSlideChanged(int from, int to) {
+                        if (from == 0 && to == 1) {
+                            if (ActivityCompat.checkSelfPermission(MainActivity.this,
+                                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                    != PackageManager.PERMISSION_GRANTED) {
+                                ActivityCompat.requestPermissions(MainActivity.this,
+                                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                        12);
+                            }
+                        }
+                    }
+                }).introduceMyself();
+```
+
+You can check if the permissions were granted like the following:
+
+```
+@Override
+public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                       @NonNull int[] grantResults) {
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+     if (requestCode == 12) {
+         if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this, "Permission was successfully granted!", Toast.LENGTH_LONG)
+                     .show();
+        }
+    }
+}
+```
+
+You can use that listener for different things too, of course!
+
+##### Styles
+
+There are two available styles: `Translucent` and `Fullscreen`.
+To apply one of those styles, do the following:
+
+```
+new IntroductionBuilder(this).withSlides(generateSlides())
+                .withStyle(IntroductionBuilder.STYLE_FULLSCREEN).introduceMyself();
+```
+
+`Translucent` is the default style.
+
+##### More
+
+A much more detailed explanation with all available APIs can be found in the [Wiki](https://github.com/RubenGees/Introduction/wiki).
+
 ### Libraries used in this project
+
+- [android-gif-drawable](https://github.com/koral--/android-gif-drawable) For the GIFs.
+- [SystemBarTint](https://github.com/jgilfelt/SystemBarTint) For the translucent style.
+
+### Acknowledgments
+
+The images in the samples are taken from the following webpages (I do not own any of the images, all rights are reserved to their respective owners):
+
+- [image1.jpg](https://www.flickr.com/photos/rbulmahn/6180104944/in/photolist-89W1PC-8Q713U-9BussZ-cwr9kY-9XzRzZ-83z8K5-84k3xS-adM5Y9-drdDdf-e1wXZE-6kzXBW-aq7DTw-98qbVd-83w6aa-6TYUqy-bttVPE-jPnPwv-83zc5G-9mgbHk-bmJtgf-c8f3yC-6T4zxf-83jUyV-9WRbGQ-6RrUxc-6oHoaj-7Z2YXE-oveaff-8rNmyh-f95MK4-8EFVd6-kiJrYR-9Y8USW-9qC58Z-o7ZmL9-ovdL7H-oMHywk-oMFMME-oMrEw4-oMHy8e-ovaLae-ovaL5K-ovaL2t-ovaKLZ-oMoBJr-89SKWD-89W1Bu-89SKwT-89SKwa-89W1kG)
+- [image2.jpg](https://www.flickr.com/photos/uncalno/8538679708/in/photolist-e1wXZE-6kzXBW-aq7DTw-98qbVd-83w6aa-6TYUqy-bttVPE-jPnPwv-83zc5G-9mgbHk-bmJtgf-c8f3yC-6T4zxf-83jUyV-9WRbGQ-6RrUxc-6oHoaj-7Z2YXE-oveaff-8rNmyh-f95MK4-8EFVd6-kiJrYR-9Y8USW-9qC58Z-o7ZmL9-ovdL7H-oMHywk-oMFMME-oMrEw4-oMHy8e-ovaLae-ovaL5K-ovaL2t-ovaKLZ-oMoBJr-89SKWD-89W1Bu-89SKwT-89SKwa-89W1kG-89W1kb-89W1jN-89W15E-89VZRs-89VZDb-9kUiFS-9957fA-ehs7zp-5yFrKB)
+- [image3.gif](http://www.modaco.com/forums/topic/344506-android-startshutdown-animation-for-i900/)
+
+Some images and ideas are from this Repo: [AppIntro by Paolo Rotolo](https://github.com/PaoloRotolo/AppIntro)
