@@ -157,7 +157,7 @@ public class IntroductionBuilder {
     }
 
     /**
-     * Applies a {@link android.support.v4.view.ViewPager.PageTransformer} to the Activity. You can
+     * Applies a PageTransformer to the Activity. You can
      * find some implementations in the commons package.
      *
      * @param pageTransformer The transformer.

@@ -5,7 +5,7 @@ import android.view.View;
 
 /**
  * An Animator for the ViewPager.
- * Taken from: <a href="Android Developers">http://developer.android.com/training/animation/screen-slide.html</a>
+ * Taken from: <a href="http://developer.android.com/training/animation/screen-slide.html">Android Developers</a>
  *
  * @author Ruben Gees
  */
