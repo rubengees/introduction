@@ -36,6 +36,4 @@ dependencies {
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.7'
 }
 
-apply from: 'https://raw.githubusercontent.com/ArthurHub/release-android-library/master/android-release-aar.gradle'
-
-
+apply from: 'release-arr.gradle'
