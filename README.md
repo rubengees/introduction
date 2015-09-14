@@ -12,17 +12,17 @@ TODO
 
 Create an `IntroductionBuilder` like the following:
 
-```
+```java
 new IntroductionBuilder(this) //this is the Activity you want to start from.
 ```
 
 Then add some Slides to your Introduction:
 
-```
+```java
 new IntroductionBuilder(this).withSlides(generateSlides())
 ```
 
-```
+```java
  private List<Slide> generateSlides() {
       List<Slide> result = new ArrayList<>();
 
@@ -37,7 +37,7 @@ new IntroductionBuilder(this).withSlides(generateSlides())
 
 Finally introduce yourself!
 
-```
+```java
 new IntroductionBuilder(this).withSlides(generateSlides()).introduceMyself();
 ```
 
@@ -50,7 +50,7 @@ You can do many customizations, which will be covered by the following.
 You can let the user make decisions, which you can use like settings.
 To do that you add an Option to your slide:
 
-```
+```java
 new Slide().withTitle("Feature is doing something").withOption(new Option("Enable the feature"))
           .withColorResource(R.color.orange).withImageResource(R.drawable.image));
 ```
@@ -58,7 +58,7 @@ new Slide().withTitle("Feature is doing something").withOption(new Option("Enabl
 When the user completes the intro, you will receive the selected Options in `onActivityResult`. 
 To read the result:
 
-```
+```java
 @Override
 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
      if (requestCode == IntroductionBuilder.INTRODUCTION_REQUEST_CODE &&
@@ -81,7 +81,7 @@ It is possible that the user cancels the intro. If that happens, the resultCode 
 
 This library supports GIFs. Just add them like normal drawables:
 
-```
+```java
 result.add(new Slide().withTitle("Some title").withDescription("Some description").
                withColorResource(R.color.green).withImageResource(R.drawable.myGIF));
 ```
@@ -93,7 +93,7 @@ This will add the GIF, which will be automatically played when the users navigat
 Android Marshmallow introduced Runtime Permissions, which can be requested easily with this lib.
 To do that, you can add a global listener like the following:
 
-```
+```java
 new IntroductionBuilder(this).withSlides(slides)
                 .withOnSlideChangedListener(new IntroductionConfiguration.OnSlideChangedListener() {
                     @Override
@@ -113,7 +113,7 @@ new IntroductionBuilder(this).withSlides(slides)
 
 You can check if the permissions were granted like the following:
 
-```
+```java
 @Override
 public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                        @NonNull int[] grantResults) {
@@ -135,7 +135,7 @@ You can use that listener for different things too, of course!
 There are two available styles: `Translucent` and `Fullscreen`.
 To apply one of those styles, do the following:
 
-```
+```java
 new IntroductionBuilder(this).withSlides(generateSlides())
                 .withStyle(IntroductionBuilder.STYLE_FULLSCREEN).introduceMyself();
 ```
