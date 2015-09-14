@@ -1,6 +1,6 @@
 # Introduction
 
-This library makes it easy to show an intro to your users, as seen in the Google Photos App.
+Show a beautiful Intro to your users with ease.
 
 ### Add to your Project
 
