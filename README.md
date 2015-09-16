@@ -10,7 +10,7 @@ Add this to your build.gradle:
 
 ```groovy
 dependencies {
-    compile 'com.rubengees:introduction:1.0@aar'
+    compile 'com.rubengees:introduction:1.0.1@aar'
 }
 ```
 
