@@ -1,6 +1,6 @@
-[![Android Gems](http://www.android-gems.com/badge/RubenGees/Introduction.svg?branch=master)](http://www.android-gems.com/lib/RubenGees/Introduction)
 
 # Introduction [ ![Download](https://api.bintray.com/packages/rubengees/maven/Introduction/images/download.svg) ](https://bintray.com/rubengees/maven/Introduction/_latestVersion) [![Licence](https://img.shields.io/badge/Licence-Apache--2.0-brightgreen.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+[![Android Gems](http://www.android-gems.com/badge/RubenGees/Introduction.svg?branch=master)](http://www.android-gems.com/lib/RubenGees/Introduction)
 
 Show a beautiful Intro to your users with ease.
 
