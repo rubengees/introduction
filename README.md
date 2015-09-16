@@ -1,4 +1,7 @@
+
 # Introduction [ ![Download](https://api.bintray.com/packages/rubengees/maven/Introduction/images/download.svg) ](https://bintray.com/rubengees/maven/Introduction/_latestVersion) [![Licence](https://img.shields.io/badge/Licence-Apache--2.0-brightgreen.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+[![Android Gems](http://www.android-gems.com/badge/RubenGees/Introduction.svg?branch=master)](http://www.android-gems.com/lib/RubenGees/Introduction)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Introduction-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/2498)
 
 Show a beautiful Intro to your users with ease.
 
@@ -10,7 +13,9 @@ Add this to your build.gradle:
 
 ```groovy
 dependencies {
-    compile 'com.rubengees:introduction:1.0.2@aar'
+    compile ('com.rubengees:introduction:1.0.2@aar'){
+        transitive = true;
+    }
 }
 ```
 
