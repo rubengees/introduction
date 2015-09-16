@@ -13,7 +13,9 @@ Add this to your build.gradle:
 
 ```groovy
 dependencies {
-    compile 'com.rubengees:introduction:1.0.2@aar'
+    compile ('com.rubengees:introduction:1.0.2@aar'){
+        transitive = true;
+    }
 }
 ```
 
