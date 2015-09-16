@@ -1,4 +1,4 @@
-# Introduction [ ![Download](https://api.bintray.com/packages/rubengees/maven/Introduction/images/download.svg) ](https://bintray.com/rubengees/maven/Introduction/_latestVersion)
+# Introduction [ ![Download](https://api.bintray.com/packages/rubengees/maven/Introduction/images/download.svg) ](https://bintray.com/rubengees/maven/Introduction/_latestVersion) [![Licence](https://img.shields.io/badge/Licence-Apache--2.0-brightgreen.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
 Show a beautiful Intro to your users with ease.
 
