@@ -42,9 +42,9 @@ new IntroductionBuilder(this).withSlides(generateSlides())
       List<Slide> result = new ArrayList<>();
 
        result.add(new Slide().withTitle("Some title").withDescription("Some description").
-               withColorResource(R.color.green).withImageResource(R.drawable.myImage));
+               withColorResource(R.color.green).withImage(R.drawable.myImage));
        result.add(new Slide().withTitle("Another title").withDescription("Another description")
-               .withColorResource(R.color.indigo).withImageResource(R.drawable.myImage2));
+               .withColorResource(R.color.indigo).withImage(R.drawable.myImage2));
 
        return result;
     }
@@ -67,7 +67,7 @@ To do that you add an Option to your slide:
 
 ```java
 new Slide().withTitle("Feature is doing something").withOption(new Option("Enable the feature"))
-          .withColorResource(R.color.orange).withImageResource(R.drawable.image));
+          .withColorResource(R.color.orange).withImage(R.drawable.image));
 ```
 
 When the user completes the intro, you will receive the selected Options in `onActivityResult`. 
