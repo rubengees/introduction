@@ -66,5 +66,11 @@
             android:layout_height="wrap_content"
             android:onClick="OnTextFromResourcesClick"
             android:text="Text from resources" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onLongStringsClick"
+            android:text="Long Strings" />
     </LinearLayout>
 </ScrollView>

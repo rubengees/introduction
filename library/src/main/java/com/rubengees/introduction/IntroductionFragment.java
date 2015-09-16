@@ -17,6 +17,7 @@
 package com.rubengees.introduction;
 
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -87,6 +88,7 @@ public class IntroductionFragment extends Fragment {
     private void initViews(LayoutInflater inflater) {
         if (slide.getTitle() != null) {
             title.setText(slide.getTitle());
+            title.setMaxLines(getLineCountForTitle());
         }
 
         if (slide.getDescription() == null && slide.getOption() != null) {
@@ -101,11 +103,13 @@ public class IntroductionFragment extends Fragment {
                 }
             });
             option.setSupportButtonTintList(ContextCompat.getColorStateList(getContext(), android.R.color.white));
+            option.setMaxLines(getLineCountForDescription());
             descriptionContainer.addView(option);
         } else if (slide.getDescription() != null) {
             TextView description = (TextView) inflater.inflate(R.layout.introduction_fragment_description, descriptionContainer, false);
 
             description.setText(slide.getDescription());
+            description.setMaxLines(getLineCountForDescription());
             descriptionContainer.addView(description);
         }
 
@@ -121,6 +125,16 @@ public class IntroductionFragment extends Fragment {
         title = (TextView) root.findViewById(R.id.introduction_fragment_title);
         image = (GifImageView) root.findViewById(R.id.introduction_fragment_image);
         descriptionContainer = (FrameLayout) root.findViewById(R.id.introduction_fragment_description_container);
+    }
+
+    private int getLineCountForTitle() {
+        return getActivity().getResources().getConfiguration().orientation ==
+                Configuration.ORIENTATION_LANDSCAPE ? 2 : 3;
+    }
+
+    private int getLineCountForDescription() {
+        return getActivity().getResources().getConfiguration().orientation ==
+                Configuration.ORIENTATION_LANDSCAPE ? 2 : 4;
     }
 
     public IntroductionActivity getIntroductionActivity() {

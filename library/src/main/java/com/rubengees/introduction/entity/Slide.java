@@ -90,6 +90,22 @@ public class Slide implements Parcelable {
      * @param titleResource The title resource.
      * @return The current instance.
      */
+    public Slide withTitle(@StringRes int titleResource) {
+        this.titleResource = titleResource;
+        this.title = null;
+
+        return this;
+    }
+
+    /**
+     * Sets the title resource for this Slide.
+     * If a title was given before, it will be overridden.
+     *
+     * @param titleResource The title resource.
+     * @return The current instance.
+     * @deprecated Use {@link #withTitle(int)} instead.
+     */
+    @Deprecated
     public Slide withTitleResource(@StringRes int titleResource) {
         this.titleResource = titleResource;
         this.title = null;
@@ -119,6 +135,23 @@ public class Slide implements Parcelable {
      * @param descriptionResource The description resource.
      * @return The current instance.
      */
+    public Slide withDescription(@StringRes int descriptionResource) {
+        this.descriptionResource = descriptionResource;
+        this.description = null;
+        this.option = null;
+
+        return this;
+    }
+
+    /**
+     * Sets the description resource of this slide.
+     * If a description was given before, it will be overridden.
+     *
+     * @param descriptionResource The description resource.
+     * @return The current instance.
+     * @deprecated Use {@link #withDescription(int)} instead.
+     */
+    @Deprecated
     public Slide withDescriptionResource(@StringRes int descriptionResource) {
         this.descriptionResource = descriptionResource;
         this.description = null;
@@ -133,6 +166,20 @@ public class Slide implements Parcelable {
      * @param imageResource The image resource.
      * @return The current instance.
      */
+    public Slide withImage(@Nullable @DrawableRes Integer imageResource) {
+        this.imageResource = imageResource;
+
+        return this;
+    }
+
+    /**
+     * Sets the image resource of this slide.
+     *
+     * @param imageResource The image resource.
+     * @return The current instance.
+     * @deprecated Use {@link #withImage(Integer)} instead.
+     */
+    @Deprecated
     public Slide withImageResource(@Nullable @DrawableRes Integer imageResource) {
         this.imageResource = imageResource;
 

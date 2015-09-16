@@ -64,11 +64,11 @@ public class MainActivity extends AppCompatActivity {
         List<Slide> result = new ArrayList<>();
 
         result.add(new Slide().withTitle("Title").withDescription("Description").
-                withColorResource(R.color.green).withImageResource(R.drawable.image1));
+                withColorResource(R.color.green).withImage(R.drawable.image1));
         result.add(new Slide().withTitle("Gif").withDescription("This is a Gif")
-                .withColorResource(R.color.indigo).withImageResource(R.drawable.image3));
+                .withColorResource(R.color.indigo).withImage(R.drawable.image3));
         result.add(new Slide().withTitle("Option").withOption(new Option("This is an option", true))
-                .withColorResource(R.color.orange).withImageResource(R.drawable.image2));
+                .withColorResource(R.color.orange).withImage(R.drawable.image2));
 
         return result;
     }
@@ -76,15 +76,27 @@ public class MainActivity extends AppCompatActivity {
     private List<Slide> generateResourceSlides() {
         List<Slide> result = new ArrayList<>();
 
-        result.add(new Slide().withTitleResource(R.string.slide_title).
-                withDescriptionResource(R.string.slide_description).withColorResource(R.color.green)
-                .withImageResource(R.drawable.image1));
-        result.add(new Slide().withTitleResource(R.string.slide_gif)
-                .withDescriptionResource(R.string.slide_gif_description)
-                .withColorResource(R.color.indigo).withImageResource(R.drawable.image3));
-        result.add(new Slide().withTitleResource(R.string.slide_option)
+        result.add(new Slide().withTitle(R.string.slide_title).
+                withDescription(R.string.slide_description).withColorResource(R.color.green)
+                .withImage(R.drawable.image1));
+        result.add(new Slide().withTitle(R.string.slide_gif)
+                .withDescription(R.string.slide_gif_description)
+                .withColorResource(R.color.indigo).withImage(R.drawable.image3));
+        result.add(new Slide().withTitle(R.string.slide_option)
                 .withOption(new Option(R.string.slide_option_description, true))
-                .withColorResource(R.color.orange).withImageResource(R.drawable.image2));
+                .withColorResource(R.color.orange).withImage(R.drawable.image2));
+
+        return result;
+    }
+
+    private List<Slide> generateLongStringsSlides() {
+        List<Slide> result = new ArrayList<>();
+
+        result.add(new Slide().withTitle("This is a veeeeeeeeeeeeeeeeeeeeeeeeeee" +
+                "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeery long title").
+                withDescription("This is an even looooooooooooooooooooooooooooooooooooooooooo" +
+                        "ooooooooooooooooooooooooooooooooooooooonger description")
+                .withColorResource(R.color.green).withImage(R.drawable.image1));
 
         return result;
     }
@@ -119,13 +131,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onFullscreenClick(View view) {
-        new IntroductionBuilder(this).withSlides(generateSlides())
-                .withStyle(IntroductionBuilder.STYLE_FULLSCREEN).introduceMyself();
+        new IntroductionBuilder(this).withSlides(generateSlides()).introduceMyself();
     }
 
     public void OnTextFromResourcesClick(View view) {
-        new IntroductionBuilder(this).withSlides(generateResourceSlides())
-                .withStyle(IntroductionBuilder.STYLE_FULLSCREEN).introduceMyself();
+        new IntroductionBuilder(this).withSlides(generateResourceSlides()).introduceMyself();
+    }
+
+    public void onLongStringsClick(View view) {
+        new IntroductionBuilder(this).withSlides(generateLongStringsSlides()).introduceMyself();
     }
 
     public void OnRequestPermissionClick(View view) {
