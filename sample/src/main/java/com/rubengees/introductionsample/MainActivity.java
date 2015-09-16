@@ -131,7 +131,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onFullscreenClick(View view) {
-        new IntroductionBuilder(this).withSlides(generateSlides()).introduceMyself();
+        new IntroductionBuilder(this).withSlides(generateSlides())
+                .withStyle(IntroductionBuilder.STYLE_FULLSCREEN).introduceMyself();
     }
 
     public void OnTextFromResourcesClick(View view) {

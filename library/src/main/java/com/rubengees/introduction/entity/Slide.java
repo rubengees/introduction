@@ -168,7 +168,7 @@ public class Slide implements Parcelable {
      * @param imageResource The image resource.
      * @return The current instance.
      */
-    public Slide withImage(@Nullable @DrawableRes Integer imageResource) {
+    public Slide withImage(@DrawableRes int imageResource) {
         this.imageResource = imageResource;
 
         return this;
@@ -179,11 +179,11 @@ public class Slide implements Parcelable {
      *
      * @param imageResource The image resource.
      * @return The current instance.
-     * @deprecated Use {@link #withImage(Integer)} instead.
+     * @deprecated Use {@link #withImage(int)} instead.
      */
     @SuppressWarnings("unused")
     @Deprecated
-    public Slide withImageResource(@Nullable @DrawableRes Integer imageResource) {
+    public Slide withImageResource(@DrawableRes int imageResource) {
         this.imageResource = imageResource;
 
         return this;
@@ -225,7 +225,7 @@ public class Slide implements Parcelable {
      * @param option The option.
      * @return The current instance.
      */
-    public Slide withOption(@NonNull Option option) {
+    public Slide withOption(@Nullable Option option) {
         this.option = option;
         this.description = null;
         this.descriptionResource = null;

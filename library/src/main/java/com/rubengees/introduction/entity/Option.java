@@ -62,20 +62,20 @@ public class Option implements Parcelable {
     }
 
     /**
-     * @param title The title as a resource
+     * @param titleResource The title as a resource
      */
-    public Option(@StringRes int title) {
-        this.titleResource = title;
+    public Option(@StringRes int titleResource) {
+        this.titleResource = titleResource;
         this.isActivated = false;
     }
 
     /**
-     * @param title       The title as a resource
+     * @param titleResource       The title as a resource
      * @param isActivated makes this option activated or not. If true is passed,
      *                    the checkbox will be checked.
      */
-    public Option(@StringRes int title, boolean isActivated) {
-        this.titleResource = title;
+    public Option(@StringRes int titleResource, boolean isActivated) {
+        this.titleResource = titleResource;
         this.isActivated = isActivated;
     }
 
