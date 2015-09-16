@@ -88,6 +88,7 @@ public class IntroductionBuilder {
      * @return The current instance.
      * @throws IllegalArgumentException If the provided int was not one of the available styles.
      */
+    @SuppressWarnings("unused")
     public IntroductionBuilder withStyle(@IntRange(from = 0, to = 1) int style) {
         if (style == 0 || style == 1) {
             this.style = style;

@@ -48,6 +48,7 @@ public class OrientationUtils {
      * Let the Activity handle the Orientation itself.
      * @param activity The Activity
      */
+    @SuppressWarnings("unused")
     public static void unlockOrientation(@NonNull Activity activity) {
         activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }

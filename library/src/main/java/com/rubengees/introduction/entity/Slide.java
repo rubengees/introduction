@@ -105,6 +105,7 @@ public class Slide implements Parcelable {
      * @return The current instance.
      * @deprecated Use {@link #withTitle(int)} instead.
      */
+    @SuppressWarnings("unused")
     @Deprecated
     public Slide withTitleResource(@StringRes int titleResource) {
         this.titleResource = titleResource;
@@ -151,6 +152,7 @@ public class Slide implements Parcelable {
      * @return The current instance.
      * @deprecated Use {@link #withDescription(int)} instead.
      */
+    @SuppressWarnings("unused")
     @Deprecated
     public Slide withDescriptionResource(@StringRes int descriptionResource) {
         this.descriptionResource = descriptionResource;
@@ -179,6 +181,7 @@ public class Slide implements Parcelable {
      * @return The current instance.
      * @deprecated Use {@link #withImage(Integer)} instead.
      */
+    @SuppressWarnings("unused")
     @Deprecated
     public Slide withImageResource(@Nullable @DrawableRes Integer imageResource) {
         this.imageResource = imageResource;
@@ -193,6 +196,7 @@ public class Slide implements Parcelable {
      * @param color The color.
      * @return The current instance.
      */
+    @SuppressWarnings("unused")
     public Slide withColor(@ColorInt int color) {
         this.color = color;
         this.colorResource = null;

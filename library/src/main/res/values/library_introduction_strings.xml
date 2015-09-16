@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?><!-- Support for AboutLibraries (https://github.com/mikepenz/AboutLibraries)-->
-<resources>
-    <string name="define_int_introduction" />
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="define_int_introduction" tools:ignore="UnusedResources" />
     <!-- Author section -->
-    <string name="library_introduction_author">Ruben Gees</string>
-    <string name="library_introduction_authorWebsite">https://github.com/RubenGees</string>
+    <string name="library_introduction_author" tools:ignore="UnusedResources">Ruben Gees</string>
+    <string name="library_introduction_authorWebsite" tools:ignore="UnusedResources">https://github.com/RubenGees</string>
     <!-- Library section -->
-    <string name="library_introduction_libraryName">Introduction</string>
-    <string name="library_introduction_libraryDescription">Introduce yourself to your users with ease.</string>
-    <string name="library_introduction_libraryWebsite">https://github.com/RubenGees/Introduction</string>
-    <string name="library_introduction_libraryVersion">1.0</string>
+    <string name="library_introduction_libraryName" tools:ignore="UnusedResources">Introduction</string>
+    <string name="library_introduction_libraryDescription" tools:ignore="UnusedResources">Introduce yourself to your users with ease.</string>
+    <string name="library_introduction_libraryWebsite" tools:ignore="UnusedResources">https://github.com/RubenGees/Introduction</string>
+    <string name="library_introduction_libraryVersion" tools:ignore="UnusedResources">1.0</string>
     <!-- OpenSource section -->
-    <string name="library_introduction_isOpenSource">true</string>
-    <string name="library_introduction_repositoryLink">https://github.com/RubenGees/Introduction</string>
+    <string name="library_introduction_isOpenSource" tools:ignore="UnusedResources">true</string>
+    <string name="library_introduction_repositoryLink" tools:ignore="UnusedResources">https://github.com/RubenGees/Introduction</string>
     <!-- ClassPath for autoDetect section -->
-    <string name="library_introduction_classPath">com.rubengees.introduction.IntroductionBuilder</string>
+    <string name="library_introduction_classPath" tools:ignore="UnusedResources">com.rubengees.introduction.IntroductionBuilder</string>
     <!-- License section -->
-    <string name="library_introduction_licenseId">apache_2_0</string>
+    <string name="library_introduction_licenseId" tools:ignore="UnusedResources">apache_2_0</string>
     <!-- Custom variables section -->
 </resources>

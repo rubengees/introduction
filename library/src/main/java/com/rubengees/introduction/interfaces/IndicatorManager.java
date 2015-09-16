@@ -39,11 +39,4 @@ public abstract class IndicatorManager implements ViewPagerProcessor {
      * @return The View, containing the indicator.
      */
     public abstract View init(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent, @IntRange(from = 0) int slideAmount);
-
-    /**
-     * Method which handles the selection of a new Slide.
-     * @param position The new position.
-     */
-    @Override
-    public abstract void select(int position);
 }
