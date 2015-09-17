@@ -1,6 +1,7 @@
 package com.rubengees.introduction.entity;
 
 import android.os.Parcel;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.ActivityInstrumentationTestCase2;
 
@@ -9,7 +10,6 @@ import com.rubengees.introduction.R;
 import com.rubengees.introduction.exception.ConfigurationException;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,6 +31,7 @@ public class OptionTest extends ActivityInstrumentationTestCase2<IntroductionAct
     @Before
     public void setUp() throws Exception {
         super.setUp();
+        injectInstrumentation(InstrumentationRegistry.getInstrumentation());
 
         this.option = new Option("Title", true);
     }
@@ -42,7 +43,7 @@ public class OptionTest extends ActivityInstrumentationTestCase2<IntroductionAct
 
     @Test
     public void testGetTitle() throws Exception {
-        Assert.assertEquals("Title", option.getTitle());
+        assertEquals("Title", option.getTitle());
     }
 
     @Test(expected = ConfigurationException.class)
@@ -54,13 +55,13 @@ public class OptionTest extends ActivityInstrumentationTestCase2<IntroductionAct
 
     @Test
     public void testIsActivated() throws Exception {
-        Assert.assertTrue(option.isActivated());
+        assertTrue(option.isActivated());
     }
 
     @Test
     public void testSetActivated() throws Exception {
         option.setActivated(false);
-        Assert.assertFalse(option.isActivated());
+        assertFalse(option.isActivated());
     }
 
     @Test(expected = ConfigurationException.class)
@@ -76,6 +77,16 @@ public class OptionTest extends ActivityInstrumentationTestCase2<IntroductionAct
         parcel.setDataPosition(0);
 
         Option createdFromParcel = Option.CREATOR.createFromParcel(parcel);
-        Assert.assertEquals(option, createdFromParcel);
+        assertEquals(option, createdFromParcel);
+    }
+
+    @Test
+    public void testInit() throws Exception {
+        option = new Option(R.string.library_introduction_author, true);
+
+        option.init(getActivity(), 3);
+
+        assertEquals("Ruben Gees", option.getTitle());
+        assertEquals(3, option.getPosition());
     }
 }

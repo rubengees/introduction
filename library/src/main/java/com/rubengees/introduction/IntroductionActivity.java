@@ -110,11 +110,20 @@ public class IntroductionActivity extends AppCompatActivity {
 
     private void getFieldsFromBundle() {
         Bundle bundle = getIntent().getExtras();
+
+        if (bundle == null) {
+            bundle = new Bundle();
+        }
+
         slides = bundle.getParcelableArrayList("introduction_slides");
-        style = bundle.getInt("introduction_style");
-        orientation = bundle.getInt("introduction_orientation");
-        showPreviousButton = bundle.getBoolean("introduction_show_previous_button");
-        showIndicator = bundle.getBoolean("introduction_show_indicator");
+        style = bundle.getInt("introduction_style", IntroductionBuilder.STYLE_TRANSLUCENT);
+        orientation = bundle.getInt("introduction_orientation", IntroductionBuilder.ORIENTATION_BOTH);
+        showPreviousButton = bundle.getBoolean("introduction_show_previous_button", true);
+        showIndicator = bundle.getBoolean("introduction_show_indicator", true);
+
+        if (slides == null) {
+            slides = new ArrayList<>();
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
