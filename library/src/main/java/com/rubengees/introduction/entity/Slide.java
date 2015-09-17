@@ -283,6 +283,42 @@ public class Slide implements Parcelable {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Slide slide = (Slide) o;
+
+        if (title != null ? !title.equals(slide.title) : slide.title != null) return false;
+        if (titleResource != null ? !titleResource.equals(slide.titleResource) : slide.titleResource != null)
+            return false;
+        if (description != null ? !description.equals(slide.description) : slide.description != null)
+            return false;
+        if (descriptionResource != null ? !descriptionResource.equals(slide.descriptionResource) : slide.descriptionResource != null)
+            return false;
+        if (imageResource != null ? !imageResource.equals(slide.imageResource) : slide.imageResource != null)
+            return false;
+        if (color != null ? !color.equals(slide.color) : slide.color != null) return false;
+        if (colorResource != null ? !colorResource.equals(slide.colorResource) : slide.colorResource != null)
+            return false;
+        return !(option != null ? !option.equals(slide.option) : slide.option != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = title != null ? title.hashCode() : 0;
+        result = 31 * result + (titleResource != null ? titleResource.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (descriptionResource != null ? descriptionResource.hashCode() : 0);
+        result = 31 * result + (imageResource != null ? imageResource.hashCode() : 0);
+        result = 31 * result + (color != null ? color.hashCode() : 0);
+        result = 31 * result + (colorResource != null ? colorResource.hashCode() : 0);
+        result = 31 * result + (option != null ? option.hashCode() : 0);
+        return result;
+    }
+
+    @Override
     public int describeContents() {
         return 0;
     }
