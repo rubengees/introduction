@@ -8,12 +8,10 @@
 	<string name="library_introduction_libraryName">Introduction</string>
 	<string name="library_introduction_libraryDescription">Show a beautiful Intro to your users with ease.</string>
 	<string name="library_introduction_libraryWebsite">https://github.com/RubenGees/Introduction</string>
-	<string name="library_introduction_libraryVersion">1.0.3</string>
+	<string name="library_introduction_libraryVersion">1.0.4</string>
 	<!-- OpenSource section -->
 	<string name="library_introduction_isOpenSource">true</string>
 	<string name="library_introduction_repositoryLink">https://github.com/RubenGees/Introduction</string>
-	<!-- ClassPath for autoDetect section -->
-	<string name="library_introduction_classPath">com.rubengees.introduction.IntroductionBuilder</string>
 	<!-- License section -->
 	<string name="library_introduction_licenseId">apache_2_0</string>
 	<!-- Custom variables section -->
