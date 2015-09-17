@@ -41,7 +41,7 @@ public class Option implements Parcelable {
     private String title;
     private Integer titleResource;
     private boolean isActivated;
-    private int position;
+    private Integer position;
 
     /**
      * @param title The title of this option.
@@ -83,10 +83,14 @@ public class Option implements Parcelable {
         this.title = in.readString();
         this.titleResource = (Integer) in.readValue(Integer.class.getClassLoader());
         this.isActivated = in.readByte() != 0;
-        this.position = in.readInt();
+        this.position = (Integer) in.readValue(Integer.class.getClassLoader());
     }
 
     public String getTitle() {
+        if (title == null && titleResource != null) {
+            throw new RuntimeException("You need to call init() first.");
+        }
+
         return title;
     }
 
@@ -99,6 +103,10 @@ public class Option implements Parcelable {
     }
 
     public int getPosition() {
+        if (position == null) {
+            throw new RuntimeException("You need to call init() first");
+        }
+
         return position;
     }
 
@@ -150,6 +158,6 @@ public class Option implements Parcelable {
         dest.writeString(this.title);
         dest.writeValue(this.titleResource);
         dest.writeByte(isActivated ? (byte) 1 : (byte) 0);
-        dest.writeInt(this.position);
+        dest.writeValue(this.position);
     }
 }

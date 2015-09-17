@@ -38,22 +38,23 @@ public class OptionTest extends ActivityInstrumentationTestCase2<IntroductionAct
 
     @Test
     public void testGetTitle() throws Exception {
-
+        Assert.assertEquals("Title", option.getTitle());
     }
 
     @Test
     public void testIsActivated() throws Exception {
-
+        Assert.assertTrue(option.isActivated());
     }
 
     @Test
     public void testSetActivated() throws Exception {
-
+        option.setActivated(false);
+        Assert.assertFalse(option.isActivated());
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void testGetPosition() throws Exception {
-
+        option.getPosition();
     }
 
     @Test
