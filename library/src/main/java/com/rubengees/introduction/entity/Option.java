@@ -102,6 +102,29 @@ public class Option implements Parcelable {
         return position;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Option option = (Option) o;
+
+        if (isActivated != option.isActivated) return false;
+        if (position != option.position) return false;
+        if (title != null ? !title.equals(option.title) : option.title != null) return false;
+        return !(titleResource != null ? !titleResource.equals(option.titleResource) : option.titleResource != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = title != null ? title.hashCode() : 0;
+        result = 31 * result + (titleResource != null ? titleResource.hashCode() : 0);
+        result = 31 * result + (isActivated ? 1 : 0);
+        result = 31 * result + position;
+        return result;
+    }
+
     /**
      * Creates and finds all the needed data. Don't call this Method yourself.
      *
