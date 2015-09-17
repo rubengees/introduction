@@ -23,6 +23,8 @@ import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 
+import com.rubengees.introduction.exception.ConfigurationException;
+
 /**
  * A bean which contains the data of an option.
  *
@@ -88,7 +90,7 @@ public class Option implements Parcelable {
 
     public String getTitle() {
         if (title == null && titleResource != null) {
-            throw new RuntimeException("You need to call init() first.");
+            throw new ConfigurationException();
         }
 
         return title;
@@ -104,7 +106,7 @@ public class Option implements Parcelable {
 
     public int getPosition() {
         if (position == null) {
-            throw new RuntimeException("You need to call init() first");
+            throw new ConfigurationException();
         }
 
         return position;

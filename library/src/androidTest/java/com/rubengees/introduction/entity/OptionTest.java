@@ -5,6 +5,8 @@ import android.support.test.runner.AndroidJUnit4;
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.rubengees.introduction.IntroductionActivity;
+import com.rubengees.introduction.R;
+import com.rubengees.introduction.exception.ConfigurationException;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -28,6 +30,8 @@ public class OptionTest extends ActivityInstrumentationTestCase2<IntroductionAct
 
     @Before
     public void setUp() throws Exception {
+        super.setUp();
+
         this.option = new Option("Title", true);
     }
 
@@ -41,6 +45,13 @@ public class OptionTest extends ActivityInstrumentationTestCase2<IntroductionAct
         Assert.assertEquals("Title", option.getTitle());
     }
 
+    @Test(expected = ConfigurationException.class)
+    public void testGetTitleResourceBeforeInit() throws Exception {
+        Option option = new Option(R.string.library_introduction_author, true);
+
+        option.getTitle();
+    }
+
     @Test
     public void testIsActivated() throws Exception {
         Assert.assertTrue(option.isActivated());
@@ -52,14 +63,9 @@ public class OptionTest extends ActivityInstrumentationTestCase2<IntroductionAct
         Assert.assertFalse(option.isActivated());
     }
 
-    @Test(expected = RuntimeException.class)
-    public void testGetPosition() throws Exception {
+    @Test(expected = ConfigurationException.class)
+    public void testGetPositionBeforeInit() throws Exception {
         option.getPosition();
-    }
-
-    @Test
-    public void testInit() throws Exception {
-
     }
 
     @Test
