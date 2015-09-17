@@ -1,4 +1,14 @@
 language: android
+
+jdk:
+  - oraclejdk8
+
+env:
+  global:
+    # Add this
+    - MALLOC_ARENA_MAX=2
+    - ADB_INSTALL_TIMEOUT=10
+
 android:
   components:
     # Uncomment the lines below if you want to
@@ -13,8 +23,6 @@ android:
     - android-23
 
     # Additional components
-    - extra-google-google_play_services
-    - extra-google-m2repository
     - extra-android-m2repository
     - addon-google_apis-google-23
 
