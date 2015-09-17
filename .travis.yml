@@ -20,7 +20,7 @@ android:
     # Latest artifacts in local repository
     - extra-android-m2repository
     # Specify at least one system image
-    - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
+    - sys-img-armeabi-v7a-android-23
 
 before_script:
   # Create and start emulator
