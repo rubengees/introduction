@@ -299,6 +299,7 @@ public class Slide implements Parcelable {
         if (imageResource != null ? !imageResource.equals(slide.imageResource) : slide.imageResource != null)
             return false;
         if (color != null ? !color.equals(slide.color) : slide.color != null) return false;
+        //noinspection SimplifiableIfStatement
         if (colorResource != null ? !colorResource.equals(slide.colorResource) : slide.colorResource != null)
             return false;
         return !(option != null ? !option.equals(slide.option) : slide.option != null);

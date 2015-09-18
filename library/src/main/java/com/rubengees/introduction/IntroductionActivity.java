@@ -30,6 +30,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.rubengees.introduction.adapter.PagerAdapter;
@@ -165,9 +166,11 @@ public class IntroductionActivity extends AppCompatActivity {
     private void handleTranslucency() {
         SystemBarTintManager tintManager = new SystemBarTintManager(this);
         config = tintManager.getConfig();
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) bottomBar.getLayoutParams();
+        params.height = params.height + config.getPixelInsetBottom();
+        bottomBar.setLayoutParams(params);
 
-        bottomBar.setY(bottomBar.getY() - config.getPixelInsetBottom());
-        bottomBar.setPadding(0, 0, config.getPixelInsetRight(), 0);
+        bottomBar.setPadding(0, -config.getPixelInsetBottom(), config.getPixelInsetRight(), 0);
     }
 
     private void initSlides() {

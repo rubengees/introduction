@@ -121,6 +121,7 @@ public class Option implements Parcelable {
 
         if (isActivated != option.isActivated) return false;
         if (position != option.position) return false;
+        //noinspection SimplifiableIfStatement
         if (title != null ? !title.equals(option.title) : option.title != null) return false;
         return !(titleResource != null ? !titleResource.equals(option.titleResource) : option.titleResource != null);
 

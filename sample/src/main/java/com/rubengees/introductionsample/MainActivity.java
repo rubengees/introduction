@@ -30,7 +30,6 @@ import com.rubengees.introduction.IntroductionActivity;
 import com.rubengees.introduction.IntroductionBuilder;
 import com.rubengees.introduction.IntroductionConfiguration;
 import com.rubengees.introduction.common.NumberIndicatorManager;
-import com.rubengees.introduction.common.ZoomOutPageTransformer;
 import com.rubengees.introduction.entity.Option;
 import com.rubengees.introduction.entity.Slide;
 
