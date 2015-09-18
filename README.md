@@ -166,6 +166,10 @@ new IntroductionBuilder(this).withSlides(generateSlides())
 
 A much more detailed explanation with all available APIs can be found in the [Wiki](https://github.com/RubenGees/Introduction/wiki).
 
+### Minimum Sdk
+
+The minimum required sdk is 10 (2.3.3 Gingerbread)
+
 ### Libraries used in this project
 
 - [android-gif-drawable](https://github.com/koral--/android-gif-drawable) For the GIFs.
