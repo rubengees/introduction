@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         result.add(new Slide().withTitle("Title").withDescription("Description").
                 withColorResource(R.color.green).withImage(R.drawable.image1));
         result.add(new Slide().withTitle("Gif").withDescription("This is a Gif")
-                .withColorResource(R.color.indigo).withImage(R.drawable.image3));
+                .withColorResource(R.color.indigo));
         result.add(new Slide().withTitle("Option").withOption(new Option("This is an option", true))
                 .withColorResource(R.color.orange).withImage(R.drawable.image2));
 
@@ -191,7 +191,9 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     protected void onSlideInit(Fragment context, int position, TextView title, ImageView image, TextView description) {
-                        Glide.with(context).load(R.drawable.image2).into(image);
+                        if (position == 2) {
+                            Glide.with(context).load(R.drawable.image3).into(image);
+                        }
                     }
                 }).introduceMyself();
     }
@@ -214,7 +216,6 @@ public class MainActivity extends AppCompatActivity {
                         if (position == 1) {
                             Glide.with(context).load(R.drawable.image3).into(image);
                         }
-
                     }
                 }).introduceMyself();
     }
