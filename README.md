@@ -29,7 +29,7 @@ repositories {
 }
 ```
 
-If you want to use asynchronous image laoding, introduced in the new version 1.0.0, than you will need [Glide](https://github.com/bumptech/glidehttps://github.com/bumptech/glide) or some other image loading library. If you want to use GIFs you will also need it.
+If you want to use asynchronous image laoding, introduced in the new version 1.1.0, than you will need [Glide](https://github.com/bumptech/glidehttps://github.com/bumptech/glide) or some other image loading library. If you want to use GIFs you will also need it.
 
 ### Usage
 
