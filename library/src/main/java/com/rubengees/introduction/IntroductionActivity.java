@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -30,7 +31,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.rubengees.introduction.adapter.PagerAdapter;
@@ -118,7 +121,8 @@ public class IntroductionActivity extends AppCompatActivity {
 
         slides = bundle.getParcelableArrayList("introduction_slides");
         style = bundle.getInt("introduction_style", IntroductionBuilder.STYLE_TRANSLUCENT);
-        orientation = bundle.getInt("introduction_orientation", IntroductionBuilder.ORIENTATION_BOTH);
+        orientation = bundle.getInt("introduction_orientation",
+                IntroductionBuilder.ORIENTATION_BOTH);
         showPreviousButton = bundle.getBoolean("introduction_show_previous_button", true);
         showIndicator = bundle.getBoolean("introduction_show_indicator", true);
 
@@ -166,7 +170,8 @@ public class IntroductionActivity extends AppCompatActivity {
     private void handleTranslucency() {
         SystemBarTintManager tintManager = new SystemBarTintManager(this);
         config = tintManager.getConfig();
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) bottomBar.getLayoutParams();
+        RelativeLayout.LayoutParams params =
+                (RelativeLayout.LayoutParams) bottomBar.getLayoutParams();
         params.height = params.height + config.getPixelInsetBottom();
         bottomBar.setLayoutParams(params);
 
@@ -230,6 +235,7 @@ public class IntroductionActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
                 if (position != previousPagerPosition) {
                     select(position);
+
                     IntroductionConfiguration.getInstance().
                             callOnSlideChanged(previousPagerPosition, position);
                     previousPagerPosition = position;

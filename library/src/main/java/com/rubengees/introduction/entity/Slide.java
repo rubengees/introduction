@@ -36,15 +36,7 @@ import android.support.v4.content.ContextCompat;
  */
 public class Slide implements Parcelable {
 
-    public static final Parcelable.Creator<Slide> CREATOR = new Parcelable.Creator<Slide>() {
-        public Slide createFromParcel(Parcel source) {
-            return new Slide(source);
-        }
-
-        public Slide[] newArray(int size) {
-            return new Slide[size];
-        }
-    };
+    private int position;
     private String title;
     private Integer titleResource;
     private String description;
@@ -56,17 +48,6 @@ public class Slide implements Parcelable {
 
     public Slide() {
 
-    }
-
-    protected Slide(Parcel in) {
-        this.title = in.readString();
-        this.titleResource = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.description = in.readString();
-        this.descriptionResource = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.imageResource = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.color = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.colorResource = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.option = in.readParcelable(Option.class.getClassLoader());
     }
 
     /**
@@ -233,6 +214,10 @@ public class Slide implements Parcelable {
         return this;
     }
 
+    public int getPosition() {
+        return position;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -260,6 +245,7 @@ public class Slide implements Parcelable {
      * @param position The position of this slide.
      */
     public void init(@NonNull Context context, @IntRange(from = 0) int position) {
+        this.position = position;
         Resources resources = context.getResources();
 
         if (titleResource != null) {
@@ -289,6 +275,7 @@ public class Slide implements Parcelable {
 
         Slide slide = (Slide) o;
 
+        if (position != slide.position) return false;
         if (title != null ? !title.equals(slide.title) : slide.title != null) return false;
         if (titleResource != null ? !titleResource.equals(slide.titleResource) : slide.titleResource != null)
             return false;
@@ -299,7 +286,6 @@ public class Slide implements Parcelable {
         if (imageResource != null ? !imageResource.equals(slide.imageResource) : slide.imageResource != null)
             return false;
         if (color != null ? !color.equals(slide.color) : slide.color != null) return false;
-        //noinspection SimplifiableIfStatement
         if (colorResource != null ? !colorResource.equals(slide.colorResource) : slide.colorResource != null)
             return false;
         return !(option != null ? !option.equals(slide.option) : slide.option != null);
@@ -308,7 +294,8 @@ public class Slide implements Parcelable {
 
     @Override
     public int hashCode() {
-        int result = title != null ? title.hashCode() : 0;
+        int result = position;
+        result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (titleResource != null ? titleResource.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (descriptionResource != null ? descriptionResource.hashCode() : 0);
@@ -319,6 +306,7 @@ public class Slide implements Parcelable {
         return result;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -326,6 +314,7 @@ public class Slide implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.position);
         dest.writeString(this.title);
         dest.writeValue(this.titleResource);
         dest.writeString(this.description);
@@ -335,4 +324,26 @@ public class Slide implements Parcelable {
         dest.writeValue(this.colorResource);
         dest.writeParcelable(this.option, 0);
     }
+
+    protected Slide(Parcel in) {
+        this.position = in.readInt();
+        this.title = in.readString();
+        this.titleResource = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.description = in.readString();
+        this.descriptionResource = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.imageResource = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.color = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.colorResource = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.option = in.readParcelable(Option.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<Slide> CREATOR = new Parcelable.Creator<Slide>() {
+        public Slide createFromParcel(Parcel source) {
+            return new Slide(source);
+        }
+
+        public Slide[] newArray(int size) {
+            return new Slide[size];
+        }
+    };
 }

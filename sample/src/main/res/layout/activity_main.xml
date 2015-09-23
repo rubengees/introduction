@@ -72,5 +72,17 @@
             android:layout_height="wrap_content"
             android:onClick="onLongStringsClick"
             android:text="Long Strings" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Asynchronous"
+            android:onClick="OnAsynchronousClick" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Many Slides"
+            android:onClick="onManySlidesClick" />
     </LinearLayout>
 </ScrollView>

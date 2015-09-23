@@ -16,7 +16,10 @@
 
 package com.rubengees.introduction;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.rubengees.introduction.interfaces.IndicatorManager;
 
@@ -29,7 +32,7 @@ import com.rubengees.introduction.interfaces.IndicatorManager;
 public class IntroductionConfiguration {
     private static IntroductionConfiguration INSTANCE;
 
-    private OnSlideChangedListener onSlideChangedListener;
+    private OnSlideListener onSlideListener;
     private ViewPager.PageTransformer pageTransformer;
     private IndicatorManager indicatorManager;
 
@@ -45,8 +48,8 @@ public class IntroductionConfiguration {
         return INSTANCE;
     }
 
-    void setOnSlideChangedListener(OnSlideChangedListener onSlideChangedListener) {
-        this.onSlideChangedListener = onSlideChangedListener;
+    void setOnSlideChangedListener(OnSlideListener onSlideChangedListener) {
+        this.onSlideListener = onSlideChangedListener;
     }
 
     ViewPager.PageTransformer getPageTransformer() {
@@ -66,20 +69,32 @@ public class IntroductionConfiguration {
     }
 
     void callOnSlideChanged(int from, int to) {
-        if (onSlideChangedListener != null) {
-            onSlideChangedListener.onSlideChanged(from, to);
+        if (onSlideListener != null) {
+            onSlideListener.onSlideChanged(from, to);
+        }
+    }
+
+    void callOnSlideInit(Fragment context, int position, TextView title, ImageView image, TextView description) {
+        if (onSlideListener != null) {
+            onSlideListener.onSlideInit(context, position, title, image, description);
         }
     }
 
     void clear() {
-        onSlideChangedListener = null;
+        onSlideListener = null;
         pageTransformer = null;
         indicatorManager = null;
 
         INSTANCE = null;
     }
 
-    public interface OnSlideChangedListener {
-        void onSlideChanged(int from, int to);
+    public static abstract class OnSlideListener {
+        protected void onSlideChanged(int from, int to) {
+
+        }
+
+        protected void onSlideInit(Fragment context, int position, TextView title, ImageView image, TextView description) {
+
+        }
     }
 }

@@ -160,13 +160,13 @@ public class IntroductionBuilder {
 
     /**
      * Assignes a
-     * {@link com.rubengees.introduction.IntroductionConfiguration.OnSlideChangedListener} to the
+     * {@link com.rubengees.introduction.IntroductionConfiguration.OnSlideListener} to the
      * Activity.
      *
      * @param onSlideChangedListener The listener.
      * @return The current instance.
      */
-    public IntroductionBuilder withOnSlideChangedListener(@NonNull IntroductionConfiguration.OnSlideChangedListener
+    public IntroductionBuilder withOnSlideListener(@NonNull IntroductionConfiguration.OnSlideListener
                                                                   onSlideChangedListener) {
         IntroductionConfiguration.getInstance().setOnSlideChangedListener(onSlideChangedListener);
 
