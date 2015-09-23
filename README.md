@@ -29,6 +29,8 @@ repositories {
 }
 ```
 
+If you want to use asynchronous image laoding, introduced in the new version 1.0.0, than you will need [Glide](https://github.com/bumptech/glidehttps://github.com/bumptech/glide) or some other image loading library. If you want to use GIFs you will also need it.
+
 ### Usage
 
 Create an `IntroductionBuilder` like the following:
@@ -100,11 +102,20 @@ It is possible that the user cancels the intro. If that happens, the resultCode 
 
 ##### Use Gifs as images
 
-This library supports GIFs. Just add them like normal drawables:
+This library supports GIFs. You need to load them asynchronously as the loading may take a while:
 
 ```java
-result.add(new Slide().withTitle("Some title").withDescription("Some description").
-               withColorResource(R.color.green).withImageResource(R.drawable.myGIF));
+new IntroductionBuilder(this).withSlides(slides)
+                .withOnSlideListener(new OnSlideListener() {
+                    @Override
+                    protected void onSlideInit(Fragment context, int position, TextView title,
+                                               ImageView image, TextView description) {
+                        if (position == 1) { //Assume we want to load the GIF at Slide 2 (index 1)
+                            Glide.with(context).load(R.drawable.image3).into(image);
+                        }
+
+                    }
+                }).introduceMyself();
 ```
 
 This will add the GIF, which will be automatically played when the users navigates to the Slide.
@@ -163,7 +174,7 @@ new IntroductionBuilder(this).withSlides(generateSlides())
 
 `Translucent` is the default style.
 
-##### More
+##### Further reading
 
 A much more detailed explanation with all available APIs can be found in the [Wiki](https://github.com/RubenGees/Introduction/wiki).
 
@@ -171,9 +182,15 @@ A much more detailed explanation with all available APIs can be found in the [Wi
 
 The minimum required sdk is 10 (2.3.3 Gingerbread)
 
+### Upgrade Guide
+
+#### 1.0.x to 1.1.0+
+
+- The 'OnSlideChangedListener' was renamed to 'OnSlideListener'. Just rename it and it's working again.
+- Asynchronous image loading is now available (and recomended!). See the 'Use GIFs as drawables' section for more info. It applies for all types of images. GIFs won't work without asynchronous loading from now on!
+
 ### Libraries used in this project
 
-- [android-gif-drawable](https://github.com/koral--/android-gif-drawable) For the GIFs.
 - [SystemBarTint](https://github.com/jgilfelt/SystemBarTint) For the translucent style.
 
 ### Acknowledgments
