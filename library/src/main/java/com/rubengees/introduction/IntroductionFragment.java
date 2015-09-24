@@ -52,7 +52,7 @@ public class IntroductionFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static IntroductionFragment newInstance(@NonNull Slide slide) {
+    public static IntroductionFragment newInstance(@NonNull final Slide slide) {
         IntroductionFragment fragment = new IntroductionFragment();
         Bundle args = new Bundle();
         args.putParcelable("introduction_slide", slide);
@@ -62,15 +62,15 @@ public class IntroductionFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         this.slide = getArguments().getParcelable("introduction_slide");
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                             final Bundle savedInstanceState) {
         createViews(inflater, container);
         initViews(inflater);
         handleTranslucency();
@@ -85,7 +85,7 @@ public class IntroductionFragment extends Fragment {
         }
     }
 
-    private void initViews(LayoutInflater inflater) {
+    private void initViews(final LayoutInflater inflater) {
         TextView description = null;
 
         if (slide.getTitle() != null) {
@@ -127,7 +127,7 @@ public class IntroductionFragment extends Fragment {
                 description);
     }
 
-    private void createViews(LayoutInflater inflater, ViewGroup container) {
+    private void createViews(final LayoutInflater inflater, final ViewGroup container) {
         root = inflater.inflate(R.layout.introduction_fragment, container, false);
         title = (TextView) root.findViewById(R.id.introduction_fragment_title);
         image = (ImageView) root.findViewById(R.id.introduction_fragment_image);

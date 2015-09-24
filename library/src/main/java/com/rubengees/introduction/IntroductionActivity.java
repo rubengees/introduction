@@ -75,7 +75,7 @@ public class IntroductionActivity extends AppCompatActivity {
     private int previousPagerPosition = 0;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         getFieldsFromBundle();
         applyStyle();
 
@@ -98,7 +98,7 @@ public class IntroductionActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
 
         outState.putInt("previous_pager_position", previousPagerPosition);
@@ -202,7 +202,7 @@ public class IntroductionActivity extends AppCompatActivity {
     private void initViews() {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 int currentIndex = pager.getCurrentItem();
 
                 if (currentIndex == slides.size() - 1) {
@@ -215,7 +215,7 @@ public class IntroductionActivity extends AppCompatActivity {
 
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 pager.setCurrentItem(pager.getCurrentItem() - 1, true);
             }
         });
@@ -223,13 +223,13 @@ public class IntroductionActivity extends AppCompatActivity {
         pager.setAdapter(new PagerAdapter(getSupportFragmentManager(), slides));
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset,
-                                       int positionOffsetPixels) {
+            public void onPageScrolled(final int position, final float positionOffset,
+                                       final int positionOffsetPixels) {
 
             }
 
             @Override
-            public void onPageSelected(int position) {
+            public void onPageSelected(final int position) {
                 if (position != previousPagerPosition) {
                     select(position);
 
@@ -240,7 +240,7 @@ public class IntroductionActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) {
+            public void onPageScrollStateChanged(final int state) {
 
             }
         });
@@ -250,7 +250,7 @@ public class IntroductionActivity extends AppCompatActivity {
         }
     }
 
-    private void select(int position) {
+    private void select(final int position) {
         if (indicatorManager != null) {
             indicatorManager.select(position);
         }
@@ -277,6 +277,7 @@ public class IntroductionActivity extends AppCompatActivity {
             if (slide.getOption() != null) {
                 options.add(slide.getOption());
             }
+
         }
 
         Intent result = new Intent();

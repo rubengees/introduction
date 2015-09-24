@@ -58,7 +58,7 @@ public class IntroductionBuilder {
      *
      * @param context The Activity.
      */
-    public IntroductionBuilder(@NonNull Activity context) {
+    public IntroductionBuilder(@NonNull final Activity context) {
         this.context = context;
         this.slides = new ArrayList<>();
     }
@@ -70,7 +70,7 @@ public class IntroductionBuilder {
      * @return The current instance.
      * @throws IllegalArgumentException If an empty list was passed.
      */
-    public IntroductionBuilder withSlides(@NonNull @Size(min = 1) List<Slide> slides) {
+    public IntroductionBuilder withSlides(@NonNull @Size(min = 1) final List<Slide> slides) {
         if (slides.size() < 1) {
             throw new IllegalArgumentException("You must add at least one slide.");
         }
@@ -89,7 +89,7 @@ public class IntroductionBuilder {
      * @throws IllegalArgumentException If the provided int was not one of the available styles.
      */
     @SuppressWarnings("unused")
-    public IntroductionBuilder withStyle(@IntRange(from = 0, to = 1) int style) {
+    public IntroductionBuilder withStyle(@IntRange(from = 0, to = 1) final int style) {
         if (style == 0 || style == 1) {
             this.style = style;
         } else {
@@ -106,7 +106,7 @@ public class IntroductionBuilder {
      * @param manager The IndicatorManager.
      * @return The current instance.
      */
-    public IntroductionBuilder withIndicatorManager(@NonNull IndicatorManager manager) {
+    public IntroductionBuilder withIndicatorManager(@NonNull final IndicatorManager manager) {
         IntroductionConfiguration.getInstance().setIndicatorManager(manager);
 
         return this;
@@ -120,7 +120,7 @@ public class IntroductionBuilder {
      * @param enabled True if the button should enabled, false otherwise.
      * @return The current instance.
      */
-    public IntroductionBuilder withPreviousButtonEnabled(boolean enabled) {
+    public IntroductionBuilder withPreviousButtonEnabled(final boolean enabled) {
         this.showPreviousButton = enabled;
 
         return this;
@@ -134,7 +134,7 @@ public class IntroductionBuilder {
      * @param enabled True if indicators should disabled.
      * @return The current instance.
      */
-    public IntroductionBuilder withIndicatorEnabled(boolean enabled) {
+    public IntroductionBuilder withIndicatorEnabled(final boolean enabled) {
         this.showIndicator = enabled;
 
         return this;
@@ -148,7 +148,7 @@ public class IntroductionBuilder {
      * @return The current instance.
      * @throws IllegalArgumentException If the passed int is not one of the available orientations.
      */
-    public IntroductionBuilder withForcedOrientation(@IntRange(from = 0, to = 2) int orientation) {
+    public IntroductionBuilder withForcedOrientation(@IntRange(from = 0, to = 2) final int orientation) {
         if (orientation < 0 || orientation > 2) {
             throw new IllegalArgumentException("You must specify one of the available orientations");
         } else {
@@ -166,7 +166,7 @@ public class IntroductionBuilder {
      * @param onSlideChangedListener The listener.
      * @return The current instance.
      */
-    public IntroductionBuilder withOnSlideListener(@NonNull IntroductionConfiguration.OnSlideListener
+    public IntroductionBuilder withOnSlideListener(@NonNull final IntroductionConfiguration.OnSlideListener
                                                                   onSlideChangedListener) {
         IntroductionConfiguration.getInstance().setOnSlideChangedListener(onSlideChangedListener);
 
@@ -180,7 +180,7 @@ public class IntroductionBuilder {
      * @param pageTransformer The transformer.
      * @return The current instance.
      */
-    public IntroductionBuilder withPageTransformer(@NonNull ViewPager.PageTransformer pageTransformer) {
+    public IntroductionBuilder withPageTransformer(@NonNull final ViewPager.PageTransformer pageTransformer) {
         IntroductionConfiguration.getInstance().setPageTransformer(pageTransformer);
 
         return this;
