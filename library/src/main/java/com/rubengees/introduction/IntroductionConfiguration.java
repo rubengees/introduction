@@ -48,7 +48,7 @@ public class IntroductionConfiguration {
         return INSTANCE;
     }
 
-    void setOnSlideChangedListener(OnSlideListener onSlideChangedListener) {
+    void setOnSlideChangedListener(final OnSlideListener onSlideChangedListener) {
         this.onSlideListener = onSlideChangedListener;
     }
 
@@ -64,17 +64,18 @@ public class IntroductionConfiguration {
         return indicatorManager;
     }
 
-    void setIndicatorManager(IndicatorManager indicatorManager) {
+    void setIndicatorManager(final IndicatorManager indicatorManager) {
         this.indicatorManager = indicatorManager;
     }
 
-    void callOnSlideChanged(int from, int to) {
+    void callOnSlideChanged(final int from, final int to) {
         if (onSlideListener != null) {
             onSlideListener.onSlideChanged(from, to);
         }
     }
 
-    void callOnSlideInit(Fragment context, int position, TextView title, ImageView image, TextView description) {
+    void callOnSlideInit(final Fragment context, final int position, final TextView title,
+                         final ImageView image, final TextView description) {
         if (onSlideListener != null) {
             onSlideListener.onSlideInit(context, position, title, image, description);
         }
@@ -93,7 +94,8 @@ public class IntroductionConfiguration {
 
         }
 
-        protected void onSlideInit(Fragment context, int position, TextView title, ImageView image, TextView description) {
+        protected void onSlideInit(final Fragment context, final int position, final TextView title,
+                                   final ImageView image, final TextView description) {
 
         }
     }
