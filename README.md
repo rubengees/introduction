@@ -127,7 +127,7 @@ To do that, you can add a global listener like the following:
 
 ```java
 new IntroductionBuilder(this).withSlides(slides)
-                .withOnSlideChangedListener(new IntroductionConfiguration.OnSlideChangedListener() {
+                .withOnSlideListener(new OnSlideListener() {
                     @Override
                     public void onSlideChanged(int from, int to) {
                         if (from == 0 && to == 1) {
