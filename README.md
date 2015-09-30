@@ -186,7 +186,7 @@ The minimum required sdk is 10 (2.3.3 Gingerbread)
 
 #### 1.1.0 to 1.1.1+
 
-- The 'OnSlideInit' in the `OnSlideListener` method now comes without the `Fragment context`. If you need a `Context`, call `image.getContext()`.
+- The 'OnSlideInit' method in the `OnSlideListener` now comes without the `Fragment context`. If you need a `Context`, call `image.getContext()`.
 - There is now a class for Styles instead of an Integer. If you apply no Style, you have to do nothing, if you use one, change it to the following e.g.: `.withStyle(new FullscreenStyle())`. 
 
 #### 1.0.x to 1.1.0+
