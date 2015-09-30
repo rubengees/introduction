@@ -26,6 +26,8 @@ import android.support.annotation.NonNull;
  */
 public class Utils {
 
+    private static final String CONFIG_ENABLE_TRANSLUCENT_DECOR = "config_enableTranslucentDecor";
+
     /**
      * Checks if translucency is available on the device.
      *
@@ -33,7 +35,7 @@ public class Utils {
      * @return True, if translucency is available.
      */
     public static boolean isTranslucencyAvailable(@NonNull Resources resources) {
-        int id = resources.getIdentifier("config_enableTranslucentDecor", "bool", "android");
+        int id = resources.getIdentifier(CONFIG_ENABLE_TRANSLUCENT_DECOR, "bool", "android");
 
         return id != 0 && resources.getBoolean(id);
     }

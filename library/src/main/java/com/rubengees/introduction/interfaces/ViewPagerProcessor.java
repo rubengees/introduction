@@ -16,6 +16,8 @@
 
 package com.rubengees.introduction.interfaces;
 
+import android.support.annotation.IntRange;
+
 /**
  * Interface for all classes, which handle Slide changes.
  *
@@ -28,6 +30,6 @@ public interface ViewPagerProcessor {
      *
      * @param position The position of the new Slide.
      */
-    void select(int position);
+    void select(@IntRange(from = 0) int position);
 
 }

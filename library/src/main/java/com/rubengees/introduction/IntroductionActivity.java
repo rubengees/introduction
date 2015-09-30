@@ -20,29 +20,34 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.rubengees.introduction.adapter.PagerAdapter;
 import com.rubengees.introduction.common.DotIndicatorManager;
 import com.rubengees.introduction.entity.Option;
 import com.rubengees.introduction.entity.Slide;
 import com.rubengees.introduction.interfaces.IndicatorManager;
+import com.rubengees.introduction.style.Style;
 import com.rubengees.introduction.util.ButtonManager;
 import com.rubengees.introduction.util.OrientationUtils;
-import com.rubengees.introduction.util.Utils;
 
 import java.util.ArrayList;
+
+import static com.rubengees.introduction.IntroductionBuilder.BUNDLE_ORIENTATION;
+import static com.rubengees.introduction.IntroductionBuilder.BUNDLE_SHOW_INDICATOR;
+import static com.rubengees.introduction.IntroductionBuilder.BUNDLE_SHOW_PREVIOUS_BUTTON;
+import static com.rubengees.introduction.IntroductionBuilder.BUNDLE_SLIDES;
+import static com.rubengees.introduction.IntroductionBuilder.BUNDLE_STYLE;
+import static com.rubengees.introduction.IntroductionBuilder.ORIENTATION_BOTH;
+import static com.rubengees.introduction.IntroductionBuilder.ORIENTATION_LANDSCAPE;
+import static com.rubengees.introduction.IntroductionBuilder.ORIENTATION_PORTRAIT;
 
 /**
  * Todo: Describe Class
@@ -52,15 +57,15 @@ import java.util.ArrayList;
 public class IntroductionActivity extends AppCompatActivity {
 
     public static final String OPTION_RESULT = "introduction_option_result";
+    public static final String STATE_PREVIOUS_PAGER_POSITION = "previous_pager_position";
 
     private ArrayList<Slide> slides;
-    private int style;
+    private Style style;
 
     private ViewPager pager;
     private ImageButton previous;
     private ImageButton next;
     private FrameLayout indicatorContainer;
-    private ViewGroup bottomBar;
 
     private IntroductionConfiguration configuration;
 
@@ -69,8 +74,8 @@ public class IntroductionActivity extends AppCompatActivity {
 
     private boolean showPreviousButton;
     private boolean showIndicator;
+
     private int orientation;
-    private SystemBarTintManager.SystemBarConfig config;
 
     private int previousPagerPosition = 0;
 
@@ -92,7 +97,7 @@ public class IntroductionActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             select(0);
         } else {
-            previousPagerPosition = savedInstanceState.getInt("previous_pager_position");
+            previousPagerPosition = savedInstanceState.getInt(STATE_PREVIOUS_PAGER_POSITION);
             select(previousPagerPosition);
         }
     }
@@ -101,12 +106,12 @@ public class IntroductionActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        outState.putInt("previous_pager_position", previousPagerPosition);
+        outState.putInt(STATE_PREVIOUS_PAGER_POSITION, previousPagerPosition);
     }
 
-    @Nullable
-    SystemBarTintManager.SystemBarConfig getSystemBarTintConfig() {
-        return config;
+    @NonNull
+    public Style getStyle() {
+        return style;
     }
 
     private void getFieldsFromBundle() {
@@ -116,12 +121,11 @@ public class IntroductionActivity extends AppCompatActivity {
             bundle = new Bundle();
         }
 
-        slides = bundle.getParcelableArrayList("introduction_slides");
-        style = bundle.getInt("introduction_style", IntroductionBuilder.STYLE_TRANSLUCENT);
-        orientation = bundle.getInt("introduction_orientation",
-                IntroductionBuilder.ORIENTATION_BOTH);
-        showPreviousButton = bundle.getBoolean("introduction_show_previous_button", true);
-        showIndicator = bundle.getBoolean("introduction_show_indicator", true);
+        slides = bundle.getParcelableArrayList(BUNDLE_SLIDES);
+        style = (Style) bundle.getSerializable(BUNDLE_STYLE);
+        orientation = bundle.getInt(BUNDLE_ORIENTATION, ORIENTATION_BOTH);
+        showPreviousButton = bundle.getBoolean(BUNDLE_SHOW_PREVIOUS_BUTTON, true);
+        showIndicator = bundle.getBoolean(BUNDLE_SHOW_INDICATOR, true);
 
         if (slides == null) {
             slides = new ArrayList<>();
@@ -130,49 +134,24 @@ public class IntroductionActivity extends AppCompatActivity {
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private void applyStyle() {
-        if (style == IntroductionBuilder.STYLE_FULLSCREEN) {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        } else if (style == IntroductionBuilder.STYLE_TRANSLUCENT) {
-            if (Utils.isTranslucencyAvailable(getResources())) {
-                Window w = getWindow();
+        style.applyStyle(this);
 
-                w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION,
-                        WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-                w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
-                        WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            }
-        }
-
-        if (orientation == IntroductionBuilder.ORIENTATION_PORTRAIT) {
+        if (orientation == ORIENTATION_PORTRAIT) {
             OrientationUtils.setOrientationPortrait(this);
-        } else if (orientation == IntroductionBuilder.ORIENTATION_LANDSCAPE) {
+        } else if (orientation == ORIENTATION_LANDSCAPE) {
             OrientationUtils.setOrientationLandscape(this);
         }
     }
 
     private void findViews() {
+        ViewGroup root = (ViewGroup) findViewById(R.id.introduction_activity_root);
         pager = (ViewPager) findViewById(R.id.introduction_activity_pager);
-        bottomBar = (ViewGroup) findViewById(R.id.introduction_activity_bottom_bar);
         previous = (ImageButton) findViewById(R.id.introduction_activity_button_previous);
         next = (ImageButton) findViewById(R.id.introduction_activity_button_next);
         indicatorContainer = (FrameLayout)
                 findViewById(R.id.introduction_activity_container_indicator);
 
-        if (style == IntroductionBuilder.STYLE_TRANSLUCENT) {
-            handleTranslucency();
-        }
-    }
-
-    private void handleTranslucency() {
-        SystemBarTintManager tintManager = new SystemBarTintManager(this);
-        config = tintManager.getConfig();
-        RelativeLayout.LayoutParams params =
-                (RelativeLayout.LayoutParams) bottomBar.getLayoutParams();
-        params.height = params.height + config.getPixelInsetBottom();
-        bottomBar.setLayoutParams(params);
-
-        bottomBar.setPadding(0, -config.getPixelInsetBottom(), config.getPixelInsetRight(), 0);
+        style.applyStyleOnActivityView(this, root);
     }
 
     private void initSlides() {

@@ -31,7 +31,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.rubengees.introduction.entity.Slide;
 
 
@@ -42,8 +41,9 @@ import com.rubengees.introduction.entity.Slide;
  */
 public class IntroductionFragment extends Fragment {
 
+    private static final String BUNDLE_SLIDE = "introduction_slide";
     private Slide slide;
-    private View root;
+    private ViewGroup root;
     private TextView title;
     private ImageView image;
     private FrameLayout descriptionContainer;
@@ -55,7 +55,7 @@ public class IntroductionFragment extends Fragment {
     public static IntroductionFragment newInstance(@NonNull Slide slide) {
         IntroductionFragment fragment = new IntroductionFragment();
         Bundle args = new Bundle();
-        args.putParcelable("introduction_slide", slide);
+        args.putParcelable(BUNDLE_SLIDE, slide);
 
         fragment.setArguments(args);
         return fragment;
@@ -65,7 +65,7 @@ public class IntroductionFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        this.slide = getArguments().getParcelable("introduction_slide");
+        this.slide = getArguments().getParcelable(BUNDLE_SLIDE);
     }
 
     @Override
@@ -73,20 +73,13 @@ public class IntroductionFragment extends Fragment {
                              Bundle savedInstanceState) {
         createViews(inflater, container);
         initViews(inflater);
-        handleTranslucency();
+        getIntroductionActivity().getStyle().applyStyleOnFragmentView(this, root);
 
         return root;
     }
 
-    private void handleTranslucency() {
-        SystemBarTintManager.SystemBarConfig config = getIntroductionActivity().getSystemBarTintConfig();
-        if (config != null) {
-            root.setPadding(0, config.getPixelInsetTop(false), config.getPixelInsetRight(), config.getPixelInsetBottom());
-        }
-    }
-
     private void initViews(LayoutInflater inflater) {
-        TextView description = null;
+        TextView description;
 
         if (slide.getTitle() != null) {
             title.setText(slide.getTitle());
@@ -94,7 +87,9 @@ public class IntroductionFragment extends Fragment {
         }
 
         if (slide.getDescription() == null && slide.getOption() != null) {
-            AppCompatCheckBox option = (AppCompatCheckBox) inflater.inflate(R.layout.introduction_fragment_option, descriptionContainer, false);
+            AppCompatCheckBox option =
+                    (AppCompatCheckBox) inflater.inflate(R.layout.introduction_fragment_option,
+                            descriptionContainer, false);
 
             option.setText(slide.getOption().getTitle());
             option.setChecked(slide.getOption().isActivated());
@@ -104,15 +99,20 @@ public class IntroductionFragment extends Fragment {
                     slide.getOption().setActivated(isChecked);
                 }
             });
-            option.setSupportButtonTintList(ContextCompat.getColorStateList(getContext(), android.R.color.white));
+            option.setSupportButtonTintList(ContextCompat.getColorStateList(getContext(),
+                    android.R.color.white));
             option.setMaxLines(getLineCountForDescription());
             descriptionContainer.addView(option);
 
             description = option;
-        } else if (slide.getDescription() != null) {
-            description = (TextView) inflater.inflate(R.layout.introduction_fragment_description, descriptionContainer, false);
+        } else {
+            description = (TextView) inflater.inflate(R.layout.introduction_fragment_description,
+                    descriptionContainer, false);
 
-            description.setText(slide.getDescription());
+            if (slide.getDescription() != null) {
+                description.setText(slide.getDescription());
+            }
+
             description.setMaxLines(getLineCountForDescription());
             descriptionContainer.addView(description);
         }
@@ -123,15 +123,16 @@ public class IntroductionFragment extends Fragment {
 
         root.setBackgroundColor(slide.getColor());
 
-        IntroductionConfiguration.getInstance().callOnSlideInit(this, slide.getPosition(), title, image,
+        IntroductionConfiguration.getInstance().callOnSlideInit(slide.getPosition(), title, image,
                 description);
     }
 
     private void createViews(LayoutInflater inflater, ViewGroup container) {
-        root = inflater.inflate(R.layout.introduction_fragment, container, false);
+        root = (ViewGroup) inflater.inflate(R.layout.introduction_fragment, container, false);
         title = (TextView) root.findViewById(R.id.introduction_fragment_title);
         image = (ImageView) root.findViewById(R.id.introduction_fragment_image);
-        descriptionContainer = (FrameLayout) root.findViewById(R.id.introduction_fragment_description_container);
+        descriptionContainer =
+                (FrameLayout) root.findViewById(R.id.introduction_fragment_description_container);
     }
 
     private int getLineCountForTitle() {
@@ -146,9 +147,5 @@ public class IntroductionFragment extends Fragment {
 
     public IntroductionActivity getIntroductionActivity() {
         return (IntroductionActivity) getActivity();
-    }
-
-    public interface OnInitListener {
-        void onInit(int position, TextView title, ImageView image, TextView description);
     }
 }

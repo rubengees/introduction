@@ -38,5 +38,7 @@ public abstract class IndicatorManager implements ViewPagerProcessor {
      * @param slideAmount The amount of slides
      * @return The View, containing the indicator.
      */
-    public abstract View init(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent, @IntRange(from = 0) int slideAmount);
+    @NonNull
+    public abstract View init(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent,
+                              @IntRange(from = 0) int slideAmount);
 }

@@ -41,7 +41,8 @@ public class ButtonManager implements ViewPagerProcessor {
      * @param showPreviousButton If the Button to navigate back should not be shown, pass false.
      * @param slideAmount        The amount of Slides.
      */
-    public ButtonManager(@NonNull ImageButton previous, @NonNull ImageButton next, boolean showPreviousButton, int slideAmount) {
+    public ButtonManager(@NonNull ImageButton previous, @NonNull ImageButton next,
+                         boolean showPreviousButton, int slideAmount) {
         this.previous = previous;
         this.next = next;
         this.showPreviousButton = showPreviousButton;

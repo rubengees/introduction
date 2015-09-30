@@ -19,13 +19,15 @@ package com.rubengees.introduction;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.IntRange;
+import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Size;
 import android.support.v4.view.ViewPager;
 
 import com.rubengees.introduction.entity.Slide;
 import com.rubengees.introduction.interfaces.IndicatorManager;
+import com.rubengees.introduction.style.Style;
+import com.rubengees.introduction.style.TranslucentStyle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,18 +41,23 @@ public class IntroductionBuilder {
 
     public static final int INTRODUCTION_REQUEST_CODE = 32142;
 
-    public static final int STYLE_FULLSCREEN = 0;
-    public static final int STYLE_TRANSLUCENT = 1;
-
     public static final int ORIENTATION_PORTRAIT = 0;
     public static final int ORIENTATION_LANDSCAPE = 1;
     public static final int ORIENTATION_BOTH = 2;
 
+    static final String BUNDLE_SLIDES = "introduction_slides";
+    static final String BUNDLE_STYLE = "introduction_style";
+    static final String BUNDLE_ORIENTATION = "introduction_orientation";
+    static final String BUNDLE_SHOW_PREVIOUS_BUTTON = "introduction_show_previous_button";
+    static final String BUNDLE_SHOW_INDICATOR = "introduction_show_indicator";
+
     private Activity context;
     private ArrayList<Slide> slides;
-    private Integer style;
+    private Style style;
     private Boolean showPreviousButton;
     private Boolean showIndicator;
+
+    @Orientation
     private Integer orientation;
 
     /**
@@ -70,6 +77,7 @@ public class IntroductionBuilder {
      * @return The current instance.
      * @throws IllegalArgumentException If an empty list was passed.
      */
+    @NonNull
     public IntroductionBuilder withSlides(@NonNull @Size(min = 1) List<Slide> slides) {
         if (slides.size() < 1) {
             throw new IllegalArgumentException("You must add at least one slide.");
@@ -88,13 +96,9 @@ public class IntroductionBuilder {
      * @return The current instance.
      * @throws IllegalArgumentException If the provided int was not one of the available styles.
      */
-    @SuppressWarnings("unused")
-    public IntroductionBuilder withStyle(@IntRange(from = 0, to = 1) int style) {
-        if (style == 0 || style == 1) {
-            this.style = style;
-        } else {
-            throw new IllegalArgumentException("You must specify one of the available styles.");
-        }
+    @NonNull
+    public IntroductionBuilder withStyle(@NonNull Style style) {
+        this.style = style;
 
         return this;
     }
@@ -106,6 +110,7 @@ public class IntroductionBuilder {
      * @param manager The IndicatorManager.
      * @return The current instance.
      */
+    @NonNull
     public IntroductionBuilder withIndicatorManager(@NonNull IndicatorManager manager) {
         IntroductionConfiguration.getInstance().setIndicatorManager(manager);
 
@@ -120,6 +125,7 @@ public class IntroductionBuilder {
      * @param enabled True if the button should enabled, false otherwise.
      * @return The current instance.
      */
+    @NonNull
     public IntroductionBuilder withPreviousButtonEnabled(boolean enabled) {
         this.showPreviousButton = enabled;
 
@@ -134,6 +140,7 @@ public class IntroductionBuilder {
      * @param enabled True if indicators should disabled.
      * @return The current instance.
      */
+    @NonNull
     public IntroductionBuilder withIndicatorEnabled(boolean enabled) {
         this.showIndicator = enabled;
 
@@ -148,12 +155,9 @@ public class IntroductionBuilder {
      * @return The current instance.
      * @throws IllegalArgumentException If the passed int is not one of the available orientations.
      */
-    public IntroductionBuilder withForcedOrientation(@IntRange(from = 0, to = 2) int orientation) {
-        if (orientation < 0 || orientation > 2) {
-            throw new IllegalArgumentException("You must specify one of the available orientations");
-        } else {
-            this.orientation = orientation;
-        }
+    @NonNull
+    public IntroductionBuilder withForcedOrientation(@Orientation int orientation) {
+        this.orientation = orientation;
 
         return this;
     }
@@ -166,8 +170,9 @@ public class IntroductionBuilder {
      * @param onSlideChangedListener The listener.
      * @return The current instance.
      */
+    @NonNull
     public IntroductionBuilder withOnSlideListener(@NonNull IntroductionConfiguration.OnSlideListener
-                                                                  onSlideChangedListener) {
+                                                           onSlideChangedListener) {
         IntroductionConfiguration.getInstance().setOnSlideChangedListener(onSlideChangedListener);
 
         return this;
@@ -180,7 +185,9 @@ public class IntroductionBuilder {
      * @param pageTransformer The transformer.
      * @return The current instance.
      */
-    public IntroductionBuilder withPageTransformer(@NonNull ViewPager.PageTransformer pageTransformer) {
+    @NonNull
+    public IntroductionBuilder withPageTransformer(@NonNull ViewPager.PageTransformer
+                                                           pageTransformer) {
         IntroductionConfiguration.getInstance().setPageTransformer(pageTransformer);
 
         return this;
@@ -188,7 +195,7 @@ public class IntroductionBuilder {
 
     private void check() {
         if (style == null) {
-            style = STYLE_TRANSLUCENT;
+            style = new TranslucentStyle();
         }
 
         if (orientation == null) {
@@ -213,13 +220,25 @@ public class IntroductionBuilder {
         Intent intent = new Intent(context, IntroductionActivity.class);
         Bundle bundle = new Bundle();
 
-        bundle.putParcelableArrayList("introduction_slides", slides);
-        bundle.putInt("introduction_style", style);
-        bundle.putInt("introduction_orientation", orientation);
-        bundle.putBoolean("introduction_show_previous_button", showPreviousButton);
-        bundle.putBoolean("introduction_show_indicator", showIndicator);
+        bundle.putParcelableArrayList(BUNDLE_SLIDES, slides);
+        bundle.putSerializable(BUNDLE_STYLE, style);
+        bundle.putInt(BUNDLE_ORIENTATION, orientation);
+        bundle.putBoolean(BUNDLE_SHOW_PREVIOUS_BUTTON, showPreviousButton);
+        bundle.putBoolean(BUNDLE_SHOW_INDICATOR, showIndicator);
 
         intent.putExtras(bundle);
+
+        Activity parent = context.getParent();
+
+        if (parent != null) {
+            context = parent;
+        }
+
         context.startActivityForResult(intent, INTRODUCTION_REQUEST_CODE);
+    }
+
+    @IntDef({ORIENTATION_PORTRAIT, ORIENTATION_LANDSCAPE, ORIENTATION_BOTH})
+    public @interface Orientation {
+
     }
 }

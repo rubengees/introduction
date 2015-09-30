@@ -22,7 +22,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,9 +32,9 @@ import com.bumptech.glide.Glide;
 import com.rubengees.introduction.IntroductionActivity;
 import com.rubengees.introduction.IntroductionBuilder;
 import com.rubengees.introduction.IntroductionConfiguration;
-import com.rubengees.introduction.common.NumberIndicatorManager;
 import com.rubengees.introduction.entity.Option;
 import com.rubengees.introduction.entity.Slide;
+import com.rubengees.introduction.style.FullscreenStyle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,10 +46,10 @@ public class MainActivity extends AppCompatActivity {
     private IntroductionConfiguration.OnSlideListener defaultOnSlideListener =
             new IntroductionConfiguration.OnSlideListener() {
                 @Override
-                protected void onSlideInit(Fragment context, int position, TextView title,
-                                           ImageView image, TextView description) {
+                protected void onSlideInit(int position, @NonNull TextView title,
+                                           @NonNull ImageView image, @NonNull TextView description) {
                     if (position % 3 == 1) {
-                        Glide.with(context).load(R.drawable.image3).into(image);
+                        Glide.with(image.getContext()).load(R.drawable.image3).into(image);
                     }
                 }
             };
@@ -63,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == IntroductionBuilder.INTRODUCTION_REQUEST_CODE &&
                 resultCode == RESULT_OK) {
             String result = "User chose: ";
@@ -155,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
     public void onFullscreenClick(View view) {
         new IntroductionBuilder(this).withSlides(generateSlides())
                 .withOnSlideListener(defaultOnSlideListener)
-                .withStyle(IntroductionBuilder.STYLE_FULLSCREEN).introduceMyself();
+                .withStyle(new FullscreenStyle()).introduceMyself();
     }
 
     public void OnTextFromResourcesClick(View view) {
@@ -190,9 +191,10 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    protected void onSlideInit(Fragment context, int position, TextView title, ImageView image, TextView description) {
+                    protected void onSlideInit(int position, @NonNull TextView title,
+                                               @NonNull ImageView image, @NonNull TextView description) {
                         if (position == 2) {
-                            Glide.with(context).load(R.drawable.image3).into(image);
+                            Glide.with(image.getContext()).load(R.drawable.image3).into(image);
                         }
                     }
                 }).introduceMyself();
@@ -211,10 +213,10 @@ public class MainActivity extends AppCompatActivity {
         new IntroductionBuilder(this).withSlides(slides)
                 .withOnSlideListener(new OnSlideListener() {
                     @Override
-                    protected void onSlideInit(Fragment context, int position, TextView title,
-                                               ImageView image, TextView description) {
+                    protected void onSlideInit(int position, @NonNull TextView title,
+                                               @NonNull ImageView image, @NonNull TextView description) {
                         if (position == 1) {
-                            Glide.with(context).load(R.drawable.image3).into(image);
+                            Glide.with(image.getContext()).load(R.drawable.image3).into(image);
                         }
                     }
                 }).introduceMyself();

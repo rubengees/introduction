@@ -72,9 +72,9 @@ public class Option implements Parcelable {
     }
 
     /**
-     * @param titleResource       The title as a resource
-     * @param isActivated makes this option activated or not. If true is passed,
-     *                    the checkbox will be checked.
+     * @param titleResource The title as a resource
+     * @param isActivated   makes this option activated or not. If true is passed,
+     *                      the checkbox will be checked.
      */
     public Option(@StringRes int titleResource, boolean isActivated) {
         this.titleResource = titleResource;
@@ -120,7 +120,7 @@ public class Option implements Parcelable {
         Option option = (Option) o;
 
         if (isActivated != option.isActivated) return false;
-        if (position != option.position) return false;
+        if (!(position.equals(option.position))) return false;
         //noinspection SimplifiableIfStatement
         if (title != null ? !title.equals(option.title) : option.title != null) return false;
         return !(titleResource != null ? !titleResource.equals(option.titleResource) : option.titleResource != null);

@@ -14,7 +14,7 @@
  *   limitations under the License.
  */
 
-package com.rubengees.introduction.common;
+package com.rubengees.introductionsample;
 
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -22,7 +22,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.rubengees.introduction.R;
 import com.rubengees.introduction.interfaces.IndicatorManager;
 
 /**
@@ -36,12 +35,13 @@ public class NumberIndicatorManager extends IndicatorManager {
     private int slideAmount;
     private TextView text;
 
+    @NonNull
     @Override
     public View init(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent,
                      int slideAmount) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.introduction_indicator_layout_number, parent,
-                false);
-        text = (TextView) root.findViewById(R.id.introduction_indicator_number_text);
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.indicator_layout_number,
+                parent, false);
+        text = (TextView) root.findViewById(R.id.indicator_number_text);
         this.slideAmount = slideAmount;
 
         return root;

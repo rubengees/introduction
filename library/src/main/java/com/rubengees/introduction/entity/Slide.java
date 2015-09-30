@@ -36,6 +36,15 @@ import android.support.v4.content.ContextCompat;
  */
 public class Slide implements Parcelable {
 
+    public static final Parcelable.Creator<Slide> CREATOR = new Parcelable.Creator<Slide>() {
+        public Slide createFromParcel(Parcel source) {
+            return new Slide(source);
+        }
+
+        public Slide[] newArray(int size) {
+            return new Slide[size];
+        }
+    };
     private int position;
     private String title;
     private Integer titleResource;
@@ -50,6 +59,18 @@ public class Slide implements Parcelable {
 
     }
 
+    protected Slide(Parcel in) {
+        this.position = in.readInt();
+        this.title = in.readString();
+        this.titleResource = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.description = in.readString();
+        this.descriptionResource = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.imageResource = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.color = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.colorResource = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.option = in.readParcelable(Option.class.getClassLoader());
+    }
+
     /**
      * Sets the title of this Slide.
      * If a title resource was given before, it will be overridden.
@@ -57,6 +78,7 @@ public class Slide implements Parcelable {
      * @param title The title.
      * @return The current instance.
      */
+    @NonNull
     public Slide withTitle(@Nullable String title) {
         this.title = title;
         this.titleResource = null;
@@ -71,6 +93,7 @@ public class Slide implements Parcelable {
      * @param titleResource The title resource.
      * @return The current instance.
      */
+    @NonNull
     public Slide withTitle(@StringRes int titleResource) {
         this.titleResource = titleResource;
         this.title = null;
@@ -88,6 +111,7 @@ public class Slide implements Parcelable {
      */
     @SuppressWarnings("unused")
     @Deprecated
+    @NonNull
     public Slide withTitleResource(@StringRes int titleResource) {
         this.titleResource = titleResource;
         this.title = null;
@@ -102,6 +126,7 @@ public class Slide implements Parcelable {
      * @param description The description.
      * @return The current instance.
      */
+    @NonNull
     public Slide withDescription(@Nullable String description) {
         this.description = description;
         this.descriptionResource = null;
@@ -117,6 +142,7 @@ public class Slide implements Parcelable {
      * @param descriptionResource The description resource.
      * @return The current instance.
      */
+    @NonNull
     public Slide withDescription(@StringRes int descriptionResource) {
         this.descriptionResource = descriptionResource;
         this.description = null;
@@ -135,6 +161,7 @@ public class Slide implements Parcelable {
      */
     @SuppressWarnings("unused")
     @Deprecated
+    @NonNull
     public Slide withDescriptionResource(@StringRes int descriptionResource) {
         this.descriptionResource = descriptionResource;
         this.description = null;
@@ -149,6 +176,7 @@ public class Slide implements Parcelable {
      * @param imageResource The image resource.
      * @return The current instance.
      */
+    @NonNull
     public Slide withImage(@DrawableRes int imageResource) {
         this.imageResource = imageResource;
 
@@ -164,6 +192,7 @@ public class Slide implements Parcelable {
      */
     @SuppressWarnings("unused")
     @Deprecated
+    @NonNull
     public Slide withImageResource(@DrawableRes int imageResource) {
         this.imageResource = imageResource;
 
@@ -178,6 +207,7 @@ public class Slide implements Parcelable {
      * @return The current instance.
      */
     @SuppressWarnings("unused")
+    @NonNull
     public Slide withColor(@ColorInt int color) {
         this.color = color;
         this.colorResource = null;
@@ -192,6 +222,7 @@ public class Slide implements Parcelable {
      * @param colorResource The color resource.
      * @return The current instance.
      */
+    @NonNull
     public Slide withColorResource(@ColorRes int colorResource) {
         this.colorResource = colorResource;
         this.color = null;
@@ -206,6 +237,7 @@ public class Slide implements Parcelable {
      * @param option The option.
      * @return The current instance.
      */
+    @NonNull
     public Slide withOption(@Nullable Option option) {
         this.option = option;
         this.description = null;
@@ -306,7 +338,6 @@ public class Slide implements Parcelable {
         return result;
     }
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -324,26 +355,4 @@ public class Slide implements Parcelable {
         dest.writeValue(this.colorResource);
         dest.writeParcelable(this.option, 0);
     }
-
-    protected Slide(Parcel in) {
-        this.position = in.readInt();
-        this.title = in.readString();
-        this.titleResource = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.description = in.readString();
-        this.descriptionResource = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.imageResource = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.color = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.colorResource = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.option = in.readParcelable(Option.class.getClassLoader());
-    }
-
-    public static final Parcelable.Creator<Slide> CREATOR = new Parcelable.Creator<Slide>() {
-        public Slide createFromParcel(Parcel source) {
-            return new Slide(source);
-        }
-
-        public Slide[] newArray(int size) {
-            return new Slide[size];
-        }
-    };
 }

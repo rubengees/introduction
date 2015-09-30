@@ -16,7 +16,9 @@
 
 package com.rubengees.introduction;
 
-import android.support.v4.app.Fragment;
+import android.support.annotation.IntRange;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,6 +42,7 @@ public class IntroductionConfiguration {
 
     }
 
+    @NonNull
     static IntroductionConfiguration getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new IntroductionConfiguration();
@@ -48,35 +51,39 @@ public class IntroductionConfiguration {
         return INSTANCE;
     }
 
-    void setOnSlideChangedListener(OnSlideListener onSlideChangedListener) {
+    void setOnSlideChangedListener(@Nullable OnSlideListener onSlideChangedListener) {
         this.onSlideListener = onSlideChangedListener;
     }
 
+    @Nullable
     ViewPager.PageTransformer getPageTransformer() {
         return pageTransformer;
     }
 
-    void setPageTransformer(ViewPager.PageTransformer pageTransformer) {
+    void setPageTransformer(@Nullable ViewPager.PageTransformer pageTransformer) {
         this.pageTransformer = pageTransformer;
     }
 
+    @Nullable
     IndicatorManager getIndicatorManager() {
         return indicatorManager;
     }
 
-    void setIndicatorManager(IndicatorManager indicatorManager) {
+    void setIndicatorManager(@Nullable IndicatorManager indicatorManager) {
         this.indicatorManager = indicatorManager;
     }
 
-    void callOnSlideChanged(int from, int to) {
+
+    void callOnSlideChanged(@IntRange(from = 0) int from, @IntRange(from = 0) int to) {
         if (onSlideListener != null) {
             onSlideListener.onSlideChanged(from, to);
         }
     }
 
-    void callOnSlideInit(Fragment context, int position, TextView title, ImageView image, TextView description) {
+    void callOnSlideInit(@IntRange(from = 0) int position, @NonNull TextView title,
+                         @NonNull ImageView image, @NonNull TextView description) {
         if (onSlideListener != null) {
-            onSlideListener.onSlideInit(context, position, title, image, description);
+            onSlideListener.onSlideInit(position, title, image, description);
         }
     }
 
@@ -93,7 +100,8 @@ public class IntroductionConfiguration {
 
         }
 
-        protected void onSlideInit(Fragment context, int position, TextView title, ImageView image, TextView description) {
+        protected void onSlideInit(int position, @NonNull TextView title, @NonNull ImageView image,
+                                   @NonNull TextView description) {
 
         }
     }

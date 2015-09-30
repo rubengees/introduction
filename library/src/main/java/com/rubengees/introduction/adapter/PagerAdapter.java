@@ -16,6 +16,7 @@
 
 package com.rubengees.introduction.adapter;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -43,6 +44,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override
+    @NonNull
     public Fragment getItem(int position) {
         return newInstance(slides.get(position));
     }
