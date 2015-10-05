@@ -32,6 +32,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rubengees.introduction.entity.Slide;
+import com.rubengees.introduction.style.Style;
 
 
 /**
@@ -73,7 +74,12 @@ public class IntroductionFragment extends Fragment {
                              Bundle savedInstanceState) {
         createViews(inflater, container);
         initViews(inflater);
-        getIntroductionActivity().getStyle().applyStyleOnFragmentView(this, root);
+
+        Style style = getIntroductionActivity().getStyle();
+
+        if (style != null) {
+            style.applyStyleOnFragmentView(this, root);
+        }
 
         return root;
     }

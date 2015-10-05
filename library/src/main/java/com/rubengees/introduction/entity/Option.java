@@ -120,10 +120,10 @@ public class Option implements Parcelable {
         Option option = (Option) o;
 
         if (isActivated != option.isActivated) return false;
-        if (!(position.equals(option.position))) return false;
-        //noinspection SimplifiableIfStatement
         if (title != null ? !title.equals(option.title) : option.title != null) return false;
-        return !(titleResource != null ? !titleResource.equals(option.titleResource) : option.titleResource != null);
+        if (titleResource != null ? !titleResource.equals(option.titleResource) : option.titleResource != null)
+            return false;
+        return !(position != null ? !position.equals(option.position) : option.position != null);
 
     }
 
@@ -132,7 +132,7 @@ public class Option implements Parcelable {
         int result = title != null ? title.hashCode() : 0;
         result = 31 * result + (titleResource != null ? titleResource.hashCode() : 0);
         result = 31 * result + (isActivated ? 1 : 0);
-        result = 31 * result + position;
+        result = 31 * result + (position != null ? position.hashCode() : 0);
         return result;
     }
 

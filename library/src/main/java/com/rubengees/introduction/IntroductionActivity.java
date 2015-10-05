@@ -110,7 +110,7 @@ public class IntroductionActivity extends AppCompatActivity {
     }
 
     @NonNull
-    public Style getStyle() {
+    Style getStyle() {
         return style;
     }
 
@@ -134,12 +134,14 @@ public class IntroductionActivity extends AppCompatActivity {
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private void applyStyle() {
-        style.applyStyle(this);
+        if (style != null) {
+            style.applyStyle(this);
 
-        if (orientation == ORIENTATION_PORTRAIT) {
-            OrientationUtils.setOrientationPortrait(this);
-        } else if (orientation == ORIENTATION_LANDSCAPE) {
-            OrientationUtils.setOrientationLandscape(this);
+            if (orientation == ORIENTATION_PORTRAIT) {
+                OrientationUtils.setOrientationPortrait(this);
+            } else if (orientation == ORIENTATION_LANDSCAPE) {
+                OrientationUtils.setOrientationLandscape(this);
+            }
         }
     }
 
@@ -151,7 +153,9 @@ public class IntroductionActivity extends AppCompatActivity {
         indicatorContainer = (FrameLayout)
                 findViewById(R.id.introduction_activity_container_indicator);
 
-        style.applyStyleOnActivityView(this, root);
+        if (style != null) {
+            style.applyStyleOnActivityView(this, root);
+        }
     }
 
     private void initSlides() {
