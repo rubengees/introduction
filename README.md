@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {
-    compile ('com.github.RubenGees:Introduction:1.1.2'){
+    compile ('com.github.rubengees:introduction:1.1.2'){
         transitive = true;
     }
 }
