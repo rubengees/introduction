@@ -1,10 +1,7 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
 
-ext {
-    PUBLISH_GROUP_ID = 'com.rubengees'
-    PUBLISH_ARTIFACT_ID = 'introduction'
-    PUBLISH_VERSION = '1.1.1'
-}
+group = 'com.rubengees'
 
 android {
     compileSdkVersion 23
@@ -38,5 +35,3 @@ dependencies {
     androidTestCompile 'com.android.support.test:runner:0.4'
     androidTestCompile 'com.android.support.test:rules:0.4'
 }
-
-apply from: 'release-arr.gradle'
