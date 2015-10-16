@@ -31,7 +31,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="?attr/selectableItemBackground"
                 android:src="@drawable/introduction_ic_arrow_previous"
                 android:visibility="invisible" />
 
@@ -54,7 +53,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/introduction_ic_arrow_next"
                 android:visibility="invisible" />
         </FrameLayout>
