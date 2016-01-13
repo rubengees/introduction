@@ -26,6 +26,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
@@ -43,6 +44,7 @@ import java.util.ArrayList;
 import static com.rubengees.introduction.IntroductionBuilder.BUNDLE_ORIENTATION;
 import static com.rubengees.introduction.IntroductionBuilder.BUNDLE_SHOW_INDICATOR;
 import static com.rubengees.introduction.IntroductionBuilder.BUNDLE_SHOW_PREVIOUS_BUTTON;
+import static com.rubengees.introduction.IntroductionBuilder.BUNDLE_SKIP_TEXT;
 import static com.rubengees.introduction.IntroductionBuilder.BUNDLE_SLIDES;
 import static com.rubengees.introduction.IntroductionBuilder.BUNDLE_STYLE;
 import static com.rubengees.introduction.IntroductionBuilder.ORIENTATION_BOTH;
@@ -66,6 +68,7 @@ public class IntroductionActivity extends AppCompatActivity {
     private ImageButton previous;
     private ImageButton next;
     private FrameLayout indicatorContainer;
+    private Button skip;
 
     private IntroductionConfiguration configuration;
 
@@ -74,6 +77,7 @@ public class IntroductionActivity extends AppCompatActivity {
 
     private boolean showPreviousButton;
     private boolean showIndicator;
+    private String skipText;
 
     private int orientation;
 
@@ -126,6 +130,7 @@ public class IntroductionActivity extends AppCompatActivity {
         orientation = bundle.getInt(BUNDLE_ORIENTATION, ORIENTATION_BOTH);
         showPreviousButton = bundle.getBoolean(BUNDLE_SHOW_PREVIOUS_BUTTON, true);
         showIndicator = bundle.getBoolean(BUNDLE_SHOW_INDICATOR, true);
+        skipText = bundle.getString(BUNDLE_SKIP_TEXT);
 
         if (slides == null) {
             slides = new ArrayList<>();
@@ -152,6 +157,7 @@ public class IntroductionActivity extends AppCompatActivity {
         next = (ImageButton) findViewById(R.id.introduction_activity_button_next);
         indicatorContainer = (FrameLayout)
                 findViewById(R.id.introduction_activity_container_indicator);
+        skip = (Button) findViewById(R.id.introduction_activity_skip);
 
         if (style != null) {
             style.applyStyleOnActivityView(this, root);
@@ -230,6 +236,19 @@ public class IntroductionActivity extends AppCompatActivity {
 
         if (configuration.getPageTransformer() != null) {
             pager.setPageTransformer(true, configuration.getPageTransformer());
+        }
+
+        if (skipText == null) {
+            skip.setVisibility(View.GONE);
+        } else {
+            skip.setText(skipText);
+
+            skip.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    handleFinish();
+                }
+            });
         }
     }
 

@@ -76,13 +76,19 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Asynchronous"
-            android:onClick="OnAsynchronousClick" />
+            android:onClick="OnAsynchronousClick"
+            android:text="Asynchronous" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Many Slides"
-            android:onClick="onManySlidesClick" />
+            android:onClick="onManySlidesClick"
+            android:text="Many Slides" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onSkipClick"
+            android:text="Skip" />
     </LinearLayout>
 </ScrollView>

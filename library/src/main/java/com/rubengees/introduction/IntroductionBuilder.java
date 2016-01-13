@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Size;
+import android.support.annotation.StringRes;
 import android.support.v4.view.ViewPager;
 
 import com.rubengees.introduction.entity.Slide;
@@ -50,12 +51,14 @@ public class IntroductionBuilder {
     static final String BUNDLE_ORIENTATION = "introduction_orientation";
     static final String BUNDLE_SHOW_PREVIOUS_BUTTON = "introduction_show_previous_button";
     static final String BUNDLE_SHOW_INDICATOR = "introduction_show_indicator";
+    static final String BUNDLE_SKIP_TEXT = "introduction_skip_text";
 
     private Activity context;
     private ArrayList<Slide> slides;
     private Style style;
     private Boolean showPreviousButton;
     private Boolean showIndicator;
+    private String skipText;
 
     @Orientation
     private Integer orientation;
@@ -147,6 +150,20 @@ public class IntroductionBuilder {
         return this;
     }
 
+    @NonNull
+    public IntroductionBuilder withSkipEnabled(@NonNull String text) {
+        this.skipText = text;
+
+        return this;
+    }
+
+    @NonNull
+    public IntroductionBuilder withSkipEnabled(@StringRes int resource) {
+        this.skipText = context.getString(resource);
+
+        return this;
+    }
+
     /**
      * Forces an orientation for the Activity. Available are portrait, landscape and both.
      * If this Method is not called, there will be no forced orientation.
@@ -225,6 +242,7 @@ public class IntroductionBuilder {
         bundle.putInt(BUNDLE_ORIENTATION, orientation);
         bundle.putBoolean(BUNDLE_SHOW_PREVIOUS_BUTTON, showPreviousButton);
         bundle.putBoolean(BUNDLE_SHOW_INDICATOR, showIndicator);
+        bundle.putString(BUNDLE_SKIP_TEXT, skipText);
 
         intent.putExtras(bundle);
 

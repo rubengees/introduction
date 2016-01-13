@@ -233,6 +233,12 @@ public class MainActivity extends AppCompatActivity {
                 .withOnSlideListener(defaultOnSlideListener).introduceMyself();
     }
 
+    public void onSkipClick(View view) {
+        new IntroductionBuilder(this).withSlides(generateSlides())
+                .withOnSlideListener(defaultOnSlideListener).withSkipEnabled("Skip")
+                .introduceMyself();
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
