@@ -18,6 +18,7 @@ package com.rubengees.introduction.util;
 
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.rubengees.introduction.R;
@@ -32,7 +33,9 @@ public class ButtonManager implements ViewPagerProcessor {
     private final int slideAmount;
     private ImageButton previous;
     private ImageButton next;
+    private Button skip;
     private boolean showPreviousButton;
+    private boolean showSkipButton;
 
     /**
      * @param previous           The Button to navigate one slide back.
@@ -42,10 +45,13 @@ public class ButtonManager implements ViewPagerProcessor {
      * @param slideAmount        The amount of Slides.
      */
     public ButtonManager(@NonNull ImageButton previous, @NonNull ImageButton next,
-                         boolean showPreviousButton, int slideAmount) {
+                         @NonNull Button skip, boolean showPreviousButton, boolean showSkipButton,
+                         int slideAmount) {
         this.previous = previous;
         this.next = next;
+        this.skip = skip;
         this.showPreviousButton = showPreviousButton;
+        this.showSkipButton = showSkipButton;
         this.slideAmount = slideAmount;
 
         init();
@@ -57,6 +63,12 @@ public class ButtonManager implements ViewPagerProcessor {
             previous.setImageResource(R.drawable.introduction_ic_arrow_previous);
         } else {
             previous.setVisibility(View.INVISIBLE);
+        }
+
+        if (showSkipButton) {
+            skip.setVisibility(View.VISIBLE);
+        } else {
+            skip.setVisibility(View.GONE);
         }
 
         next.setVisibility(View.VISIBLE);
@@ -78,8 +90,16 @@ public class ButtonManager implements ViewPagerProcessor {
 
         if (position < slideAmount - 1) {
             next.setImageResource(R.drawable.introduction_ic_arrow_next);
+
+            if (showSkipButton) {
+                skip.setVisibility(View.VISIBLE);
+            }
         } else {
             next.setImageResource(R.drawable.introduction_ic_done);
+
+            if (showSkipButton) {
+                skip.setVisibility(View.GONE);
+            }
         }
     }
 }

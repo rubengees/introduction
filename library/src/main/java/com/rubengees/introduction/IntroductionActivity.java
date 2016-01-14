@@ -44,7 +44,8 @@ import java.util.ArrayList;
 import static com.rubengees.introduction.IntroductionBuilder.BUNDLE_ORIENTATION;
 import static com.rubengees.introduction.IntroductionBuilder.BUNDLE_SHOW_INDICATOR;
 import static com.rubengees.introduction.IntroductionBuilder.BUNDLE_SHOW_PREVIOUS_BUTTON;
-import static com.rubengees.introduction.IntroductionBuilder.BUNDLE_SKIP_TEXT;
+import static com.rubengees.introduction.IntroductionBuilder.BUNDLE_SKIP_RESOURCE;
+import static com.rubengees.introduction.IntroductionBuilder.BUNDLE_SKIP_STRING;
 import static com.rubengees.introduction.IntroductionBuilder.BUNDLE_SLIDES;
 import static com.rubengees.introduction.IntroductionBuilder.BUNDLE_STYLE;
 import static com.rubengees.introduction.IntroductionBuilder.ORIENTATION_BOTH;
@@ -52,7 +53,7 @@ import static com.rubengees.introduction.IntroductionBuilder.ORIENTATION_LANDSCA
 import static com.rubengees.introduction.IntroductionBuilder.ORIENTATION_PORTRAIT;
 
 /**
- * Todo: Describe Class
+ * The Activity which shows the introduction finally to the user.
  *
  * @author Ruben Gees
  */
@@ -130,10 +131,18 @@ public class IntroductionActivity extends AppCompatActivity {
         orientation = bundle.getInt(BUNDLE_ORIENTATION, ORIENTATION_BOTH);
         showPreviousButton = bundle.getBoolean(BUNDLE_SHOW_PREVIOUS_BUTTON, true);
         showIndicator = bundle.getBoolean(BUNDLE_SHOW_INDICATOR, true);
-        skipText = bundle.getString(BUNDLE_SKIP_TEXT);
+        skipText = bundle.getString(BUNDLE_SKIP_STRING);
 
         if (slides == null) {
             slides = new ArrayList<>();
+        }
+
+        if (skipText == null) {
+            int skipResource = bundle.getInt(BUNDLE_SKIP_RESOURCE, 0);
+
+            if (skipResource != 0) {
+                skipText = this.getString(skipResource);
+            }
         }
     }
 
@@ -173,7 +182,8 @@ public class IntroductionActivity extends AppCompatActivity {
     }
 
     private void initManagers() {
-        buttonManager = new ButtonManager(previous, next, showPreviousButton, slides.size());
+        buttonManager = new ButtonManager(previous, next, skip, showPreviousButton,
+                skipText != null, slides.size());
         indicatorManager = configuration.getIndicatorManager();
 
         if (indicatorManager == null) {
@@ -238,11 +248,8 @@ public class IntroductionActivity extends AppCompatActivity {
             pager.setPageTransformer(true, configuration.getPageTransformer());
         }
 
-        if (skipText == null) {
-            skip.setVisibility(View.GONE);
-        } else {
+        if (skipText != null) {
             skip.setText(skipText);
-
             skip.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

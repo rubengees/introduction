@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.rubengees.introduction.IntroductionActivity;
 import com.rubengees.introduction.IntroductionBuilder;
 import com.rubengees.introduction.IntroductionConfiguration;
@@ -49,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
                 protected void onSlideInit(int position, @NonNull TextView title,
                                            @NonNull ImageView image, @NonNull TextView description) {
                     if (position % 3 == 1) {
-                        Glide.with(image.getContext()).load(R.drawable.image3).into(image);
+                        Glide.with(image.getContext()).load(R.drawable.image3)
+                                .diskCacheStrategy(DiskCacheStrategy.NONE).into(image);
                     }
                 }
             };
@@ -161,7 +163,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void OnTextFromResourcesClick(View view) {
         new IntroductionBuilder(this).withSlides(generateResourceSlides())
-                .withOnSlideListener(defaultOnSlideListener).introduceMyself();
+                .withOnSlideListener(defaultOnSlideListener).withSkipEnabled(R.string.skip)
+                .introduceMyself();
     }
 
     public void onLongStringsClick(View view) {
@@ -216,7 +219,8 @@ public class MainActivity extends AppCompatActivity {
                     protected void onSlideInit(int position, @NonNull TextView title,
                                                @NonNull ImageView image, @NonNull TextView description) {
                         if (position == 1) {
-                            Glide.with(image.getContext()).load(R.drawable.image3).into(image);
+                            Glide.with(image.getContext()).load(R.drawable.image3)
+                                    .diskCacheStrategy(DiskCacheStrategy.NONE).into(image);
                         }
                     }
                 }).introduceMyself();

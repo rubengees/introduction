@@ -51,14 +51,16 @@ public class IntroductionBuilder {
     static final String BUNDLE_ORIENTATION = "introduction_orientation";
     static final String BUNDLE_SHOW_PREVIOUS_BUTTON = "introduction_show_previous_button";
     static final String BUNDLE_SHOW_INDICATOR = "introduction_show_indicator";
-    static final String BUNDLE_SKIP_TEXT = "introduction_skip_text";
+    static final String BUNDLE_SKIP_STRING = "introduction_skip_string";
+    static final String BUNDLE_SKIP_RESOURCE = "introduction_skip_resource";
 
     private Activity context;
     private ArrayList<Slide> slides;
     private Style style;
     private Boolean showPreviousButton;
     private Boolean showIndicator;
-    private String skipText;
+    private String skipString;
+    private Integer skipResource;
 
     @Orientation
     private Integer orientation;
@@ -150,16 +152,32 @@ public class IntroductionBuilder {
         return this;
     }
 
+    /**
+     * Specifies whether to show a skip button or not.
+     * If you specified a resource earlier it will be overridden.
+     *
+     * @param text The text to show.
+     * @return The current instance.
+     */
     @NonNull
     public IntroductionBuilder withSkipEnabled(@NonNull String text) {
-        this.skipText = text;
+        this.skipString = text;
+        this.skipResource = null;
 
         return this;
     }
 
+    /**
+     * Specifies whether to show a skip button or not.
+     * If you specified a text earlier it will be overridden.
+     *
+     * @param resource The resource to show.
+     * @return The current instance.
+     */
     @NonNull
     public IntroductionBuilder withSkipEnabled(@StringRes int resource) {
-        this.skipText = context.getString(resource);
+        this.skipResource = resource;
+        this.skipString = null;
 
         return this;
     }
@@ -242,7 +260,11 @@ public class IntroductionBuilder {
         bundle.putInt(BUNDLE_ORIENTATION, orientation);
         bundle.putBoolean(BUNDLE_SHOW_PREVIOUS_BUTTON, showPreviousButton);
         bundle.putBoolean(BUNDLE_SHOW_INDICATOR, showIndicator);
-        bundle.putString(BUNDLE_SKIP_TEXT, skipText);
+        bundle.putString(BUNDLE_SKIP_STRING, skipString);
+
+        if (skipResource != null) {
+            bundle.putInt(BUNDLE_SKIP_RESOURCE, skipResource);
+        }
 
         intent.putExtras(bundle);
 
