@@ -77,9 +77,7 @@ public class IntroductionFragment extends Fragment {
 
         Style style = getIntroductionActivity().getStyle();
 
-        if (style != null) {
-            style.applyStyleOnFragmentView(this, root);
-        }
+        style.applyStyleOnFragmentView(this, root);
 
         return root;
     }

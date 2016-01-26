@@ -30,6 +30,8 @@ import com.rubengees.introduction.interfaces.IndicatorManager;
 import com.rubengees.introduction.style.Style;
 import com.rubengees.introduction.style.TranslucentStyle;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -229,6 +231,10 @@ public class IntroductionBuilder {
     }
 
     private void check() {
+        if (slides == null) {
+            throw new RuntimeException("You need to add slides.");
+        }
+
         if (style == null) {
             style = new TranslucentStyle();
         }
@@ -277,6 +283,7 @@ public class IntroductionBuilder {
         context.startActivityForResult(intent, INTRODUCTION_REQUEST_CODE);
     }
 
+    @Retention(RetentionPolicy.SOURCE)
     @IntDef({ORIENTATION_PORTRAIT, ORIENTATION_LANDSCAPE, ORIENTATION_BOTH})
     public @interface Orientation {
 
