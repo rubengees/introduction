@@ -40,12 +40,10 @@ public class TranslucentStyle extends Style {
         SystemBarTintManager tintManager = new SystemBarTintManager(activity);
         SystemBarTintManager.SystemBarConfig config = tintManager.getConfig();
 
-        RelativeLayout.LayoutParams params =
-                (RelativeLayout.LayoutParams) bottomBar.getLayoutParams();
-        params.height = params.height + config.getPixelInsetBottom();
-        bottomBar.setLayoutParams(params);
-
-        bottomBar.setPadding(0, -config.getPixelInsetBottom(), config.getPixelInsetRight(), 0);
+        RelativeLayout.MarginLayoutParams params =
+                (RelativeLayout.MarginLayoutParams) bottomBar.getLayoutParams();
+        params.bottomMargin = params.bottomMargin + config.getPixelInsetBottom();
+        params.rightMargin = params.rightMargin + config.getPixelInsetRight();
     }
 
     @Override
