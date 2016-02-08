@@ -105,10 +105,10 @@ This library supports GIFs. You need to load them asynchronously as the loading 
 new IntroductionBuilder(this).withSlides(slides)
                 .withOnSlideListener(new OnSlideListener() {
                     @Override
-                    protected void onSlideInit(Fragment context, int position, TextView title,
+                    protected void onSlideInit(int position, TextView title,
                                                ImageView image, TextView description) {
                         if (position == 1) { //Assume we want to load the GIF at Slide 2 (index 1)
-                            Glide.with(context).load(R.drawable.image3).into(image);
+                            Glide.with(image.getContext()).load(R.drawable.image3).into(image);
                         }
 
                     }
