@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!-- Support for AboutLibraries by Mike Penz (https://github.com/mikepenz/AboutLibraries) -->
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Support for AboutLibraries by Mike Penz (https://github.com/mikepenz/AboutLibraries) -->
 <resources xmlns:tools="http://schemas.android.com/tools">
 	<string name="define_introduction" tools:ignore="UnusedResources" />
 	<!-- Author section -->
