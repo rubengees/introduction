@@ -191,10 +191,6 @@ The minimum required sdk is 8 (2.2 Froyo)
 - The 'OnSlideChangedListener' was renamed to 'OnSlideListener'. Just rename it and it's working again.
 - Asynchronous image loading is now available (and recomended!). See the 'Use GIFs as drawables' section for more info. It applies for all types of images. GIFs won't work without asynchronous loading from now on!
 
-### Libraries used in this project
-
-- [SystemBarTint](https://github.com/jgilfelt/SystemBarTint) For the translucent style.
-
 ### Acknowledgments
 
 The images in the samples are taken from the following webpages (I do not own any of the images, all rights are reserved to their respective owners):
