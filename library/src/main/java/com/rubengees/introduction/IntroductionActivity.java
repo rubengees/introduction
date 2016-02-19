@@ -21,7 +21,10 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.view.OnApplyWindowInsetsListener;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.WindowInsetsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +44,7 @@ import com.rubengees.introduction.util.OrientationUtils;
 
 import java.util.ArrayList;
 
+import static com.rubengees.introduction.IntroductionBuilder.BUNDLE_ALLOW_BACK_PRESS;
 import static com.rubengees.introduction.IntroductionBuilder.BUNDLE_ORIENTATION;
 import static com.rubengees.introduction.IntroductionBuilder.BUNDLE_SHOW_INDICATOR;
 import static com.rubengees.introduction.IntroductionBuilder.BUNDLE_SHOW_PREVIOUS_BUTTON;
@@ -79,6 +83,7 @@ public class IntroductionActivity extends AppCompatActivity {
     private boolean showPreviousButton;
     private boolean showIndicator;
     private String skipText;
+    private boolean allowBackPress;
 
     private int orientation;
 
@@ -103,8 +108,39 @@ public class IntroductionActivity extends AppCompatActivity {
             select(0);
         } else {
             previousPagerPosition = savedInstanceState.getInt(STATE_PREVIOUS_PAGER_POSITION);
+
             select(previousPagerPosition);
         }
+
+        //Workaround for fitsSystemWindows in a ViewPager
+        ViewCompat.setOnApplyWindowInsetsListener(pager,
+                new OnApplyWindowInsetsListener() {
+                    @Override
+                    public WindowInsetsCompat onApplyWindowInsets(View v,
+                                                                  WindowInsetsCompat insets) {
+                        insets = ViewCompat.onApplyWindowInsets(v, insets);
+
+                        if (insets.isConsumed()) {
+                            return insets;
+                        }
+
+                        boolean consumed = false;
+
+                        if (insets.isConsumed()) {
+                            consumed = true;
+                        }
+
+                        for (int i = 0, count = pager.getChildCount(); i < count; i++) {
+                            ViewCompat.dispatchApplyWindowInsets(pager.getChildAt(i), insets);
+
+                            if (insets.isConsumed()) {
+                                consumed = true;
+                            }
+                        }
+
+                        return consumed ? insets.consumeSystemWindowInsets() : insets;
+                    }
+                });
     }
 
     @Override
@@ -132,6 +168,7 @@ public class IntroductionActivity extends AppCompatActivity {
         showPreviousButton = bundle.getBoolean(BUNDLE_SHOW_PREVIOUS_BUTTON, true);
         showIndicator = bundle.getBoolean(BUNDLE_SHOW_INDICATOR, true);
         skipText = bundle.getString(BUNDLE_SKIP_STRING);
+        allowBackPress = bundle.getBoolean(BUNDLE_ALLOW_BACK_PRESS, false);
 
         if (slides == null) {
             slides = new ArrayList<>();
@@ -244,6 +281,9 @@ public class IntroductionActivity extends AppCompatActivity {
             }
         });
 
+        previous.bringToFront();
+        next.bringToFront();
+
         if (configuration.getPageTransformer() != null) {
             pager.setPageTransformer(true, configuration.getPageTransformer());
         }
@@ -272,14 +312,16 @@ public class IntroductionActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (pager.getCurrentItem() == 0) {
-            handleFinishCancelled();
+            if (allowBackPress) {
+                handleFinishCancelled();
+            }
         } else {
             pager.setCurrentItem(pager.getCurrentItem() - 1);
         }
     }
 
     private void handleFinish() {
-        IntroductionConfiguration.getInstance().clear();
+        IntroductionConfiguration.destroy();
         ArrayList<Option> options = new ArrayList<>();
 
         for (Slide slide : slides) {
@@ -296,7 +338,7 @@ public class IntroductionActivity extends AppCompatActivity {
     }
 
     private void handleFinishCancelled() {
-        IntroductionConfiguration.getInstance().clear();
+        IntroductionConfiguration.destroy();
         setResult(RESULT_CANCELED);
         finish();
     }

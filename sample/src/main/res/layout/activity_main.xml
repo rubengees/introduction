@@ -90,5 +90,11 @@
             android:layout_height="wrap_content"
             android:onClick="onSkipClick"
             android:text="Skip" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onBackPressClick"
+            android:text="Back press" />
     </LinearLayout>
 </ScrollView>

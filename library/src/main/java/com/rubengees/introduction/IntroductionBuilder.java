@@ -55,6 +55,7 @@ public class IntroductionBuilder {
     static final String BUNDLE_SHOW_INDICATOR = "introduction_show_indicator";
     static final String BUNDLE_SKIP_STRING = "introduction_skip_string";
     static final String BUNDLE_SKIP_RESOURCE = "introduction_skip_resource";
+    static final String BUNDLE_ALLOW_BACK_PRESS = "introduction_allow_back_press";
 
     private Activity context;
     private ArrayList<Slide> slides;
@@ -63,6 +64,7 @@ public class IntroductionBuilder {
     private Boolean showIndicator;
     private String skipString;
     private Integer skipResource;
+    private Boolean allowBackPress;
 
     @Orientation
     private Integer orientation;
@@ -185,6 +187,19 @@ public class IntroductionBuilder {
     }
 
     /**
+     * Sets if ít is allowed for the user to press the back button at the first slide to cancel the
+     * introduction. The default value is false.
+     *
+     * @param allow If the back button cancels the introduction.
+     * @return The current instance.
+     */
+    public IntroductionBuilder withAllowBackPress(boolean allow) {
+        this.allowBackPress = allow;
+
+        return this;
+    }
+
+    /**
      * Forces an orientation for the Activity. Available are portrait, landscape and both.
      * If this Method is not called, there will be no forced orientation.
      *
@@ -250,6 +265,10 @@ public class IntroductionBuilder {
         if (showIndicator == null) {
             showIndicator = true;
         }
+
+        if (allowBackPress == null) {
+            allowBackPress = false;
+        }
     }
 
     /**
@@ -267,6 +286,7 @@ public class IntroductionBuilder {
         bundle.putBoolean(BUNDLE_SHOW_PREVIOUS_BUTTON, showPreviousButton);
         bundle.putBoolean(BUNDLE_SHOW_INDICATOR, showIndicator);
         bundle.putString(BUNDLE_SKIP_STRING, skipString);
+        bundle.putBoolean(BUNDLE_ALLOW_BACK_PRESS, allowBackPress);
 
         if (skipResource != null) {
             bundle.putInt(BUNDLE_SKIP_RESOURCE, skipResource);

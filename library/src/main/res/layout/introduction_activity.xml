@@ -1,4 +1,5 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/introduction_activity_root"
     android:layout_width="match_parent"
@@ -9,78 +10,97 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/introduction_activity_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 
-    <LinearLayout
-        android:id="@+id/introduction_activity_bottom_bar"
+    <android.support.percent.PercentFrameLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:baselineAligned="false">
+        android:fitsSystemWindows="true">
 
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:animateLayoutChanges="true"
-            tools:targetApi="honeycomb">
-
-            <ImageButton
-                android:id="@+id/introduction_activity_button_previous"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/introduction_ic_arrow_previous"
-                android:visibility="invisible" />
-
-        </FrameLayout>
-
-        <LinearLayout
-            android:id="@+id/introduction_activity_indicator_bar"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="6"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/introduction_activity_skip"
-                style="?attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_weight="0.75"
-                tools:ignore="NestedWeights" />
+        <android.support.percent.PercentRelativeLayout
+            android:id="@+id/introduction_activity_bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:layout_heightPercent="10%"
+            app:layout_marginBottomPercent="2%">
 
             <FrameLayout
-                android:id="@+id/introduction_activity_container_indicator"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.25" />
-
-        </LinearLayout>
-
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:animateLayoutChanges="true"
-            tools:targetApi="honeycomb">
-
-            <ImageButton
-                android:id="@+id/introduction_activity_button_next"
+                android:id="@+id/introduction_activity_button_previous_container"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/introduction_ic_arrow_next"
-                android:visibility="invisible" />
-        </FrameLayout>
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:animateLayoutChanges="true"
+                app:layout_widthPercent="20%"
+                tools:targetApi="honeycomb">
 
-    </LinearLayout>
+                <ImageButton
+                    android:id="@+id/introduction_activity_button_previous"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/introduction_ic_arrow_previous"
+                    android:visibility="invisible" />
 
-</RelativeLayout>
+            </FrameLayout>
+
+            <LinearLayout
+                android:id="@+id/introduction_activity_indicator_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@+id/introduction_activity_button_previous_container"
+                android:layout_toLeftOf="@+id/introduction_activity_button_next_container"
+                android:layout_toRightOf="@+id/introduction_activity_button_previous_container"
+                android:layout_toStartOf="@+id/introduction_activity_button_next_container"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_widthPercent="60%"
+                tools:targetApi="honeycomb">
+
+                <Button
+                    android:id="@+id/introduction_activity_skip"
+                    style="?attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:padding="0dp" />
+
+                <FrameLayout
+                    android:id="@+id/introduction_activity_container_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5" />
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/introduction_activity_button_next_container"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:animateLayoutChanges="true"
+                app:layout_widthPercent="20%"
+                tools:targetApi="honeycomb">
+
+                <ImageButton
+                    android:id="@+id/introduction_activity_button_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/introduction_ic_arrow_next"
+                    android:visibility="invisible" />
+            </FrameLayout>
+
+        </android.support.percent.PercentRelativeLayout>
+    </android.support.percent.PercentFrameLayout>
+
+</android.support.percent.PercentRelativeLayout>

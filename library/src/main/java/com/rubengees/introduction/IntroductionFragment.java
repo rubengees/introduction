@@ -20,8 +20,10 @@ package com.rubengees.introduction;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,7 +74,7 @@ public class IntroductionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        createViews(inflater, container);
+        createAndFindViews(inflater, container);
         initViews(inflater);
 
         Style style = getIntroductionActivity().getStyle();
@@ -80,6 +82,13 @@ public class IntroductionFragment extends Fragment {
         style.applyStyleOnFragmentView(this, root);
 
         return root;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        ViewCompat.requestApplyInsets(root);
     }
 
     private void initViews(LayoutInflater inflater) {
@@ -131,7 +140,7 @@ public class IntroductionFragment extends Fragment {
                 description);
     }
 
-    private void createViews(LayoutInflater inflater, ViewGroup container) {
+    private void createAndFindViews(LayoutInflater inflater, ViewGroup container) {
         root = (ViewGroup) inflater.inflate(R.layout.introduction_fragment, container, false);
         title = (TextView) root.findViewById(R.id.introduction_fragment_title);
         image = (ImageView) root.findViewById(R.id.introduction_fragment_image);

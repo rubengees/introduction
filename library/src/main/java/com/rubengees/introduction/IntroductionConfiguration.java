@@ -51,6 +51,16 @@ public class IntroductionConfiguration {
         return INSTANCE;
     }
 
+    static void destroy() {
+        if (INSTANCE != null) {
+            INSTANCE.onSlideListener = null;
+            INSTANCE.pageTransformer = null;
+            INSTANCE.indicatorManager = null;
+
+            INSTANCE = null;
+        }
+    }
+
     void setOnSlideChangedListener(@Nullable OnSlideListener onSlideChangedListener) {
         this.onSlideListener = onSlideChangedListener;
     }
@@ -73,7 +83,6 @@ public class IntroductionConfiguration {
         this.indicatorManager = indicatorManager;
     }
 
-
     void callOnSlideChanged(@IntRange(from = 0) int from, @IntRange(from = 0) int to) {
         if (onSlideListener != null) {
             onSlideListener.onSlideChanged(from, to);
@@ -85,14 +94,6 @@ public class IntroductionConfiguration {
         if (onSlideListener != null) {
             onSlideListener.onSlideInit(position, title, image, description);
         }
-    }
-
-    void clear() {
-        onSlideListener = null;
-        pageTransformer = null;
-        indicatorManager = null;
-
-        INSTANCE = null;
     }
 
     public static abstract class OnSlideListener {

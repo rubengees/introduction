@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                                            @NonNull ImageView image, @NonNull TextView description) {
                     if (position % 3 == 1) {
                         Glide.with(image.getContext()).load(R.drawable.image3)
-                                .diskCacheStrategy(DiskCacheStrategy.NONE).into(image);
+                                .diskCacheStrategy(DiskCacheStrategy.SOURCE).into(image);
                     }
                 }
             };
@@ -172,6 +172,12 @@ public class MainActivity extends AppCompatActivity {
                 .withOnSlideListener(defaultOnSlideListener).introduceMyself();
     }
 
+    public void onBackPressClick(View view) {
+        new IntroductionBuilder(this).withSlides(generateSlides())
+                .withOnSlideListener(defaultOnSlideListener).withAllowBackPress(true)
+                .introduceMyself();
+    }
+
     public void OnRequestPermissionClick(View view) {
         List<Slide> slides = generateSlides();
 
@@ -195,7 +201,8 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     protected void onSlideInit(int position, @NonNull TextView title,
-                                               @NonNull ImageView image, @NonNull TextView description) {
+                                               @NonNull ImageView image,
+                                               @NonNull TextView description) {
                         if (position == 2) {
                             Glide.with(image.getContext()).load(R.drawable.image3).into(image);
                         }

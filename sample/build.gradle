@@ -8,8 +8,8 @@ android {
         applicationId "com.rubengees.introductionsample"
         minSdkVersion 11
         targetSdkVersion 23
-        versionCode 11
-        versionName "1.1.5"
+        versionCode 12
+        versionName "1.1.6"
     }
     buildTypes {
         release {
@@ -21,6 +21,6 @@ android {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.github.bumptech.glide:glide:3.6.1'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
     compile project(':library')
 }

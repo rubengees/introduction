@@ -8,7 +8,7 @@ android {
     buildToolsVersion '23.0.2'
 
     defaultConfig {
-        minSdkVersion 10
+        minSdkVersion 8
         targetSdkVersion 23
         versionCode 12
         versionName "1.1.6"
@@ -22,7 +22,7 @@ repositories {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    compile 'com.android.support:percent:23.1.1'
 }
 
 // build a jar with source files
