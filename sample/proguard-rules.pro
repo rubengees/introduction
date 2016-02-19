@@ -1,1 +1,2 @@
-
+-keep class android.support.** { *; }
+-keep interface android.support.** { *; }
