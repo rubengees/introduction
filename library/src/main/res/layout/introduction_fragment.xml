@@ -48,10 +48,9 @@
     <View
         android:id="@+id/introduction_bottom_bar_placeholder"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="64dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        app:layout_heightPercent="10%"
-        app:layout_marginBottomPercent="2%" />
+        android:layout_marginRight="16dp" />
 </android.support.percent.PercentRelativeLayout>
