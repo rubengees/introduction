@@ -8,8 +8,8 @@ android {
         applicationId "com.rubengees.introductionsample"
         minSdkVersion 11
         targetSdkVersion 23
-        versionCode 12
-        versionName "1.1.6"
+        versionCode 13
+        versionName "1.2.0"
     }
     buildTypes {
         release {

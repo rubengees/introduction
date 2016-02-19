@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {
-    compile ('com.github.rubengees:introduction:1.1.6@aar'){
+    compile ('com.github.rubengees:introduction:1.2.0@aar'){
         transitive = true;
     }
 }
@@ -177,7 +177,7 @@ A much more detailed explanation with all available APIs can be found in the [Wi
 
 ### Minimum Sdk
 
-The minimum required sdk is 10 (2.3.3 Gingerbread)
+The minimum required sdk is 8 (2.2 Froyo)
 
 ### Upgrade Guide
 
