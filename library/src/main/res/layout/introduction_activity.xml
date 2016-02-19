@@ -37,7 +37,6 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_gravity="center"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/introduction_ic_arrow_previous"
                 android:visibility="invisible" />
@@ -74,7 +73,6 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_gravity="center"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/introduction_ic_arrow_next"
                 android:visibility="invisible" />
