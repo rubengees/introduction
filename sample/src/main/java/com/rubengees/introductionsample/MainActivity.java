@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 result += option.getPosition() + (option.isActivated() ? " enabled" : " disabled");
             }
 
-            Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+            Snackbar.make(findViewById(android.R.id.content), result, Snackbar.LENGTH_LONG).show();
         }
     }
 
@@ -195,6 +196,9 @@ public class MainActivity extends AppCompatActivity {
                                 ActivityCompat.requestPermissions(MainActivity.this,
                                         new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                                         12);
+                            } else {
+                                Toast.makeText(MainActivity.this, "Permission is already granted",
+                                        Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -256,9 +260,10 @@ public class MainActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (requestCode == 12) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Permission was successfully granted!", Toast.LENGTH_LONG)
-                        .show();
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                Toast.makeText(MainActivity.this, "Permission was granted successfully",
+                        Toast.LENGTH_SHORT).show();
             }
         }
     }
