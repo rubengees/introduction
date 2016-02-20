@@ -19,7 +19,7 @@
         android:maxLines="3"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/white"
-        app:layout_heightPercent="16%"
+        app:layout_heightPercent="21%"
         app:layout_marginBottomPercent="1%"
         app:layout_marginTopPercent="1%"
         tools:text="Title" />
@@ -33,7 +33,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:gravity="center"
-        app:layout_heightPercent="50%" />
+        app:layout_heightPercent="40%" />
 
     <FrameLayout
         android:id="@+id/introduction_fragment_description_container"
@@ -42,9 +42,9 @@
         android:layout_above="@+id/introduction_bottom_bar_placeholder"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        app:layout_heightPercent="18%"
+        app:layout_heightPercent="22%"
         app:layout_marginBottomPercent="1%"
-        app:layout_marginTopPercent="1%" />
+        app:layout_marginTopPercent="2%" />
 
     <View
         android:id="@+id/introduction_bottom_bar_placeholder"
