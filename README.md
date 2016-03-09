@@ -192,9 +192,9 @@ public class CustomViewBuilderImpl implements Slide.CustomViewBuilder {
 Then set it to your Slide:
 
 ```java
-        new IntroductionBuilder(this)
-                .withSlides(new Slide().withCustomViewBuilder(new CustomViewBuilderImpl())
-                        .withColorResource(R.color.cyan)).introduceMyself();
+new IntroductionBuilder(this)
+        .withSlides(new Slide().withCustomViewBuilder(new CustomViewBuilderImpl())
+                .withColorResource(R.color.cyan)).introduceMyself();
 ```
 
 If you set a CustomViewBuilder to your Slide, all other values aside from the color are overriden. You have to manage all on your own.
