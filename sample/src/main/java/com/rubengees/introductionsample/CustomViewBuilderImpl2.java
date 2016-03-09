@@ -8,7 +8,8 @@ import android.view.ViewGroup;
 import com.rubengees.introduction.entity.Slide;
 
 /**
- * TODO: Describe Class
+ * An implementation of the CustomViewBuilder to return a very basic view.
+ * This class cannot be anonymous because Java.
  *
  * @author Ruben Gees
  */

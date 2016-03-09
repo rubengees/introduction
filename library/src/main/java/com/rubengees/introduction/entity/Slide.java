@@ -395,8 +395,21 @@ public class Slide implements Parcelable {
         dest.writeSerializable(this.customViewBuilder);
     }
 
+    /**
+     * The interface to define a custom View.
+     * Note: You cannot use a anonymous class to implement this. See the CustomViewBuilderImpl in
+     * the sample.
+     */
     public interface CustomViewBuilder extends Serializable {
 
+        /**
+         * Returns the desired view for this slide.
+         *
+         * @param inflater The inflater.
+         * @param parent   The parent of the new view. Only for inflation purposes. Do not add your
+         *                 View to this.
+         * @return The new View.
+         */
         @NonNull
         View buildView(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent);
     }
