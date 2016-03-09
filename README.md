@@ -193,7 +193,7 @@ Then set it to your Slide:
 
 ```java
         new IntroductionBuilder(this)
-                .withSlides(new Slide().withCustomViewBuilder(new CustomViewBuilderImpl1())
+                .withSlides(new Slide().withCustomViewBuilder(new CustomViewBuilderImpl())
                         .withColorResource(R.color.cyan)).introduceMyself();
 ```
 
