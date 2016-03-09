@@ -171,6 +171,34 @@ new IntroductionBuilder(this).withSlides(generateSlides())
 
 `Translucent` is the default style.
 
+##### Custom Views
+
+You can supply your own View to a Slide instead of just setting the title, image and description.  
+This is done like follows:
+
+Create a class which implements CustomViewBuilder:  
+(Note: This *must* be a class on its own. Don't anonymously implement this)
+
+```java
+public class CustomViewBuilderImpl implements Slide.CustomViewBuilder {
+    @NonNull
+    @Override
+    public View buildView(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
+        return inflater.inflate(R.layout.layout_custom, parent, false);
+    }
+}
+```
+
+Then set it to your Slide:
+
+```java
+        new IntroductionBuilder(this)
+                .withSlides(new Slide().withCustomViewBuilder(new CustomViewBuilderImpl1())
+                        .withColorResource(R.color.cyan)).introduceMyself();
+```
+
+If you set a CustomViewBuilder to your Slide, all other values aside from the color are overriden. You have to manage all on your own.
+
 ##### Further reading
 
 A much more detailed explanation with all available APIs can be found in the [Wiki](https://github.com/RubenGees/Introduction/wiki).
