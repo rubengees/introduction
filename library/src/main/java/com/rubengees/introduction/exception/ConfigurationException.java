@@ -17,7 +17,7 @@
 package com.rubengees.introduction.exception;
 
 /**
- * Todo: Describe Class
+ * An Exception, thrown when methods are called in the wrong order.
  *
  * @author Ruben Gees
  */

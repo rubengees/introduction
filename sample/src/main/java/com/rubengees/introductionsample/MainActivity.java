@@ -254,6 +254,15 @@ public class MainActivity extends AppCompatActivity {
                 .introduceMyself();
     }
 
+    public void onCustomViewClick(View view) {
+        new IntroductionBuilder(this)
+                .withSlides(new Slide().withCustomViewBuilder(new CustomViewBuilderImpl1())
+                                .withColorResource(R.color.cyan),
+                        new Slide().withCustomViewBuilder(new CustomViewBuilderImpl2())
+                                .withColorResource(R.color.green))
+                .introduceMyself();
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {

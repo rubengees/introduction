@@ -29,12 +29,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rubengees.introduction.entity.Slide;
-import com.rubengees.introduction.style.Style;
 
 
 /**
@@ -46,10 +44,7 @@ public class IntroductionFragment extends Fragment {
 
     private static final String BUNDLE_SLIDE = "introduction_slide";
     private Slide slide;
-    private ViewGroup root;
-    private TextView title;
-    private ImageView image;
-    private FrameLayout descriptionContainer;
+    private View root;
 
     public IntroductionFragment() {
         // Required empty public constructor
@@ -74,12 +69,9 @@ public class IntroductionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        createAndFindViews(inflater, container);
-        initViews(inflater);
+        root = initViews(inflater, container, savedInstanceState);
 
-        Style style = getIntroductionActivity().getStyle();
-
-        style.applyStyleOnFragmentView(this, root);
+        getIntroductionActivity().getStyle().applyStyleOnFragmentView(this, root);
 
         return root;
     }
@@ -91,7 +83,37 @@ public class IntroductionFragment extends Fragment {
         ViewCompat.requestApplyInsets(root);
     }
 
-    private void initViews(LayoutInflater inflater) {
+    @NonNull
+    private View initViews(@NonNull LayoutInflater inflater, @NonNull ViewGroup container,
+                           @Nullable Bundle savedInstanceState) {
+        ViewGroup root =
+                (ViewGroup) inflater.inflate(R.layout.introduction_fragment, container, false);
+        ViewGroup contentContainer =
+                (ViewGroup) root.findViewById(R.id.introduction_fragment_content_container);
+
+        if (slide.getCustomViewBuilder() == null) {
+            contentContainer.addView(initDefaultViews(inflater, container));
+        } else {
+            contentContainer.addView(initCustomViews(inflater, container));
+        }
+
+        root.setBackgroundColor(slide.getColor());
+
+        return root;
+    }
+
+    @NonNull
+    private View initDefaultViews(@NonNull LayoutInflater inflater,
+                                  @NonNull ViewGroup container) {
+        ViewGroup root =
+                (ViewGroup) inflater.inflate(R.layout.introduction_fragment_default_content,
+                        container, false);
+        TextView title =
+                (TextView) root.findViewById(R.id.introduction_fragment_default_content_title);
+        ImageView image =
+                (ImageView) root.findViewById(R.id.introduction_fragment_default_content_image);
+        ViewGroup descriptionContainer =
+                (ViewGroup) root.findViewById(R.id.introduction_fragment_default_content_description_container);
         TextView description;
 
         if (slide.getTitle() != null) {
@@ -134,18 +156,16 @@ public class IntroductionFragment extends Fragment {
             image.setImageResource(slide.getImageResource());
         }
 
-        root.setBackgroundColor(slide.getColor());
+        IntroductionConfiguration.getInstance().callOnSlideInit(slide.getPosition(), title,
+                image, description);
 
-        IntroductionConfiguration.getInstance().callOnSlideInit(slide.getPosition(), title, image,
-                description);
+        return root;
     }
 
-    private void createAndFindViews(LayoutInflater inflater, ViewGroup container) {
-        root = (ViewGroup) inflater.inflate(R.layout.introduction_fragment, container, false);
-        title = (TextView) root.findViewById(R.id.introduction_fragment_title);
-        image = (ImageView) root.findViewById(R.id.introduction_fragment_image);
-        descriptionContainer =
-                (FrameLayout) root.findViewById(R.id.introduction_fragment_description_container);
+    @NonNull
+    private View initCustomViews(@NonNull LayoutInflater inflater,
+                                 @NonNull ViewGroup container) {
+        return slide.getCustomViewBuilder().buildView(inflater, container);
     }
 
     private int getLineCountForTitle() {

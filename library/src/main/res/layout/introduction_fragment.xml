@@ -1,50 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context="com.rubengees.introduction.IntroductionFragment">
 
-    <TextView
-        android:id="@+id/introduction_fragment_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:maxLines="3"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@android:color/white"
-        app:layout_heightPercent="21%"
-        app:layout_marginBottomPercent="1%"
-        app:layout_marginTopPercent="1%"
-        tools:text="Title" />
-
-    <ImageView
-        android:id="@+id/introduction_fragment_image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/introduction_fragment_description_container"
-        android:layout_below="@id/introduction_fragment_title"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:gravity="center"
-        app:layout_heightPercent="40%" />
-
     <FrameLayout
-        android:id="@+id/introduction_fragment_description_container"
+        android:id="@+id/introduction_fragment_content_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/introduction_bottom_bar_placeholder"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        app:layout_heightPercent="22%"
-        app:layout_marginBottomPercent="1%"
-        app:layout_marginTopPercent="2%" />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/introduction_bottom_bar_placeholder" />
 
     <View
         android:id="@+id/introduction_bottom_bar_placeholder"
@@ -54,4 +20,4 @@
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp" />
-</android.support.percent.PercentRelativeLayout>
+</RelativeLayout>

@@ -33,6 +33,7 @@ import com.rubengees.introduction.style.TranslucentStyle;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -95,6 +96,18 @@ public class IntroductionBuilder {
         this.slides.addAll(new ArrayList<>(slides));
 
         return this;
+    }
+
+    /**
+     * The Slides to display.
+     *
+     * @param slides A List of Slides.
+     * @return The current instance.
+     * @throws IllegalArgumentException If an empty list was passed.
+     */
+    @NonNull
+    public IntroductionBuilder withSlides(Slide... slides) {
+        return withSlides(Arrays.asList(slides));
     }
 
     /**

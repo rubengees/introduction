@@ -28,6 +28,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import java.io.Serializable;
 
 /**
  * A bean which contains the data of a slide.
@@ -54,6 +59,7 @@ public class Slide implements Parcelable {
     private Integer color;
     private Integer colorResource;
     private Option option;
+    private CustomViewBuilder customViewBuilder;
 
     public Slide() {
 
@@ -69,6 +75,7 @@ public class Slide implements Parcelable {
         this.color = (Integer) in.readValue(Integer.class.getClassLoader());
         this.colorResource = (Integer) in.readValue(Integer.class.getClassLoader());
         this.option = in.readParcelable(Option.class.getClassLoader());
+        this.customViewBuilder = (CustomViewBuilder) in.readSerializable();
     }
 
     /**
@@ -82,6 +89,7 @@ public class Slide implements Parcelable {
     public Slide withTitle(@Nullable String title) {
         this.title = title;
         this.titleResource = null;
+        this.customViewBuilder = null;
 
         return this;
     }
@@ -97,6 +105,7 @@ public class Slide implements Parcelable {
     public Slide withTitle(@StringRes int titleResource) {
         this.titleResource = titleResource;
         this.title = null;
+        this.customViewBuilder = null;
 
         return this;
     }
@@ -115,6 +124,7 @@ public class Slide implements Parcelable {
     public Slide withTitleResource(@StringRes int titleResource) {
         this.titleResource = titleResource;
         this.title = null;
+        this.customViewBuilder = null;
 
         return this;
     }
@@ -131,6 +141,7 @@ public class Slide implements Parcelable {
         this.description = description;
         this.descriptionResource = null;
         this.option = null;
+        this.customViewBuilder = null;
 
         return this;
     }
@@ -147,6 +158,7 @@ public class Slide implements Parcelable {
         this.descriptionResource = descriptionResource;
         this.description = null;
         this.option = null;
+        this.customViewBuilder = null;
 
         return this;
     }
@@ -166,6 +178,7 @@ public class Slide implements Parcelable {
         this.descriptionResource = descriptionResource;
         this.description = null;
         this.option = null;
+        this.customViewBuilder = null;
 
         return this;
     }
@@ -179,6 +192,7 @@ public class Slide implements Parcelable {
     @NonNull
     public Slide withImage(@DrawableRes int imageResource) {
         this.imageResource = imageResource;
+        this.customViewBuilder = null;
 
         return this;
     }
@@ -195,6 +209,7 @@ public class Slide implements Parcelable {
     @NonNull
     public Slide withImageResource(@DrawableRes int imageResource) {
         this.imageResource = imageResource;
+        this.customViewBuilder = null;
 
         return this;
     }
@@ -242,6 +257,19 @@ public class Slide implements Parcelable {
         this.option = option;
         this.description = null;
         this.descriptionResource = null;
+        this.customViewBuilder = null;
+
+        return this;
+    }
+
+    public Slide withCustomViewBuilder(@Nullable CustomViewBuilder customViewBuilder) {
+        this.customViewBuilder = customViewBuilder;
+        this.title = null;
+        this.titleResource = null;
+        this.imageResource = null;
+        this.option = null;
+        this.description = null;
+        this.descriptionResource = null;
 
         return this;
     }
@@ -268,6 +296,10 @@ public class Slide implements Parcelable {
 
     public Option getOption() {
         return option;
+    }
+
+    public CustomViewBuilder getCustomViewBuilder() {
+        return customViewBuilder;
     }
 
     /**
@@ -298,6 +330,10 @@ public class Slide implements Parcelable {
         if (option != null) {
             option.init(context, position);
         }
+
+        if (color == null) {
+            throw new RuntimeException("You must add a color to each slide");
+        }
     }
 
     @Override
@@ -320,7 +356,8 @@ public class Slide implements Parcelable {
         if (color != null ? !color.equals(slide.color) : slide.color != null) return false;
         if (colorResource != null ? !colorResource.equals(slide.colorResource) : slide.colorResource != null)
             return false;
-        return !(option != null ? !option.equals(slide.option) : slide.option != null);
+        if (option != null ? !option.equals(slide.option) : slide.option != null) return false;
+        return customViewBuilder != null ? customViewBuilder.equals(slide.customViewBuilder) : slide.customViewBuilder == null;
 
     }
 
@@ -335,6 +372,7 @@ public class Slide implements Parcelable {
         result = 31 * result + (color != null ? color.hashCode() : 0);
         result = 31 * result + (colorResource != null ? colorResource.hashCode() : 0);
         result = 31 * result + (option != null ? option.hashCode() : 0);
+        result = 31 * result + (customViewBuilder != null ? customViewBuilder.hashCode() : 0);
         return result;
     }
 
@@ -353,6 +391,13 @@ public class Slide implements Parcelable {
         dest.writeValue(this.imageResource);
         dest.writeValue(this.color);
         dest.writeValue(this.colorResource);
-        dest.writeParcelable(this.option, 0);
+        dest.writeParcelable(this.option, flags);
+        dest.writeSerializable(this.customViewBuilder);
+    }
+
+    public interface CustomViewBuilder extends Serializable {
+
+        @NonNull
+        View buildView(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent);
     }
 }
