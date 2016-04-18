@@ -98,6 +98,7 @@ public class IntroductionFragment extends Fragment {
         }
 
         root.setBackgroundColor(slide.getColor());
+        root.setTag(slide.getPosition());
 
         return root;
     }

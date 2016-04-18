@@ -37,6 +37,9 @@ import com.rubengees.introduction.IntroductionConfiguration;
 import com.rubengees.introduction.entity.Option;
 import com.rubengees.introduction.entity.Slide;
 import com.rubengees.introduction.style.FullscreenStyle;
+import com.rubengees.introductionsample.transformer.ColorPageTransformer;
+import com.rubengees.introductionsample.transformer.DepthPageTransformer;
+import com.rubengees.introductionsample.transformer.ZoomOutPageTransformer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +79,8 @@ public class MainActivity extends AppCompatActivity {
                 result += option.getPosition() + (option.isActivated() ? " enabled" : " disabled");
             }
 
-            Snackbar.make(findViewById(android.R.id.content), result, Snackbar.LENGTH_LONG).show();
+            //noinspection ConstantConditions
+            Snackbar.make(findViewById(R.id.root), result, Snackbar.LENGTH_LONG).show();
         }
     }
 
@@ -130,6 +134,24 @@ public class MainActivity extends AppCompatActivity {
         new IntroductionBuilder(this).withSlides(generateSlides())
                 .withOnSlideListener(defaultOnSlideListener)
                 .withPageTransformer(new ZoomOutPageTransformer()).introduceMyself();
+    }
+
+    public void onZoomOutClick(View view) {
+        new IntroductionBuilder(this).withSlides(generateSlides())
+                .withOnSlideListener(defaultOnSlideListener)
+                .withPageTransformer(new ZoomOutPageTransformer()).introduceMyself();
+    }
+
+    public void onDepthClick(View view) {
+        new IntroductionBuilder(this).withSlides(generateSlides())
+                .withOnSlideListener(defaultOnSlideListener)
+                .withPageTransformer(new DepthPageTransformer()).introduceMyself();
+    }
+
+    public void onColorTransformationClick(View view) {
+        new IntroductionBuilder(this).withSlides(generateSlides())
+                .withOnSlideListener(defaultOnSlideListener)
+                .withPageTransformer(new ColorPageTransformer()).introduceMyself();
     }
 
     public void onCustomIndicatorClick(View view) {
