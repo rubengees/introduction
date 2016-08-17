@@ -1,13 +1,13 @@
 buildscript {
-    ext.support_version = '24.0.0'
-    ext.build_tools_version = '24'
+    ext.support_version = '24.2.0'
+    ext.build_tools_version = '24.0.1'
 
     repositories {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.0-alpha3'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'
+        classpath 'com.android.tools.build:gradle:2.2.0-beta1'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
     }
 }
 
