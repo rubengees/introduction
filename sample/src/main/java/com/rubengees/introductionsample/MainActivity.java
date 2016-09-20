@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                                            @NonNull ImageView image, @NonNull TextView description) {
                     if (position % 3 == 1) {
                         Glide.with(image.getContext()).load(R.drawable.image3)
-                                .diskCacheStrategy(DiskCacheStrategy.SOURCE).into(image);
+                                .diskCacheStrategy(DiskCacheStrategy.NONE).into(image);
                     }
                 }
             };
