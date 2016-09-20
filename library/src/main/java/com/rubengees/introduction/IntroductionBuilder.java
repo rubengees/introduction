@@ -60,6 +60,7 @@ public class IntroductionBuilder {
     static final String BUNDLE_ALLOW_BACK_PRESS = "introduction_allow_back_press";
 
     private static final String EXCEPTION_SLIDE_AMOUNT_MESSAGE = "You must add at least one slide.";
+    private static final String EXCEPTION_NO_SLIDES_MESSAGE = "You need to add slides.";
 
     private Activity context;
     private ArrayList<Slide> slides;
@@ -263,7 +264,7 @@ public class IntroductionBuilder {
 
     private void check() {
         if (slides == null) {
-            throw new RuntimeException("You need to add slides.");
+            throw new IntroductionConfigurationException(EXCEPTION_NO_SLIDES_MESSAGE);
         }
 
         if (style == null) {
