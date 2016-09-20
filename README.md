@@ -5,6 +5,8 @@ Show a beautiful Intro to your users with ease.
 
 ![](art/screenshot_gallery.png)
 
+You can download the latest sample app [here](https://github.com/rubengees/introduction/releases/download/1.3.4/sample-release.apk).
+
 ### Table of contents
 
 - [Include in your Project](#include-in-your-project)   
