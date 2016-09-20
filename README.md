@@ -1,8 +1,5 @@
 
-# Introduction [ ![Download](https://img.shields.io/github/release/rubengees/introduction.svg?label=JitPack) ](https://jitpack.io/#rubengees/introduction/) [![Licence](https://img.shields.io/badge/Licence-Apache--2.0-brightgreen.svg)](https://www.apache.org/licenses/LICENSE-2.0)
-[![Android Gems](http://www.android-gems.com/badge/RubenGees/Introduction.svg?branch=master)](http://www.android-gems.com/lib/RubenGees/Introduction)
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Introduction-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/2498)
-[![AndroidLibs](https://img.shields.io/badge/AndroidLibs-Introduction-brightgreen.svg?style=flat)](https://android-libs.com/lib/introduction?utm_source=github-badge&utm_medium=github-badge&utm_campaign=github-badge)
+# Introduction [![Download](https://img.shields.io/github/release/rubengees/introduction.svg?label=JitPack)](https://jitpack.io/#rubengees/introduction/) ![API](https://img.shields.io/badge/API-9%2B-blue.svg)
 
 Show a beautiful Intro to your users with ease.
 
@@ -75,7 +72,7 @@ new Slide().withTitle("Feature is doing something").withOption(new Option("Enabl
           .withColorResource(R.color.orange).withImage(R.drawable.image));
 ```
 
-When the user completes the intro, you will receive the selected Options in `onActivityResult`. 
+When the user completes the intro, you will receive the selected Options in `onActivityResult`.
 To read the result:
 
 ```java
@@ -166,7 +163,7 @@ To apply one of those styles, do the following:
 
 ```java
 new IntroductionBuilder(this).withSlides(generateSlides())
-                .withStyle(IntroductionBuilder.STYLE_FULLSCREEN).introduceMyself();
+                .withStyle(new FullscreenStyle()).introduceMyself();
 ```
 
 `Translucent` is the default style.
@@ -203,21 +200,22 @@ If you set a CustomViewBuilder to your Slide, all other values aside from the co
 
 A much more detailed explanation with all available APIs can be found in the [Wiki](https://github.com/RubenGees/Introduction/wiki).
 
-### Minimum Sdk
-
-The minimum required sdk is 8 (2.2 Froyo)
-
 ### Upgrade Guide
 
 #### 1.1.0 to 1.1.1+
 
-- The 'OnSlideInit' method in the `OnSlideListener` now comes without the `Fragment context`. If you need a `Context`, call `image.getContext()`.
-- There is now a class for Styles instead of an Integer. If you apply no Style, you have to do nothing, if you use one, change it to the following e.g.: `.withStyle(new FullscreenStyle())`. 
+- The `OnSlideInit` method in the `OnSlideListener` now comes without the `Fragment context`. If you need a `Context`, call `image.getContext()`.
+- There is now a class for Styles instead of an Integer. If you apply no Style, you have to do nothing, if you use one, change it to the following e.g.: `.withStyle(new FullscreenStyle())`.
 
 #### 1.0.x to 1.1.0+
 
-- The 'OnSlideChangedListener' was renamed to 'OnSlideListener'. Just rename it and it's working again.
-- Asynchronous image loading is now available (and recomended!). See the 'Use GIFs as drawables' section for more info. It applies for all types of images. GIFs won't work without asynchronous loading from now on!
+- The `OnSlideChangedListener` was renamed to `OnSlideListener`. Just rename it and it's working again.
+- Asynchronous image loading is now available (and recomended!). See the [Use GIFs as drawables](#Use-Gifs-as-images) section for more info. It applies for all types of images. GIFs won't work without asynchronous loading from now on!
+
+### Metrics
+
+<a href="http://www.methodscount.com/?lib=com.github.rubengees%3Aintroduction%3A1.3.3"><img src="https://img.shields.io/badge/Methods and size-core: 281 | deps: 17087 | 63 KB-e91e63.svg"/></a>  
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2c56559b0732423eb976dc4aa56ab95a)](https://www.codacy.com/app/geesruben/introduction?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rubengees/introduction&amp;utm_campaign=Badge_Grade)
 
 ### Acknowledgments
 

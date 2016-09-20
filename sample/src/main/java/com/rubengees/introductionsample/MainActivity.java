@@ -130,12 +130,6 @@ public class MainActivity extends AppCompatActivity {
                 .withOnSlideListener(defaultOnSlideListener).introduceMyself();
     }
 
-    public void onCustomAnimatorsClick(View view) {
-        new IntroductionBuilder(this).withSlides(generateSlides())
-                .withOnSlideListener(defaultOnSlideListener)
-                .withPageTransformer(new ZoomOutPageTransformer()).introduceMyself();
-    }
-
     public void onZoomOutClick(View view) {
         new IntroductionBuilder(this).withSlides(generateSlides())
                 .withOnSlideListener(defaultOnSlideListener)
@@ -207,6 +201,7 @@ public class MainActivity extends AppCompatActivity {
         slides.add(0, new Slide().withTitle("Permission Request")
                 .withDescription("You can request permissions with the listener")
                 .withColorResource(R.color.purple));
+
         new IntroductionBuilder(this).withSlides(slides)
                 .withOnSlideListener(new OnSlideListener() {
                     @Override
@@ -292,7 +287,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == 12) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
                 Toast.makeText(MainActivity.this, "Permission was granted successfully",
                         Toast.LENGTH_SHORT).show();
             }
