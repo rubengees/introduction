@@ -91,7 +91,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 }
 ```
 
-The constant value of the requst is 32142, so don't use that yourself.
+The constant value of the request is 32142, so don't use that yourself.
 It is possible that the user cancels the intro. If that happens, the resultCode is `RESULT_CANCELLED` and no Options are passed back.
 
 ##### Use Gifs as images
@@ -114,7 +114,7 @@ new IntroductionBuilder(this).withSlides(slides)
 
 This will add the GIF, which will be automatically played when the users navigates to the Slide.
 
-##### Runtime Premissions
+##### Runtime Permissions
 
 Android Marshmallow introduced Runtime Permissions, which can be requested easily with this lib.
 To do that, you can add a global listener like the following:
@@ -194,7 +194,7 @@ new IntroductionBuilder(this)
                 .withColorResource(R.color.cyan)).introduceMyself();
 ```
 
-If you set a CustomViewBuilder to your Slide, all other values aside from the color are overriden. You have to manage all on your own.
+If you set a CustomViewBuilder to your Slide, all other values aside from the color are overridden. You have to manage all on your own.
 
 ##### Further reading
 
@@ -210,7 +210,7 @@ A much more detailed explanation with all available APIs can be found in the [Wi
 #### 1.0.x to 1.1.0+
 
 - The `OnSlideChangedListener` was renamed to `OnSlideListener`. Just rename it and it's working again.
-- Asynchronous image loading is now available (and recomended!). See the [Use GIFs as drawables](#Use-Gifs-as-images) section for more info. It applies for all types of images. GIFs won't work without asynchronous loading from now on!
+- Asynchronous image loading is now available (and recommended!). See the [Use GIFs as drawables](#Use-Gifs-as-images) section for more info. It applies for all types of images. GIFs won't work without asynchronous loading from now on!
 
 ### Metrics
 

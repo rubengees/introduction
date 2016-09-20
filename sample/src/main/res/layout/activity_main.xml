@@ -23,103 +23,103 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onDefaultClick"
-                android:text="Default" />
+                android:text="@string/button_default" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onFullscreenClick"
-                android:text="Fullscreen" />
+                android:text="@string/button_fullscreen" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onZoomOutClick"
-                android:text="Zoom Out Animation" />
+                android:text="@string/button_zoom_out_animation" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onDepthClick"
-                android:text="Depth Animation" />
+                android:text="@string/button_depth_animation" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onColorTransformationClick"
-                android:text="Color Transformation Animation" />
+                android:text="@string/button_color_transformation_animation" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onCustomIndicatorClick"
-                android:text="Custom Indicator" />
+                android:text="@string/button_custom_indicator" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onCustomButtonsClick"
-                android:text="Custom Buttons" />
+                android:text="@string/button_custom_buttons" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onNoIndicatorClick"
-                android:text="No Indicator" />
+                android:text="@string/button_no_indicator" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onPortraitOnlyClick"
-                android:text="Portrait only" />
+                android:text="@string/button_portrait_only" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="OnRequestPermissionClick"
-                android:text="Permission request" />
+                android:text="@string/button_permission_request" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="OnTextFromResourcesClick"
-                android:text="Text from resources" />
+                android:text="@string/button_text_from_resources" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onLongStringsClick"
-                android:text="Long Strings" />
+                android:text="@string/button_long_strings" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="OnAsynchronousClick"
-                android:text="Asynchronous" />
+                android:text="@string/button_asynchronous" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onManySlidesClick"
-                android:text="Many Slides" />
+                android:text="@string/button_many_slides" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onSkipClick"
-                android:text="Skip" />
+                android:text="@string/button_skip" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onBackPressClick"
-                android:text="Back press" />
+                android:text="@string/button_back_press" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onCustomViewClick"
-                android:text="Custom view" />
+                android:text="@string/button_custom_view" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

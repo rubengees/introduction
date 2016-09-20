@@ -31,7 +31,8 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:gravity="center"
-        app:layout_heightPercent="44%" />
+        app:layout_heightPercent="44%"
+        tools:ignore="ContentDescription" />
 
     <FrameLayout
         android:id="@+id/introduction_fragment_default_content_description_container"

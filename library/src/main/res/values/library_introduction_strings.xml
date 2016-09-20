@@ -1,19 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Support for AboutLibraries by Mike Penz (https://github.com/mikepenz/AboutLibraries) -->
+<?xml version="1.0" encoding="utf-8"?><!-- Support for AboutLibraries by Mike Penz (https://github.com/mikepenz/AboutLibraries) -->
 <resources xmlns:tools="http://schemas.android.com/tools">
-	<string name="define_introduction" tools:ignore="UnusedResources" />
-	<!-- Author section -->
-	<string name="library_introduction_author">Ruben Gees</string>
-	<string name="library_introduction_authorWebsite" tools:ignore="UnusedResources">https://github.com/RubenGees</string>
-	<!-- Library section -->
-	<string name="library_introduction_libraryName" tools:ignore="UnusedResources">Introduction</string>
-	<string name="library_introduction_libraryDescription" tools:ignore="UnusedResources">Show a beautiful Intro to your users with ease.</string>
-	<string name="library_introduction_libraryWebsite" tools:ignore="UnusedResources">https://github.com/RubenGees/Introduction</string>
-	<string name="library_introduction_libraryVersion" tools:ignore="UnusedResources">1.0.4</string>
-	<!-- OpenSource section -->
-	<string name="library_introduction_isOpenSource" tools:ignore="UnusedResources">true</string>
-	<string name="library_introduction_repositoryLink" tools:ignore="UnusedResources">https://github.com/RubenGees/Introduction</string>
-	<!-- License section -->
-	<string name="library_introduction_licenseId" tools:ignore="UnusedResources">apache_2_0</string>
-	<!-- Custom variables section -->
+    <string name="define_introduction" tools:ignore="UnusedResources" />
+    <!-- Author section -->
+    <string name="library_introduction_author" tools:ignore="UnusedResources">Ruben Gees</string>
+    <string name="library_introduction_authorWebsite" tools:ignore="UnusedResources">https://github.com/RubenGees</string>
+    <!-- Library section -->
+    <string name="library_introduction_libraryName" tools:ignore="UnusedResources">Introduction</string>
+    <string name="library_introduction_libraryDescription" tools:ignore="UnusedResources">Show a beautiful Intro to your users with ease.</string>
+    <string name="library_introduction_libraryWebsite" tools:ignore="UnusedResources">https://github.com/RubenGees/Introduction</string>
+    <string name="library_introduction_libraryVersion" tools:ignore="UnusedResources">1.0.4</string>
+    <!-- OpenSource section -->
+    <string name="library_introduction_isOpenSource" tools:ignore="UnusedResources">true</string>
+    <string name="library_introduction_repositoryLink" tools:ignore="UnusedResources">https://github.com/RubenGees/Introduction</string>
+    <!-- License section -->
+    <string name="library_introduction_licenseId" tools:ignore="UnusedResources">apache_2_0</string>
+    <!-- Custom variables section -->
 </resources>

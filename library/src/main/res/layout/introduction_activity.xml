@@ -40,7 +40,8 @@
                 android:layout_alignParentStart="true"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/introduction_ic_arrow_previous"
-                android:visibility="invisible" />
+                android:visibility="invisible"
+                tools:ignore="ContentDescription" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -76,7 +77,8 @@
                 android:layout_alignParentRight="true"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/introduction_ic_arrow_next"
-                android:visibility="invisible" />
+                android:visibility="invisible"
+                tools:ignore="ContentDescription" />
 
         </android.support.percent.PercentRelativeLayout>
     </FrameLayout>

@@ -126,7 +126,7 @@ public class IntroductionBuilder {
     }
 
     /**
-     * Assignes a custom IndicatorManager. If this Method is not called, the
+     * Assigns a custom IndicatorManager. If this Method is not called, the
      * {@link com.rubengees.introduction.common.DotIndicatorManager} will be used by default.
      *
      * @param manager The IndicatorManager.
@@ -228,7 +228,7 @@ public class IntroductionBuilder {
     }
 
     /**
-     * Assignes a
+     * Assigns a
      * {@link com.rubengees.introduction.IntroductionConfiguration.OnSlideListener} to the
      * Activity.
      *

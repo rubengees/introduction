@@ -8,4 +8,23 @@
     <string name="slide_option">Option</string>
     <string name="slide_option_description">This is an option</string>
     <string name="skip">Skip</string>
+    <string name="button_default">Default</string>
+    <string name="button_fullscreen">Fullscreen</string>
+    <string name="button_zoom_out_animation">Zoom Out Animation</string>
+    <string name="button_depth_animation">Depth Animation</string>
+    <string name="button_color_transformation_animation">Color Transformation Animation</string>
+    <string name="button_custom_indicator">Custom Indicator</string>
+    <string name="button_custom_buttons">Custom Buttons</string>
+    <string name="button_no_indicator">No Indicator</string>
+    <string name="button_portrait_only">Portrait only</string>
+    <string name="button_permission_request">Permission request</string>
+    <string name="button_text_from_resources">Text from resources</string>
+    <string name="button_long_strings">Long Strings</string>
+    <string name="button_asynchronous">Asynchronous</string>
+    <string name="button_many_slides">Many Slides</string>
+    <string name="button_skip">Skip</string>
+    <string name="button_back_press">Back press</string>
+    <string name="button_custom_view">Custom view</string>
+    <string name="layout_custom_1_text">This is a custom view</string>
+    <string name="layout_custom_2_text">This is another custom view</string>
 </resources>

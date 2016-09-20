@@ -4,6 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:text="This is another custom view"
+    android:text="@string/layout_custom_2_text"
     android:textAppearance="?android:attr/textAppearanceLarge"
     android:textColor="@android:color/white" />
