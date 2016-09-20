@@ -25,7 +25,6 @@ dependencies {
     compile "com.android.support:percent:$support_version"
 }
 
-// build a jar with source files
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier = 'sources'
@@ -33,12 +32,12 @@ task sourcesJar(type: Jar) {
 
 task javadoc(type: Javadoc) {
     failOnError false
+    options.memberLevel = JavadocMemberLevel.PUBLIC
     source = android.sourceSets.main.java.sourceFiles
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
     classpath += configurations.compile
 }
 
-// build a jar with javadoc
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
     from javadoc.getDestinationDir()
