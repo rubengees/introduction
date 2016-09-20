@@ -76,13 +76,13 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="OnRequestPermissionClick"
+                android:onClick="onRequestPermissionClick"
                 android:text="@string/button_permission_request" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="OnTextFromResourcesClick"
+                android:onClick="onTextFromResourcesClick"
                 android:text="@string/button_text_from_resources" />
 
             <Button
@@ -94,7 +94,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="OnAsynchronousClick"
+                android:onClick="onAsynchronousClick"
                 android:text="@string/button_asynchronous" />
 
             <Button

@@ -46,16 +46,13 @@ public class IntroductionFragment extends Fragment {
     private Slide slide;
     private View root;
 
-    public IntroductionFragment() {
-        // Required empty public constructor
-    }
-
     public static IntroductionFragment newInstance(@NonNull Slide slide) {
         IntroductionFragment fragment = new IntroductionFragment();
         Bundle args = new Bundle();
-        args.putParcelable(BUNDLE_SLIDE, slide);
 
+        args.putParcelable(BUNDLE_SLIDE, slide);
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -69,7 +66,7 @@ public class IntroductionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        root = initViews(inflater, container, savedInstanceState);
+        root = initViews(inflater, container);
 
         getIntroductionActivity().getStyle().applyStyleOnFragmentView(this, root);
 
@@ -84,8 +81,7 @@ public class IntroductionFragment extends Fragment {
     }
 
     @NonNull
-    private View initViews(@NonNull LayoutInflater inflater, @NonNull ViewGroup container,
-                           @Nullable Bundle savedInstanceState) {
+    private View initViews(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
         ViewGroup root =
                 (ViewGroup) inflater.inflate(R.layout.introduction_fragment, container, false);
         ViewGroup contentContainer =

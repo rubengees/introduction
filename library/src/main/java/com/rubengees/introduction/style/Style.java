@@ -45,7 +45,7 @@ public abstract class Style implements Serializable {
      * @param root     The root of the Activity.
      */
     public void applyStyleOnActivityView(@NonNull Activity activity, @NonNull View root) {
-
+        // To be implemented by the user
     }
 
     /**
@@ -55,7 +55,7 @@ public abstract class Style implements Serializable {
      * @param root     The root view of the fragment.
      */
     public void applyStyleOnFragmentView(@NonNull Fragment fragment, @NonNull View root) {
-
+        // To be implemented by the user
     }
 
 }

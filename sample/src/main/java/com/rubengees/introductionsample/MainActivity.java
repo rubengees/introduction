@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
                 .withStyle(new FullscreenStyle()).introduceMyself();
     }
 
-    public void OnTextFromResourcesClick(View view) {
+    public void onTextFromResourcesClick(View view) {
         new IntroductionBuilder(this).withSlides(generateResourceSlides())
                 .withOnSlideListener(defaultOnSlideListener).withSkipEnabled(R.string.skip)
                 .introduceMyself();
@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
                 .introduceMyself();
     }
 
-    public void OnRequestPermissionClick(View view) {
+    public void onRequestPermissionClick(View view) {
         List<Slide> slides = generateSlides();
 
         slides.add(0, new Slide().withTitle("Permission Request")
@@ -231,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
                 }).introduceMyself();
     }
 
-    public void OnAsynchronousClick(View view) {
+    public void onAsynchronousClick(View view) {
         List<Slide> slides = new ArrayList<>();
 
         slides.add(0, new Slide().withTitle("Asynchronous")
@@ -285,11 +285,10 @@ public class MainActivity extends AppCompatActivity {
                                            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == 12) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(MainActivity.this, "Permission was granted successfully",
-                        Toast.LENGTH_SHORT).show();
-            }
+        if (requestCode == 12 && grantResults.length > 0 &&
+                grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(MainActivity.this, "Permission was granted successfully",
+                    Toast.LENGTH_SHORT).show();
         }
     }
 }

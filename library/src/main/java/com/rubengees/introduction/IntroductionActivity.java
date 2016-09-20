@@ -130,7 +130,7 @@ public class IntroductionActivity extends AppCompatActivity {
                             consumed = true;
                         }
 
-                        for (int i = 0, count = pager.getChildCount(); i < count; i++) {
+                        for (int i = 0; i < pager.getChildCount(); i++) {
                             ViewCompat.dispatchApplyWindowInsets(pager.getChildAt(i), insets);
 
                             if (insets.isConsumed()) {
@@ -227,9 +227,7 @@ public class IntroductionActivity extends AppCompatActivity {
             if (showIndicator) {
                 indicatorManager = new DotIndicatorManager();
             }
-        }
-
-        if (indicatorManager != null) {
+        } else {
             indicatorContainer.addView(indicatorManager.init(LayoutInflater.from(this),
                     indicatorContainer, slides.size()));
         }
@@ -261,7 +259,7 @@ public class IntroductionActivity extends AppCompatActivity {
             @Override
             public void onPageScrolled(int position, float positionOffset,
                                        int positionOffsetPixels) {
-
+                // Not needed
             }
 
             @Override
@@ -277,7 +275,7 @@ public class IntroductionActivity extends AppCompatActivity {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
+                // Not needed
             }
         });
 

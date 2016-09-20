@@ -98,12 +98,12 @@ public class IntroductionConfiguration {
 
     public static abstract class OnSlideListener {
         protected void onSlideChanged(int from, int to) {
-
+            // To be implemented by the user
         }
 
         protected void onSlideInit(int position, @NonNull TextView title, @NonNull ImageView image,
                                    @NonNull TextView description) {
-
+            // To be implemented by the user
         }
     }
 }
