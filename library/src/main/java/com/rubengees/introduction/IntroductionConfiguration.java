@@ -32,7 +32,7 @@ import com.rubengees.introduction.interfaces.IndicatorManager;
  * @author Ruben Gees
  */
 public final class IntroductionConfiguration {
-    private static IntroductionConfiguration INSTANCE = new IntroductionConfiguration();
+    private static IntroductionConfiguration INSTANCE;
 
     private OnSlideListener onSlideListener;
     private ViewPager.PageTransformer pageTransformer;

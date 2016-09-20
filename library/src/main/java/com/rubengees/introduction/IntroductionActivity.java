@@ -223,11 +223,11 @@ public class IntroductionActivity extends AppCompatActivity {
                 skipText != null, slides.size());
         indicatorManager = configuration.getIndicatorManager();
 
-        if (indicatorManager == null) {
-            if (showIndicator) {
-                indicatorManager = new DotIndicatorManager();
-            }
-        } else {
+        if (indicatorManager == null && showIndicator) {
+            indicatorManager = new DotIndicatorManager();
+        }
+
+        if (indicatorManager != null) {
             indicatorContainer.addView(indicatorManager.init(LayoutInflater.from(this),
                     indicatorContainer, slides.size()));
         }
