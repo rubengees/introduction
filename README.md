@@ -5,15 +5,35 @@ Show a beautiful Intro to your users with ease.
 
 ![](art/screenshot_gallery.png)
 
+### Table of contents
+
+- [Include in your Project](#include-in-your-project)   
+- [Usage](#usage)   
+  - [Options](#options)   
+  - [Use Gifs as images](#use-gifs-as-images)   
+  - [Runtime Permissions](#runtime-permissions)   
+  - [Styles](#styles)   
+  - [Custom Views](#custom-views)   
+  - [Further reading](#further-reading)   
+- [Upgrade Guide](#upgrade-guide)   
+  - [1.1.0 to 1.1.1+](#110-to-111)   
+  - [1.0.x to 1.1.0+](#10x-to-110)   
+- [Metrics](#metrics)   
+- [Acknowledgments](#acknowledgments)
+
 ### Include in your Project
 
-Add this to your build.gradle:
+Add this to your root `build.gradle` (usually in the root of your project):
 
 ```groovy
 repositories {
     maven { url "https://jitpack.io" }
 }
+```
 
+And this to your module `build.gradle` (usually in the `app` directory):
+
+```groovy
 dependencies {
     compile ('com.github.rubengees:introduction:1.3.4@aar'){
         transitive = true;
