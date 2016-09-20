@@ -43,11 +43,15 @@ public final class IntroductionConfiguration {
     }
 
     @NonNull
-    static IntroductionConfiguration getInstance() {
+    synchronized static IntroductionConfiguration getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new IntroductionConfiguration();
+        }
+
         return INSTANCE;
     }
 
-    static void destroy() {
+    synchronized static void destroy() {
         if (INSTANCE != null) {
             INSTANCE.onSlideListener = null;
             INSTANCE.pageTransformer = null;

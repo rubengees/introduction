@@ -44,8 +44,6 @@ import com.rubengees.introductionsample.transformer.ZoomOutPageTransformer;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.rubengees.introduction.IntroductionConfiguration.OnSlideListener;
-
 public class MainActivity extends AppCompatActivity {
 
     private IntroductionConfiguration.OnSlideListener defaultOnSlideListener =
@@ -203,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
                 .withColorResource(R.color.purple));
 
         new IntroductionBuilder(this).withSlides(slides)
-                .withOnSlideListener(new OnSlideListener() {
+                .withOnSlideListener(new IntroductionConfiguration.OnSlideListener() {
                     @Override
                     public void onSlideChanged(int from, int to) {
                         if (from == 0 && to == 1) {
@@ -242,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
                 .withColorResource(R.color.indigo));
 
         new IntroductionBuilder(this).withSlides(slides)
-                .withOnSlideListener(new OnSlideListener() {
+                .withOnSlideListener(new IntroductionConfiguration.OnSlideListener() {
                     @Override
                     protected void onSlideInit(int position, @NonNull TextView title,
                                                @NonNull ImageView image, @NonNull TextView description) {

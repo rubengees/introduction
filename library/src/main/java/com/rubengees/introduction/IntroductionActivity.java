@@ -118,27 +118,27 @@ public class IntroductionActivity extends AppCompatActivity {
                     @Override
                     public WindowInsetsCompat onApplyWindowInsets(View v,
                                                                   WindowInsetsCompat insets) {
-                        insets = ViewCompat.onApplyWindowInsets(v, insets);
+                        WindowInsetsCompat newInsets = ViewCompat.onApplyWindowInsets(v, insets);
 
-                        if (insets.isConsumed()) {
-                            return insets;
+                        if (newInsets.isConsumed()) {
+                            return newInsets;
                         }
 
                         boolean consumed = false;
 
-                        if (insets.isConsumed()) {
+                        if (newInsets.isConsumed()) {
                             consumed = true;
                         }
 
                         for (int i = 0; i < pager.getChildCount(); i++) {
-                            ViewCompat.dispatchApplyWindowInsets(pager.getChildAt(i), insets);
+                            ViewCompat.dispatchApplyWindowInsets(pager.getChildAt(i), newInsets);
 
-                            if (insets.isConsumed()) {
+                            if (newInsets.isConsumed()) {
                                 consumed = true;
                             }
                         }
 
-                        return consumed ? insets.consumeSystemWindowInsets() : insets;
+                        return consumed ? newInsets.consumeSystemWindowInsets() : newInsets;
                     }
                 });
     }

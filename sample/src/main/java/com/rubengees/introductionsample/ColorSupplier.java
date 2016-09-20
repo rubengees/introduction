@@ -14,11 +14,14 @@ import com.rubengees.introductionsample.transformer.ColorPageTransformer;
  *
  * @author Ruben Gees
  */
-public class ColorSupplier {
+public final class ColorSupplier {
 
     private static final String ILLEAGAL_ARGUMENT_POSITION_MESSAGE = "The position cannot be " +
             "larger than the amount of colors";
     private static Integer[] colors = new Integer[]{R.color.green, R.color.indigo, R.color.orange};
+
+    private ColorSupplier() {
+    }
 
     @ColorInt
     public static int getColorResForPosition(int position) {

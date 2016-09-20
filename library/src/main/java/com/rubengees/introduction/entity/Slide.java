@@ -32,6 +32,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.rubengees.introduction.exception.IntroductionConfigurationException;
+
 import java.io.Serializable;
 
 /**
@@ -50,6 +52,9 @@ public class Slide implements Parcelable {
             return new Slide[size];
         }
     };
+
+    private static final String EXCEPTION_COLOR_MESSAGE = "You must add a color to each slide";
+
     private int position;
     private String title;
     private Integer titleResource;
@@ -332,7 +337,7 @@ public class Slide implements Parcelable {
         }
 
         if (color == null) {
-            throw new RuntimeException("You must add a color to each slide");
+            throw new IntroductionConfigurationException(EXCEPTION_COLOR_MESSAGE);
         }
     }
 

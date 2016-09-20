@@ -26,6 +26,7 @@ import android.support.annotation.StringRes;
 import android.support.v4.view.ViewPager;
 
 import com.rubengees.introduction.entity.Slide;
+import com.rubengees.introduction.exception.IntroductionConfigurationException;
 import com.rubengees.introduction.interfaces.IndicatorManager;
 import com.rubengees.introduction.style.Style;
 import com.rubengees.introduction.style.TranslucentStyle;
@@ -57,6 +58,8 @@ public class IntroductionBuilder {
     static final String BUNDLE_SKIP_STRING = "introduction_skip_string";
     static final String BUNDLE_SKIP_RESOURCE = "introduction_skip_resource";
     static final String BUNDLE_ALLOW_BACK_PRESS = "introduction_allow_back_press";
+
+    private static final String EXCEPTION_SLIDE_AMOUNT_MESSAGE = "You must add at least one slide.";
 
     private Activity context;
     private ArrayList<Slide> slides;
@@ -90,7 +93,7 @@ public class IntroductionBuilder {
     @NonNull
     public IntroductionBuilder withSlides(@NonNull @Size(min = 1) List<Slide> slides) {
         if (slides.isEmpty()) {
-            throw new IllegalArgumentException("You must add at least one slide.");
+            throw new IntroductionConfigurationException(EXCEPTION_SLIDE_AMOUNT_MESSAGE);
         }
 
         this.slides.addAll(new ArrayList<>(slides));
