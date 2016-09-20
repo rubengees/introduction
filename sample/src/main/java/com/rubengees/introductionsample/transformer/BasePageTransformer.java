@@ -4,7 +4,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 /**
- * TODO: Describe class
+ * Base class for all ViewPager transformer, simplifying implementation.
  *
  * @author Ruben Gees
  */

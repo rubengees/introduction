@@ -25,7 +25,10 @@ import android.support.annotation.NonNull;
  *
  * @author Ruben Gees
  */
-public class OrientationUtils {
+public final class OrientationUtils {
+
+    private OrientationUtils() {
+    }
 
     /**
      * Sets the orientation to landscape.

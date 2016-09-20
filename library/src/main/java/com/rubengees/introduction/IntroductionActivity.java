@@ -87,7 +87,7 @@ public class IntroductionActivity extends AppCompatActivity {
 
     private int orientation;
 
-    private int previousPagerPosition = 0;
+    private int previousPagerPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -31,8 +31,8 @@ import com.rubengees.introduction.interfaces.IndicatorManager;
  *
  * @author Ruben Gees
  */
-public class IntroductionConfiguration {
-    private static IntroductionConfiguration INSTANCE;
+public final class IntroductionConfiguration {
+    private static IntroductionConfiguration INSTANCE = new IntroductionConfiguration();
 
     private OnSlideListener onSlideListener;
     private ViewPager.PageTransformer pageTransformer;
@@ -44,10 +44,6 @@ public class IntroductionConfiguration {
 
     @NonNull
     static IntroductionConfiguration getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new IntroductionConfiguration();
-        }
-
         return INSTANCE;
     }
 
@@ -96,7 +92,11 @@ public class IntroductionConfiguration {
         }
     }
 
-    public static abstract class OnSlideListener {
+    public static class OnSlideListener {
+
+        protected OnSlideListener() {
+        }
+
         protected void onSlideChanged(int from, int to) {
             // To be implemented by the user
         }

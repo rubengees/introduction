@@ -16,13 +16,14 @@ import com.rubengees.introductionsample.transformer.ColorPageTransformer;
  */
 public class ColorSupplier {
 
+    private static final String ILLEAGAL_ARGUMENT_POSITION_MESSAGE = "The position cannot be " +
+            "larger than the amount of colors";
     private static Integer[] colors = new Integer[]{R.color.green, R.color.indigo, R.color.orange};
 
     @ColorInt
     public static int getColorResForPosition(int position) {
         if (position > colors.length) {
-            throw new IllegalArgumentException("The position cannot be larger than the amount of " +
-                    "colors");
+            throw new IllegalArgumentException(ILLEAGAL_ARGUMENT_POSITION_MESSAGE);
         }
 
         return colors[position];
@@ -31,8 +32,7 @@ public class ColorSupplier {
     @ColorInt
     public static int getColorForPosition(@NonNull Context context, int position) {
         if (position > colors.length) {
-            throw new IllegalArgumentException("The position cannot be larger than the amount of " +
-                    "colors");
+            throw new IllegalArgumentException(ILLEAGAL_ARGUMENT_POSITION_MESSAGE);
         }
 
         return ContextCompat.getColor(context, colors[position]);

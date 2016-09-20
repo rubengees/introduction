@@ -89,7 +89,7 @@ public class IntroductionBuilder {
      */
     @NonNull
     public IntroductionBuilder withSlides(@NonNull @Size(min = 1) List<Slide> slides) {
-        if (slides.size() < 1) {
+        if (slides.isEmpty()) {
             throw new IllegalArgumentException("You must add at least one slide.");
         }
 

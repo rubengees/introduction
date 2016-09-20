@@ -21,9 +21,9 @@ package com.rubengees.introduction.exception;
  *
  * @author Ruben Gees
  */
-public class ConfigurationException extends RuntimeException {
+public class IntroductionConfigurationException extends RuntimeException {
 
-    public ConfigurationException() {
-        super("Don't call this method while constructing the IntroductionBuilder");
+    public IntroductionConfigurationException(String message) {
+        super(message);
     }
 }
