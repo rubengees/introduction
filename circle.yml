@@ -13,6 +13,7 @@ dependencies:
     - echo y | android update sdk --no-ui --all --filter "extra-android-support"
     - echo y | android update sdk --no-ui --all --filter "android-24"
     - echo y | android update sdk --no-ui --all --filter "build-tools-24.0.2"
+    - echo y | android update sdk --no-ui --all --filter "platform-tools"
   override:
     - ./gradlew dependencies -Dorg.gradle.daemon=false --console=plain
 
