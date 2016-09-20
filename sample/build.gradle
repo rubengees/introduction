@@ -8,9 +8,10 @@ android {
         applicationId "com.rubengees.introductionsample"
         minSdkVersion 11
         targetSdkVersion 24
-        versionCode 19
-        versionName "1.3.3"
+        versionCode 20
+        versionName "1.3.4"
     }
+
     buildTypes {
         release {
             minifyEnabled true

@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    compile ('com.github.rubengees:introduction:1.3.3@aar'){
+    compile ('com.github.rubengees:introduction:1.3.4@aar'){
         transitive = true;
     }
 }
@@ -199,6 +199,7 @@ If you set a CustomViewBuilder to your Slide, all other values aside from the co
 ##### Further reading
 
 A much more detailed explanation with all available APIs can be found in the [Wiki](https://github.com/RubenGees/Introduction/wiki).
+Detailed Javadoc can be found [here](https://jitpack.io/com/github/rubengees/introduction/1.3.4/javadoc/).
 
 ### Upgrade Guide
 
@@ -214,7 +215,7 @@ A much more detailed explanation with all available APIs can be found in the [Wi
 
 ### Metrics
 
-<a href="http://www.methodscount.com/?lib=com.github.rubengees%3Aintroduction%3A1.3.3"><img src="https://img.shields.io/badge/Methods and size-core: 281 | deps: 17087 | 63 KB-e91e63.svg"/></a>  
+<a href="http://www.methodscount.com/?lib=com.github.rubengees%3Aintroduction%3A1.3.4"><img src="https://img.shields.io/badge/Methods and size-core: 281 | deps: 17087 | 63 KB-e91e63.svg"/></a>  
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2c56559b0732423eb976dc4aa56ab95a)](https://www.codacy.com/app/geesruben/introduction?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rubengees/introduction&amp;utm_campaign=Badge_Grade)
 
 ### Acknowledgments
