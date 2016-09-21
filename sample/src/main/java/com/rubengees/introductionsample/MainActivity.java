@@ -47,7 +47,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String ERROR_API_LEVEL = "You need at least API 11 for this feature";
+    private static final String ERROR_API_LEVEL = "You need at least API 11 for this feature";
+
     private IntroductionConfiguration.OnSlideListener defaultOnSlideListener =
             new IntroductionConfiguration.OnSlideListener() {
                 @Override
