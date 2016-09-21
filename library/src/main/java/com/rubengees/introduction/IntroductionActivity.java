@@ -26,12 +26,12 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.WindowInsetsCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatImageButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 
 import com.rubengees.introduction.adapter.PagerAdapter;
 import com.rubengees.introduction.common.DotIndicatorManager;
@@ -70,8 +70,8 @@ public class IntroductionActivity extends AppCompatActivity {
     private Style style;
 
     private ViewPager pager;
-    private ImageButton previous;
-    private ImageButton next;
+    private AppCompatImageButton previous;
+    private AppCompatImageButton next;
     private FrameLayout indicatorContainer;
     private Button skip;
 
@@ -199,8 +199,8 @@ public class IntroductionActivity extends AppCompatActivity {
     private void findViews() {
         ViewGroup root = (ViewGroup) findViewById(R.id.introduction_activity_root);
         pager = (ViewPager) findViewById(R.id.introduction_activity_pager);
-        previous = (ImageButton) findViewById(R.id.introduction_activity_button_previous);
-        next = (ImageButton) findViewById(R.id.introduction_activity_button_next);
+        previous = (AppCompatImageButton) findViewById(R.id.introduction_activity_button_previous);
+        next = (AppCompatImageButton) findViewById(R.id.introduction_activity_button_next);
         indicatorContainer = (FrameLayout)
                 findViewById(R.id.introduction_activity_container_indicator);
         skip = (Button) findViewById(R.id.introduction_activity_skip);

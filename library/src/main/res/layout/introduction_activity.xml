@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/introduction_activity_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.rubengees.introduction.IntroductionActivity">
 
     <android.support.v4.view.ViewPager
@@ -20,7 +19,7 @@
         android:background="@android:color/transparent"
         android:fitsSystemWindows="true">
 
-        <android.support.percent.PercentRelativeLayout
+        <RelativeLayout
             android:id="@+id/introduction_activity_bottom_bar"
             android:layout_width="match_parent"
             android:layout_height="64dp"
@@ -29,22 +28,22 @@
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
             android:animateLayoutChanges="true"
+            tools:ignore="UselessParent"
             tools:targetApi="honeycomb">
 
-            <ImageButton
+            <com.rubengees.introduction.view.HeightAspectImageButton
                 android:id="@+id/introduction_activity_button_previous"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/introduction_ic_arrow_previous"
                 android:visibility="invisible"
+                app:srcCompat="@drawable/introduction_ic_arrow_previous"
                 tools:ignore="ContentDescription" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_toEndOf="@+id/introduction_activity_button_previous"
                 android:layout_toLeftOf="@+id/introduction_activity_button_next"
@@ -52,8 +51,7 @@
                 android:layout_toStartOf="@+id/introduction_activity_button_next"
                 android:animateLayoutChanges="true"
                 android:gravity="center"
-                android:orientation="vertical"
-                app:layout_widthPercent="60%">
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/introduction_activity_skip"
@@ -69,18 +67,17 @@
 
             </LinearLayout>
 
-            <ImageButton
+            <com.rubengees.introduction.view.HeightAspectImageButton
                 android:id="@+id/introduction_activity_button_next"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/introduction_ic_arrow_next"
                 android:visibility="invisible"
+                app:srcCompat="@drawable/introduction_ic_arrow_next"
                 tools:ignore="ContentDescription" />
 
-        </android.support.percent.PercentRelativeLayout>
+        </RelativeLayout>
     </FrameLayout>
-
-</android.support.percent.PercentRelativeLayout>
+</RelativeLayout>

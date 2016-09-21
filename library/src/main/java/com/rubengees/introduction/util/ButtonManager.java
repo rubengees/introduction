@@ -17,9 +17,9 @@
 package com.rubengees.introduction.util;
 
 import android.support.annotation.NonNull;
+import android.support.v7.widget.AppCompatImageButton;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 
 import com.rubengees.introduction.R;
 import com.rubengees.introduction.interfaces.ViewPagerProcessor;
@@ -31,8 +31,8 @@ import com.rubengees.introduction.interfaces.ViewPagerProcessor;
  */
 public class ButtonManager implements ViewPagerProcessor {
     private final int slideAmount;
-    private ImageButton previous;
-    private ImageButton next;
+    private AppCompatImageButton previous;
+    private AppCompatImageButton next;
     private Button skip;
     private boolean showPreviousButton;
     private boolean showSkipButton;
@@ -44,7 +44,7 @@ public class ButtonManager implements ViewPagerProcessor {
      * @param showPreviousButton If the Button to navigate back should not be shown, pass false.
      * @param slideAmount        The amount of Slides.
      */
-    public ButtonManager(@NonNull ImageButton previous, @NonNull ImageButton next,
+    public ButtonManager(@NonNull AppCompatImageButton previous, @NonNull AppCompatImageButton next,
                          @NonNull Button skip, boolean showPreviousButton, boolean showSkipButton,
                          int slideAmount) {
         this.previous = previous;
