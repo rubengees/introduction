@@ -18,6 +18,8 @@
 
 package com.rubengees.introductionsample.transformer;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.view.View;
 
 /**
@@ -25,6 +27,7 @@ import android.view.View;
  *
  * @author Ruben Gees
  */
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class ZoomOutPageTransformer extends BasePageTransformer {
     private static final float MIN_SCALE = 0.85f;
     private static final float MIN_ALPHA = 0.5f;

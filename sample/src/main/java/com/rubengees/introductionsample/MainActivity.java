@@ -19,6 +19,7 @@ package com.rubengees.introductionsample;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -46,6 +47,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String ERROR_API_LEVEL = "You need at least API 11 for this feature";
     private IntroductionConfiguration.OnSlideListener defaultOnSlideListener =
             new IntroductionConfiguration.OnSlideListener() {
                 @Override
@@ -129,21 +131,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onZoomOutClick(View view) {
-        new IntroductionBuilder(this).withSlides(generateSlides())
-                .withOnSlideListener(defaultOnSlideListener)
-                .withPageTransformer(new ZoomOutPageTransformer()).introduceMyself();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            new IntroductionBuilder(this).withSlides(generateSlides())
+                    .withOnSlideListener(defaultOnSlideListener)
+                    .withPageTransformer(new ZoomOutPageTransformer()).introduceMyself();
+        } else {
+            Snackbar.make(findViewById(R.id.root), ERROR_API_LEVEL, Snackbar.LENGTH_LONG).show();
+        }
     }
 
     public void onDepthClick(View view) {
-        new IntroductionBuilder(this).withSlides(generateSlides())
-                .withOnSlideListener(defaultOnSlideListener)
-                .withPageTransformer(new DepthPageTransformer()).introduceMyself();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            new IntroductionBuilder(this).withSlides(generateSlides())
+                    .withOnSlideListener(defaultOnSlideListener)
+                    .withPageTransformer(new DepthPageTransformer()).introduceMyself();
+        } else {
+            Snackbar.make(findViewById(R.id.root), ERROR_API_LEVEL, Snackbar.LENGTH_LONG).show();
+        }
     }
 
     public void onColorTransformationClick(View view) {
-        new IntroductionBuilder(this).withSlides(generateSlides())
-                .withOnSlideListener(defaultOnSlideListener)
-                .withPageTransformer(new ColorPageTransformer()).introduceMyself();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            new IntroductionBuilder(this).withSlides(generateSlides())
+                    .withOnSlideListener(defaultOnSlideListener)
+                    .withPageTransformer(new ColorPageTransformer()).introduceMyself();
+        } else {
+            Snackbar.make(findViewById(R.id.root), ERROR_API_LEVEL, Snackbar.LENGTH_LONG).show();
+        }
     }
 
     public void onCustomIndicatorClick(View view) {

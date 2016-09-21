@@ -18,6 +18,8 @@
 
 package com.rubengees.introductionsample.transformer;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.view.View;
 
 /**
@@ -25,7 +27,7 @@ import android.view.View;
  *
  * @author Ruben Gees
  */
-@SuppressWarnings("unused")
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class DepthPageTransformer extends BasePageTransformer {
     private static final float MIN_SCALE = 0.75f;
 
