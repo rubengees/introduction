@@ -230,6 +230,13 @@ public class IntroductionActivity extends AppCompatActivity {
         if (indicatorManager != null) {
             indicatorContainer.addView(indicatorManager.init(LayoutInflater.from(this),
                     indicatorContainer, slides.size()));
+
+            indicatorManager.setListener(new IndicatorManager.OnUserSelectionListener() {
+                @Override
+                public void onSelection(int position) {
+                    pager.setCurrentItem(position);
+                }
+            });
         }
     }
 
@@ -319,7 +326,7 @@ public class IntroductionActivity extends AppCompatActivity {
     }
 
     private void handleFinish() {
-        IntroductionConfiguration.destroy();
+        clean();
         ArrayList<Option> options = new ArrayList<>();
 
         for (Slide slide : slides) {
@@ -336,8 +343,16 @@ public class IntroductionActivity extends AppCompatActivity {
     }
 
     private void handleFinishCancelled() {
-        IntroductionConfiguration.destroy();
+        clean();
         setResult(RESULT_CANCELED);
         finish();
+    }
+
+    private void clean() {
+        if (indicatorManager != null) {
+            indicatorManager.setListener(null);
+        }
+
+        IntroductionConfiguration.destroy();
     }
 }
