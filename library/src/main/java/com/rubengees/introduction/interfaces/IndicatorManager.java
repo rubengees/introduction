@@ -46,39 +46,25 @@ public abstract class IndicatorManager implements ViewPagerProcessor {
                               @IntRange(from = 0) int slideAmount);
 
     /**
-     * Interface for selections by the user e.g. clicking a dot.
-     */
-    public interface OnUserSelectionListener {
-
-        /**
-         * Called when the user selected another page. This method is <strong>not</strong> invoked
-         * if {@link ViewPagerProcessor#select(int)} is called.
-         *
-         * @param position The position of the new page.
-         */
-        void onSelection(int position);
-    }
-
-    /**
-     * Interface for selections by the user e.g. clicking a dot.
-     */
-    public interface OnUserSelectionListener {
-
-        /**
-         * Called when the user selected another page. This method is <strong>not</strong> invoked
-         * if {@link ViewPagerProcessor#select(int)} is called.
-         *
-         * @param position The position of the new page.
-         */
-        void onSelection(int position);
-    }
-
-    /**
      * Registers a listener.
      *
      * @param listener The listener.
      */
     public void setListener(@Nullable OnUserSelectionListener listener) {
         this.onUserSelectionListener = listener;
+    }
+
+    /**
+     * Interface for selections by the user e.g. clicking a dot.
+     */
+    public interface OnUserSelectionListener {
+
+        /**
+         * Called when the user selected another page. This method is <strong>not</strong> invoked
+         * if {@link ViewPagerProcessor#select(int)} is called.
+         *
+         * @param position The position of the new page.
+         */
+        void onSelection(int position);
     }
 }
