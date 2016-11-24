@@ -5,14 +5,13 @@ machine:
     GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
 
 dependencies:
-  cache_directories:
-    - /usr/local/android-sdk-linux
   pre:
     - echo y | android update sdk --no-ui --all --filter "extra-android-m2repository"
     - echo y | android update sdk --no-ui --all --filter "extra-google-m2repository"
     - echo y | android update sdk --no-ui --all --filter "extra-android-support"
     - echo y | android update sdk --no-ui --all --filter "android-25"
     - echo y | android update sdk --no-ui --all --filter "build-tools-25.0.0"
+    - echo y | android update sdk --no-ui --all --filter "tools"
     - echo y | android update sdk --no-ui --all --filter "platform-tools"
   override:
     - ./gradlew dependencies -Dorg.gradle.daemon=false --console=plain
