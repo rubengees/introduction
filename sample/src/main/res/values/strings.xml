@@ -27,4 +27,6 @@
     <string name="button_custom_view">Custom view</string>
     <string name="layout_custom_1_text">This is a custom view</string>
     <string name="layout_custom_2_text">This is another custom view</string>
+    <string name="button_text_size">Custom text size</string>
+    <string name="button_custom_typeface">Custom typeface</string>
 </resources>

@@ -43,23 +43,26 @@ import java.io.Serializable;
  */
 public class Slide implements Parcelable {
 
-    public static final Parcelable.Creator<Slide> CREATOR = new Parcelable.Creator<Slide>() {
+    public static final Creator<Slide> CREATOR = new Creator<Slide>() {
+        @Override
         public Slide createFromParcel(Parcel source) {
             return new Slide(source);
         }
 
+        @Override
         public Slide[] newArray(int size) {
             return new Slide[size];
         }
     };
 
     private static final String EXCEPTION_COLOR_MESSAGE = "You must add a color to each slide";
-
     private int position;
     private String title;
     private Integer titleResource;
+    private Float titleSize;
     private String description;
     private Integer descriptionResource;
+    private Float descriptionSize;
     private Integer imageResource;
     private Integer color;
     private Integer colorResource;
@@ -74,8 +77,10 @@ public class Slide implements Parcelable {
         this.position = in.readInt();
         this.title = in.readString();
         this.titleResource = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.titleSize = (Float) in.readValue(Float.class.getClassLoader());
         this.description = in.readString();
         this.descriptionResource = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.descriptionSize = (Float) in.readValue(Float.class.getClassLoader());
         this.imageResource = (Integer) in.readValue(Integer.class.getClassLoader());
         this.color = (Integer) in.readValue(Integer.class.getClassLoader());
         this.colorResource = (Integer) in.readValue(Integer.class.getClassLoader());
@@ -184,6 +189,20 @@ public class Slide implements Parcelable {
         this.description = null;
         this.option = null;
         this.customViewBuilder = null;
+
+        return this;
+    }
+
+    @NonNull
+    public Slide withTitleSize(@Nullable Float size) {
+        this.titleSize = size;
+
+        return this;
+    }
+
+    @NonNull
+    public Slide withDescriptionSize(@Nullable Float size) {
+        this.descriptionSize = size;
 
         return this;
     }
@@ -303,6 +322,14 @@ public class Slide implements Parcelable {
         return option;
     }
 
+    public Float getTitleSize() {
+        return titleSize;
+    }
+
+    public Float getDescriptionSize() {
+        return descriptionSize;
+    }
+
     public CustomViewBuilder getCustomViewBuilder() {
         return customViewBuilder;
     }
@@ -391,8 +418,10 @@ public class Slide implements Parcelable {
         dest.writeInt(this.position);
         dest.writeString(this.title);
         dest.writeValue(this.titleResource);
+        dest.writeValue(this.titleSize);
         dest.writeString(this.description);
         dest.writeValue(this.descriptionResource);
+        dest.writeValue(this.descriptionSize);
         dest.writeValue(this.imageResource);
         dest.writeValue(this.color);
         dest.writeValue(this.colorResource);

@@ -25,6 +25,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.AppCompatCheckBox;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -117,6 +118,10 @@ public class IntroductionFragment extends Fragment {
             title.setText(slide.getTitle());
             title.setMaxLines(getLineCountForTitle());
             title.setTypeface(IntroductionConfiguration.getInstance().getTypeface());
+
+            if (slide.getTitleSize() != null) {
+                title.setTextSize(TypedValue.COMPLEX_UNIT_DIP, slide.getTitleSize());
+            }
         }
 
         if (slide.getDescription() == null && slide.getOption() != null) {

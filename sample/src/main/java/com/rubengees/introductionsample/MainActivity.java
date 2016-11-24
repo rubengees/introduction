@@ -44,6 +44,7 @@ import com.rubengees.introductionsample.transformer.DepthPageTransformer;
 import com.rubengees.introductionsample.transformer.ZoomOutPageTransformer;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -288,6 +289,17 @@ public class MainActivity extends AppCompatActivity {
     public void onTypefaceClick(View view) {
         new IntroductionBuilder(this).withSlides(generateSlides())
                 .withOnSlideListener(defaultOnSlideListener).withTypeface(Typeface.MONOSPACE)
+                .introduceMyself();
+    }
+
+    public void onTextSizeClick(View view) {
+        new IntroductionBuilder(this)
+                .withSlides(Collections.singletonList(new Slide().withTitle("small text")
+                        .withDescription("BIG TEXT")
+                        .withTitleSize(12f)
+                        .withDescriptionSize(60f)
+                        .withColorResource(R.color.green)))
+                .withOnSlideListener(defaultOnSlideListener)
                 .introduceMyself();
     }
 
