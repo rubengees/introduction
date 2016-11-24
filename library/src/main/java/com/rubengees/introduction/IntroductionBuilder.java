@@ -18,6 +18,7 @@ package com.rubengees.introduction;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
@@ -258,6 +259,13 @@ public class IntroductionBuilder {
     public IntroductionBuilder withPageTransformer(@NonNull ViewPager.PageTransformer
                                                            pageTransformer) {
         IntroductionConfiguration.getInstance().setPageTransformer(pageTransformer);
+
+        return this;
+    }
+
+    @NonNull
+    public IntroductionBuilder withTypeface(@NonNull Typeface typeface) {
+        IntroductionConfiguration.getInstance().setTypeface(typeface);
 
         return this;
     }

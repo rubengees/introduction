@@ -16,6 +16,7 @@
 
 package com.rubengees.introduction;
 
+import android.graphics.Typeface;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -37,6 +38,7 @@ public final class IntroductionConfiguration {
     private OnSlideListener onSlideListener;
     private ViewPager.PageTransformer pageTransformer;
     private IndicatorManager indicatorManager;
+    private Typeface typeface;
 
     private IntroductionConfiguration() {
 
@@ -94,6 +96,15 @@ public final class IntroductionConfiguration {
         if (onSlideListener != null) {
             onSlideListener.onSlideInit(position, title, image, description);
         }
+    }
+
+    @Nullable
+    Typeface getTypeface() {
+        return typeface;
+    }
+
+    void setTypeface(Typeface typeface) {
+        this.typeface = typeface;
     }
 
     public static class OnSlideListener {

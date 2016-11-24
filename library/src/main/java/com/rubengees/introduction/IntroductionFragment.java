@@ -116,6 +116,7 @@ public class IntroductionFragment extends Fragment {
         if (slide.getTitle() != null) {
             title.setText(slide.getTitle());
             title.setMaxLines(getLineCountForTitle());
+            title.setTypeface(IntroductionConfiguration.getInstance().getTypeface());
         }
 
         if (slide.getDescription() == null && slide.getOption() != null) {
@@ -147,6 +148,10 @@ public class IntroductionFragment extends Fragment {
 
             description.setMaxLines(getLineCountForDescription());
             descriptionContainer.addView(description);
+        }
+
+        if (IntroductionConfiguration.getInstance().getTypeface() != null) {
+            description.setTypeface(IntroductionConfiguration.getInstance().getTypeface());
         }
 
         if (slide.getImageResource() != null) {

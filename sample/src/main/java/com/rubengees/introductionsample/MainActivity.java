@@ -19,6 +19,7 @@ package com.rubengees.introductionsample;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -281,6 +282,12 @@ public class MainActivity extends AppCompatActivity {
     public void onSkipClick(View view) {
         new IntroductionBuilder(this).withSlides(generateSlides())
                 .withOnSlideListener(defaultOnSlideListener).withSkipEnabled("Skip")
+                .introduceMyself();
+    }
+
+    public void onTypefaceClick(View view) {
+        new IntroductionBuilder(this).withSlides(generateSlides())
+                .withOnSlideListener(defaultOnSlideListener).withTypeface(Typeface.MONOSPACE)
                 .introduceMyself();
     }
 

@@ -118,6 +118,12 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="onTypefaceClick"
+                android:text="Custom typeface" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:onClick="onCustomViewClick"
                 android:text="@string/button_custom_view" />
         </LinearLayout>
