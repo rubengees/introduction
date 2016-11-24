@@ -341,6 +341,7 @@ public class Slide implements Parcelable {
         }
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -363,7 +364,6 @@ public class Slide implements Parcelable {
             return false;
         if (option != null ? !option.equals(slide.option) : slide.option != null) return false;
         return customViewBuilder != null ? customViewBuilder.equals(slide.customViewBuilder) : slide.customViewBuilder == null;
-
     }
 
     @Override
