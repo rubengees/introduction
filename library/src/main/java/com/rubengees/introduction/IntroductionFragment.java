@@ -159,6 +159,10 @@ public class IntroductionFragment extends Fragment {
             description.setTypeface(IntroductionConfiguration.getInstance().getTypeface());
         }
 
+        if (slide.getDescriptionSize() != null) {
+            description.setTextSize(TypedValue.COMPLEX_UNIT_DIP, slide.getDescriptionSize());
+        }
+
         if (slide.getImageResource() != null) {
             image.setImageResource(slide.getImageResource());
         }
