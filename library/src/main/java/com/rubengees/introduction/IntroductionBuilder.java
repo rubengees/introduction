@@ -263,6 +263,12 @@ public class IntroductionBuilder {
         return this;
     }
 
+    /**
+     * Sets a global typeface to apply on the titles and descriptions of slides.
+     *
+     * @param typeface The typeface.
+     * @return The current instance.
+     */
     @NonNull
     public IntroductionBuilder withTypeface(@NonNull Typeface typeface) {
         IntroductionConfiguration.getInstance().setTypeface(typeface);
