@@ -20,7 +20,8 @@ test:
   override:
     - ./gradlew lint install -PdisablePreDex -Dorg.gradle.daemon=false --console=plain
   post:
-    - mkdir $CIRCLE_TEST_REPORTS/lint
+    - mkdir $CIRCLE_TEST_REPORTS/lint/library
+    - mkdir $CIRCLE_TEST_REPORTS/lint/sample
     - mkdir $CIRCLE_ARTIFACTS/javadoc
     - cp -r library/build/outputs/lint-results.* $CIRCLE_TEST_REPORTS/lint/library
     - cp -r sample/build/outputs/lint-results.* $CIRCLE_TEST_REPORTS/lint/sample
