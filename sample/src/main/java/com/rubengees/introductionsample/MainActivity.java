@@ -288,7 +288,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void onTypefaceClick(View view) {
         new IntroductionBuilder(this).withSlides(generateSlides())
-                .withOnSlideListener(defaultOnSlideListener).withTypeface(Typeface.MONOSPACE)
+                .withOnSlideListener(defaultOnSlideListener)
+                .withTitleTypeface(Typeface.MONOSPACE)
+                .withDescriptionTypeface(Typeface.SERIF)
                 .introduceMyself();
     }
 

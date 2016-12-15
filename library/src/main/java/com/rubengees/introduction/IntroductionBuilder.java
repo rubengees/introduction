@@ -271,7 +271,35 @@ public class IntroductionBuilder {
      */
     @NonNull
     public IntroductionBuilder withTypeface(@NonNull Typeface typeface) {
-        IntroductionConfiguration.getInstance().setTypeface(typeface);
+        IntroductionConfiguration.getInstance().setTitleTypeface(typeface);
+        IntroductionConfiguration.getInstance().setTitleTypeface(typeface);
+
+        return this;
+    }
+
+    /**
+     * Sets a global typeface to apply only on titles of slides.
+     *
+     * @param typeface The typeface.
+     * @return The current instance.
+     */
+    @NonNull
+    public IntroductionBuilder withTitleTypeface(@NonNull Typeface typeface) {
+        IntroductionConfiguration.getInstance().setTitleTypeface(typeface);
+
+        return this;
+    }
+
+
+    /**
+     * Sets a global typeface to apply only on descriptions of slides.
+     *
+     * @param typeface The typeface.
+     * @return The current instance.
+     */
+    @NonNull
+    public IntroductionBuilder withDescriptionTypeface(@NonNull Typeface typeface) {
+        IntroductionConfiguration.getInstance().setDescriptionTypeface(typeface);
 
         return this;
     }

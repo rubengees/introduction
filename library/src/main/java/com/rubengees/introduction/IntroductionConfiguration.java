@@ -38,7 +38,8 @@ public final class IntroductionConfiguration {
     private OnSlideListener onSlideListener;
     private ViewPager.PageTransformer pageTransformer;
     private IndicatorManager indicatorManager;
-    private Typeface typeface;
+    private Typeface titleTypeface;
+    private Typeface descriptionTypeface;
 
     private IntroductionConfiguration() {
 
@@ -99,12 +100,21 @@ public final class IntroductionConfiguration {
     }
 
     @Nullable
-    Typeface getTypeface() {
-        return typeface;
+    Typeface getTitleTypeface() {
+        return titleTypeface;
     }
 
-    void setTypeface(Typeface typeface) {
-        this.typeface = typeface;
+    void setTitleTypeface(Typeface typeface) {
+        this.titleTypeface = typeface;
+    }
+
+    @Nullable
+    Typeface getDescriptionTypeface() {
+        return descriptionTypeface;
+    }
+
+    void setDescriptionTypeface(Typeface typeface) {
+        this.descriptionTypeface = typeface;
     }
 
     public static class OnSlideListener {

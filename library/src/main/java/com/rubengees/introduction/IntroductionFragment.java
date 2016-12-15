@@ -117,7 +117,7 @@ public class IntroductionFragment extends Fragment {
         if (slide.getTitle() != null) {
             title.setText(slide.getTitle());
             title.setMaxLines(getLineCountForTitle());
-            title.setTypeface(IntroductionConfiguration.getInstance().getTypeface());
+            title.setTypeface(IntroductionConfiguration.getInstance().getTitleTypeface());
 
             if (slide.getTitleSize() != null) {
                 title.setTextSize(TypedValue.COMPLEX_UNIT_DIP, slide.getTitleSize());
@@ -155,9 +155,7 @@ public class IntroductionFragment extends Fragment {
             descriptionContainer.addView(description);
         }
 
-        if (IntroductionConfiguration.getInstance().getTypeface() != null) {
-            description.setTypeface(IntroductionConfiguration.getInstance().getTypeface());
-        }
+        description.setTypeface(IntroductionConfiguration.getInstance().getDescriptionTypeface());
 
         if (slide.getDescriptionSize() != null) {
             description.setTextSize(TypedValue.COMPLEX_UNIT_DIP, slide.getDescriptionSize());
