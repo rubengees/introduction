@@ -272,7 +272,7 @@ public class IntroductionBuilder {
     @NonNull
     public IntroductionBuilder withTypeface(@NonNull Typeface typeface) {
         IntroductionConfiguration.getInstance().setTitleTypeface(typeface);
-        IntroductionConfiguration.getInstance().setTitleTypeface(typeface);
+        IntroductionConfiguration.getInstance().setDescriptionTypeface(typeface);
 
         return this;
     }
