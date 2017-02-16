@@ -24,6 +24,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
+import android.support.v4.widget.CompoundButtonCompat;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -131,17 +132,18 @@ public class IntroductionFragment extends Fragment {
 
             option.setText(slide.getOption().getTitle());
             option.setChecked(slide.getOption().isActivated());
+            option.setMaxLines(getLineCountForDescription());
             option.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     slide.getOption().setActivated(isChecked);
                 }
             });
-            option.setSupportButtonTintList(ContextCompat.getColorStateList(getContext(),
-                    android.R.color.white));
-            option.setMaxLines(getLineCountForDescription());
-            descriptionContainer.addView(option);
 
+            CompoundButtonCompat.setButtonTintList(option,
+                    ContextCompat.getColorStateList(getContext(), android.R.color.white));
+
+            descriptionContainer.addView(option);
             description = option;
         } else {
             description = (TextView) inflater.inflate(R.layout.introduction_fragment_description,
