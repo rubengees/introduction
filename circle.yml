@@ -23,6 +23,6 @@ test:
     - mkdir -p $CIRCLE_TEST_REPORTS/lint/library
     - mkdir -p $CIRCLE_TEST_REPORTS/lint/sample
     - mkdir $CIRCLE_ARTIFACTS/javadoc
-    - cp -r library/build/outputs/lint-results.* $CIRCLE_TEST_REPORTS/lint/library
-    - cp -r sample/build/outputs/lint-results.* $CIRCLE_TEST_REPORTS/lint/sample
+    - cp -r library/build/reports/* $CIRCLE_TEST_REPORTS/lint/library
+    - cp -r sample/build/reports/* $CIRCLE_TEST_REPORTS/lint/sample
     - cp -r library/build/docs/javadoc/* $CIRCLE_ARTIFACTS/javadoc
