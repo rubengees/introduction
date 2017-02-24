@@ -19,9 +19,12 @@ package com.rubengees.introduction.util;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.view.View;
+
+import static android.content.pm.ApplicationInfo.FLAG_SUPPORTS_RTL;
 
 /**
  * Some utils to set different Orientations.
@@ -64,7 +67,8 @@ public final class OrientationUtils {
     @SuppressWarnings("SimplifiableIfStatement")
     public static boolean isRTL(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            return context.getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
+            return (context.getApplicationInfo().flags & ApplicationInfo.FLAG_SUPPORTS_RTL) == FLAG_SUPPORTS_RTL &&
+                    context.getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
         } else {
             return false;
         }
