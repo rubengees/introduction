@@ -61,9 +61,9 @@ public class Option implements Parcelable {
     }
 
     /**
-     * @param title       The title of this option.
+     * @param title     The title of this option.
      * @param activated makes this option activated or not. If true is passed,
-     *                    the checkbox will be checked.
+     *                  the checkbox will be checked.
      */
     public Option(@NonNull String title, boolean activated) {
         this.title = title;
@@ -80,7 +80,7 @@ public class Option implements Parcelable {
 
     /**
      * @param titleResource The title as a resource
-     * @param activated   makes this option activated or not. If true is passed,
+     * @param activated     makes this option activated or not. If true is passed,
      *                      the checkbox will be checked.
      */
     public Option(@StringRes int titleResource, boolean activated) {

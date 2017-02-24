@@ -16,6 +16,7 @@
 
 package com.rubengees.introduction.util;
 
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatImageButton;
 import android.view.View;
@@ -30,6 +31,7 @@ import com.rubengees.introduction.interfaces.ViewPagerProcessor;
  * @author Ruben Gees
  */
 public class ButtonManager implements ViewPagerProcessor {
+
     private final int slideAmount;
     private AppCompatImageButton previous;
     private AppCompatImageButton next;
@@ -39,7 +41,7 @@ public class ButtonManager implements ViewPagerProcessor {
 
     /**
      * @param previous           The Button to navigate one slide back.
-     * @param next               The Button to navigate on slide forth. Also used to show the done icon, if the
+     * @param next               The Button to navigate one slide forth. Also used to show the done icon, if the
      *                           current Slide is the last Slide.
      * @param showPreviousButton If the Button to navigate back should not be shown, pass false.
      * @param slideAmount        The amount of Slides.
@@ -60,7 +62,7 @@ public class ButtonManager implements ViewPagerProcessor {
     private void init() {
         if (showPreviousButton) {
             previous.setVisibility(View.VISIBLE);
-            previous.setImageResource(R.drawable.introduction_ic_arrow_previous);
+            previous.setImageResource(previousIcon());
         } else {
             previous.setVisibility(View.INVISIBLE);
         }
@@ -89,7 +91,7 @@ public class ButtonManager implements ViewPagerProcessor {
         }
 
         if (position < slideAmount - 1) {
-            next.setImageResource(R.drawable.introduction_ic_arrow_next);
+            next.setImageResource(nextIcon());
 
             if (showSkipButton) {
                 skip.setVisibility(View.VISIBLE);
@@ -100,6 +102,24 @@ public class ButtonManager implements ViewPagerProcessor {
             if (showSkipButton) {
                 skip.setVisibility(View.GONE);
             }
+        }
+    }
+
+    @DrawableRes
+    private int nextIcon() {
+        if (OrientationUtils.isRTL(next.getContext())) {
+            return R.drawable.introduction_ic_arrow_previous;
+        } else {
+            return R.drawable.introduction_ic_arrow_next;
+        }
+    }
+
+    @DrawableRes
+    private int previousIcon() {
+        if (OrientationUtils.isRTL(next.getContext())) {
+            return R.drawable.introduction_ic_arrow_next;
+        } else {
+            return R.drawable.introduction_ic_arrow_previous;
         }
     }
 }

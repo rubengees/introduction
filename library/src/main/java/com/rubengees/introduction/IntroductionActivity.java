@@ -43,6 +43,7 @@ import com.rubengees.introduction.util.ButtonManager;
 import com.rubengees.introduction.util.OrientationUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import static com.rubengees.introduction.IntroductionBuilder.BUNDLE_ALLOW_BACK_PRESS;
 import static com.rubengees.introduction.IntroductionBuilder.BUNDLE_ORIENTATION;
@@ -106,6 +107,7 @@ public class IntroductionActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             select(0);
+            pager.setCurrentItem(rtlAwarePosition(0));
         } else {
             previousPagerPosition = savedInstanceState.getInt(STATE_PREVIOUS_PAGER_POSITION);
 
@@ -199,11 +201,16 @@ public class IntroductionActivity extends AppCompatActivity {
     private void findViews() {
         ViewGroup root = (ViewGroup) findViewById(R.id.introduction_activity_root);
         pager = (ViewPager) findViewById(R.id.introduction_activity_pager);
-        previous = (AppCompatImageButton) findViewById(R.id.introduction_activity_button_previous);
-        next = (AppCompatImageButton) findViewById(R.id.introduction_activity_button_next);
-        indicatorContainer = (FrameLayout)
-                findViewById(R.id.introduction_activity_container_indicator);
+        indicatorContainer = (FrameLayout) findViewById(R.id.introduction_activity_container_indicator);
         skip = (Button) findViewById(R.id.introduction_activity_skip);
+
+        if (OrientationUtils.isRTL(this)) {
+            previous = (AppCompatImageButton) findViewById(R.id.introduction_activity_button_next);
+            next = (AppCompatImageButton) findViewById(R.id.introduction_activity_button_previous);
+        } else {
+            previous = (AppCompatImageButton) findViewById(R.id.introduction_activity_button_previous);
+            next = (AppCompatImageButton) findViewById(R.id.introduction_activity_button_next);
+        }
 
         if (style != null) {
             style.applyStyleOnActivityView(this, root);
@@ -211,6 +218,10 @@ public class IntroductionActivity extends AppCompatActivity {
     }
 
     private void initSlides() {
+        if (OrientationUtils.isRTL(this)) {
+            Collections.reverse(slides);
+        }
+
         for (int i = 0; i < slides.size(); i++) {
             Slide slide = slides.get(i);
 
@@ -219,8 +230,7 @@ public class IntroductionActivity extends AppCompatActivity {
     }
 
     private void initManagers() {
-        buttonManager = new ButtonManager(previous, next, skip, showPreviousButton,
-                skipText != null, slides.size());
+        buttonManager = new ButtonManager(previous, next, skip, showPreviousButton, skipText != null, slides.size());
         indicatorManager = configuration.getIndicatorManager();
 
         if (indicatorManager == null && showIndicator) {
@@ -244,12 +254,12 @@ public class IntroductionActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int currentIndex = pager.getCurrentItem();
+                final int currentIndex = pager.getCurrentItem();
 
-                if (currentIndex == slides.size() - 1) {
+                if (currentIndex == rtlAwarePosition(slides.size() - 1)) {
                     handleFinish();
                 } else {
-                    pager.setCurrentItem(currentIndex + 1, true);
+                    pager.setCurrentItem(nextPosition(currentIndex), true);
                 }
             }
         });
@@ -257,7 +267,7 @@ public class IntroductionActivity extends AppCompatActivity {
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pager.setCurrentItem(pager.getCurrentItem() - 1, true);
+                pager.setCurrentItem(previousPosition(pager.getCurrentItem()), true);
             }
         });
 
@@ -274,8 +284,8 @@ public class IntroductionActivity extends AppCompatActivity {
                 if (position != previousPagerPosition) {
                     select(position);
 
-                    IntroductionConfiguration.getInstance().
-                            callOnSlideChanged(previousPagerPosition, position);
+                    IntroductionConfiguration.getInstance()
+                            .callOnSlideChanged(previousPagerPosition, rtlAwarePosition(position));
                     previousPagerPosition = position;
                 }
             }
@@ -306,22 +316,22 @@ public class IntroductionActivity extends AppCompatActivity {
 
     private void select(int position) {
         if (indicatorManager != null) {
-            indicatorManager.select(position);
+            indicatorManager.select(rtlAwarePosition(position));
         }
 
         if (buttonManager != null) {
-            buttonManager.select(position);
+            buttonManager.select(rtlAwarePosition(position));
         }
     }
 
     @Override
     public void onBackPressed() {
-        if (pager.getCurrentItem() == 0) {
+        if (pager.getCurrentItem() == rtlAwarePosition(0)) {
             if (allowBackPress) {
                 handleFinishCancelled();
             }
         } else {
-            pager.setCurrentItem(pager.getCurrentItem() - 1);
+            pager.setCurrentItem(previousPosition(pager.getCurrentItem()));
         }
     }
 
@@ -354,5 +364,21 @@ public class IntroductionActivity extends AppCompatActivity {
         }
 
         IntroductionConfiguration.destroy();
+    }
+
+    private int rtlAwarePosition(final int position) {
+        if (OrientationUtils.isRTL(this)) {
+            return slides.size() - position - 1;
+        } else {
+            return position;
+        }
+    }
+
+    private int nextPosition(final int position) {
+        return OrientationUtils.isRTL(this) ? position - 1 : position + 1;
+    }
+
+    private int previousPosition(final int position) {
+        return OrientationUtils.isRTL(this) ? position + 1 : position - 1;
     }
 }

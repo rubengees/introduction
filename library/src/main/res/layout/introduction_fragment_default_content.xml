@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <TextView
         android:id="@+id/introduction_fragment_default_content_title"
@@ -19,7 +19,7 @@
         android:maxLines="3"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/white"
-        tools:text="Title" />
+        tools:text="Title"/>
 
     <ImageView
         android:id="@+id/introduction_fragment_default_content_image"
@@ -29,7 +29,7 @@
         android:layout_marginRight="16dp"
         android:layout_weight="44"
         android:gravity="center"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"/>
 
     <FrameLayout
         android:id="@+id/introduction_fragment_default_content_description_container"
@@ -39,6 +39,6 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="4dp"
-        android:layout_weight="29" />
+        android:layout_weight="29"/>
 
 </LinearLayout>

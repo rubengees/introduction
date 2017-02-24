@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/introduction_fragment_description"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:ellipsize="end"
-    android:gravity="center"
-    android:maxLines="4"
-    android:textAppearance="?android:attr/textAppearanceMedium"
-    android:textColor="@android:color/white"
-    tools:text="Description" />
+          xmlns:tools="http://schemas.android.com/tools"
+          android:id="@+id/introduction_fragment_description"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:ellipsize="end"
+          android:gravity="center"
+          android:maxLines="4"
+          android:textAppearance="?android:attr/textAppearanceMedium"
+          android:textColor="@android:color/white"
+          tools:text="Description"/>

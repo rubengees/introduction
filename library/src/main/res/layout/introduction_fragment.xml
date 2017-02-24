@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="com.rubengees.introduction.IntroductionFragment">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                tools:context="com.rubengees.introduction.IntroductionFragment">
 
     <FrameLayout
         android:id="@+id/introduction_fragment_content_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/introduction_bottom_bar_placeholder" />
+        android:layout_above="@+id/introduction_bottom_bar_placeholder"/>
 
     <View
         android:id="@+id/introduction_bottom_bar_placeholder"
@@ -19,5 +19,5 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp" />
+        android:layout_marginRight="16dp"/>
 </RelativeLayout>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="HeightAspectImageButton">
-        <attr name="aspect" format="float" />
+        <attr name="aspect" format="float"/>
     </declare-styleable>
 </resources>

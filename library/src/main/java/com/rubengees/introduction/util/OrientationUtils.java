@@ -17,8 +17,11 @@
 package com.rubengees.introduction.util;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.view.View;
 
 /**
  * Some utils to set different Orientations.
@@ -41,6 +44,7 @@ public final class OrientationUtils {
 
     /**
      * Sets the orientation to portrait.
+     *
      * @param activity The Activity
      */
     public static void setOrientationPortrait(@NonNull Activity activity) {
@@ -49,6 +53,7 @@ public final class OrientationUtils {
 
     /**
      * Let the Activity handle the Orientation itself.
+     *
      * @param activity The Activity
      */
     @SuppressWarnings("unused")
@@ -56,4 +61,12 @@ public final class OrientationUtils {
         activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
+    public static boolean isRTL(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            return context.getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
+        } else {
+            return false;
+        }
+    }
 }
