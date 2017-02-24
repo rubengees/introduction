@@ -1,6 +1,3 @@
--keep class android.support.** { *; }
--keep interface android.support.** { *; }
-
 -keepattributes EnclosingMethod
 
 -keep public class * implements com.bumptech.glide.module.GlideModule
