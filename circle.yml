@@ -14,11 +14,11 @@ dependencies:
     - echo y | android update sdk --no-ui --all --filter "tools"
     - echo y | android update sdk --no-ui --all --filter "platform-tools"
   override:
-    - ./gradlew dependencies -Dorg.gradle.daemon=false --console=plain
+    - ./gradlew dependencies --console=plain
 
 test:
   override:
-    - ./gradlew lint install -PdisablePreDex -Dorg.gradle.daemon=false --console=plain
+    - ./gradlew lint install -PdisablePreDex --console=plain
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/lint/library
     - mkdir -p $CIRCLE_TEST_REPORTS/lint/sample
