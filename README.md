@@ -38,9 +38,7 @@ And this to your module `build.gradle` (usually in the `app` directory):
 
 ```groovy
 dependencies {
-    compile ('com.github.rubengees:introduction:1.3.9@aar'){
-        transitive = true;
-    }
+    compile 'com.github.rubengees:introduction:1.3.9:
 }
 ```
 
