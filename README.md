@@ -38,7 +38,7 @@ And this to your module `build.gradle` (usually in the `app` directory):
 
 ```groovy
 dependencies {
-    compile 'com.github.rubengees:introduction:1.3.9:
+    compile 'com.github.rubengees:introduction:1.3.9'
 }
 ```
 
