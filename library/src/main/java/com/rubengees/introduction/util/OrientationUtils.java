@@ -25,8 +25,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RestrictTo;
 import android.view.View;
 
-import static android.content.pm.ApplicationInfo.FLAG_SUPPORTS_RTL;
-
 /**
  * Some utils to set different Orientations.
  *
@@ -69,8 +67,10 @@ public final class OrientationUtils {
     @SuppressWarnings("SimplifiableIfStatement")
     public static boolean isRTL(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            return (context.getApplicationInfo().flags & ApplicationInfo.FLAG_SUPPORTS_RTL) == FLAG_SUPPORTS_RTL &&
-                    context.getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
+            final int flag = context.getApplicationInfo().flags & ApplicationInfo.FLAG_SUPPORTS_RTL;
+            final int layoutDirection = context.getResources().getConfiguration().getLayoutDirection();
+
+            return flag == ApplicationInfo.FLAG_SUPPORTS_RTL && layoutDirection == View.LAYOUT_DIRECTION_RTL;
         } else {
             return false;
         }
