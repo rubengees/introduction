@@ -234,6 +234,11 @@ Detailed Javadoc can be found [here](https://jitpack.io/com/github/rubengees/int
 
 ### Upgrade Guide
 
+#### 1.3.9 to 1.4.0+
+
+- `Slide` and `Option` have been moved into a different package. Just let Android Studio re-import them.
+- The `OnSlideListener` is now an interface on its own. Remove `IntroductionConfig` before each and let Android Studio re-import. Furthermore `@NotNull` annotations have been added; You should add them to the signature.
+
 #### 1.1.0 to 1.1.1+
 
 - The `OnSlideInit` method in the `OnSlideListener` now comes without the `Fragment context`. If you need a `Context`, call `image.getContext()`.
