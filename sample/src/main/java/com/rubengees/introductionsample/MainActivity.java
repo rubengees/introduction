@@ -144,7 +144,17 @@ public class MainActivity extends AppCompatActivity {
                         "long title")
                 .withDescription("This is an even looooooooooooooooooooooooooooooooooooooooooooooooooooooooooo" +
                         "oooooooooooooooonger description")
-                .withColorResource(R.color.green).withImage(R.drawable.image1));
+                .withColorResource(R.color.green)
+                .withImage(R.drawable.image1));
+
+        result.add(new Slide()
+                .withTitle("This is a veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeery " +
+                        "long title")
+                .withOption(new Option("This is a veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" +
+                        "eeeeeeeeeeeeeery long option"))
+                .withColorResource(R.color.orange)
+                .withImage(R.drawable.image2)
+        );
 
         return result;
     }

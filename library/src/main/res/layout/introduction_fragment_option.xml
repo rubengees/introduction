@@ -5,5 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:paddingEnd="0dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="0dp"
+    android:paddingStart="8dp"
     android:textAppearance="?android:attr/textAppearanceMedium"
     tools:text="Option Description" />
