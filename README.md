@@ -1,4 +1,3 @@
-
 # Introduction [![Download](https://img.shields.io/github/release/rubengees/introduction.svg?label=JitPack)](https://jitpack.io/#rubengees/introduction/) ![API](https://img.shields.io/badge/API-9%2B-blue.svg) [![CircleCI](https://circleci.com/gh/rubengees/introduction.svg?style=shield)](https://circleci.com/gh/rubengees/introduction)
 
 Show a beautiful Intro to your users with ease.
@@ -9,19 +8,19 @@ You can download the latest sample app [here](https://github.com/rubengees/intro
 
 ### Table of contents
 
-- [Include in your Project](#include-in-your-project)   
-- [Usage](#usage)   
-  - [Options](#options)   
-  - [Use Gifs as images](#use-gifs-as-images)   
-  - [Runtime Permissions](#runtime-permissions)   
-  - [Styles](#styles)   
-  - [Custom Views](#custom-views)   
-  - [Further reading](#further-reading)   
-- [Upgrade Guide](#upgrade-guide)   
-  - [1.1.0 to 1.1.1+](#110-to-111)   
-  - [1.0.x to 1.1.0+](#10x-to-110)   
-- [Metrics](#metrics)   
-- [Contributions and contributors](#contributions-and-contributors)  
+- [Include in your Project](#include-in-your-project)
+- [Usage](#usage)
+  - [Options](#options)
+  - [Use Gifs as images](#use-gifs-as-images)
+  - [Runtime Permissions](#runtime-permissions)
+  - [Styles](#styles)
+  - [Custom Views](#custom-views)
+  - [Further reading](#further-reading)
+- [Upgrade Guide](#upgrade-guide)
+  - [1.1.0 to 1.1.1+](#110-to-111)
+  - [1.0.x to 1.1.0+](#10x-to-110)
+- [Metrics](#metrics)
+- [Contributions and contributors](#contributions-and-contributors)
 - [Acknowledgments](#acknowledgments)
 
 ### Include in your Project
@@ -38,7 +37,7 @@ And this to your module `build.gradle` (usually in the `app` directory):
 
 ```groovy
 dependencies {
-    compile 'com.github.rubengees:introduction:1.3.9'
+    compile 'com.github.rubengees:introduction:1.4.0'
 }
 ```
 
@@ -51,7 +50,7 @@ If you want to use asynchronous image loading, introduced in the new version 1.1
 Create an `IntroductionBuilder` like the following:
 
 ```java
-new IntroductionBuilder(this) //this is the Activity you want to start from.
+new IntroductionBuilder(this) // this is the Activity you want to start from.
 ```
 
 Then add some Slides to your Introduction:
@@ -61,16 +60,25 @@ new IntroductionBuilder(this).withSlides(generateSlides())
 ```
 
 ```java
- private List<Slide> generateSlides() {
-      List<Slide> result = new ArrayList<>();
+private List<Slide> generateSlides() {
+    List<Slide> result = new ArrayList<>();
 
-       result.add(new Slide().withTitle("Some title").withDescription("Some description").
-               withColorResource(R.color.green).withImage(R.drawable.myImage));
-       result.add(new Slide().withTitle("Another title").withDescription("Another description")
-               .withColorResource(R.color.indigo).withImage(R.drawable.myImage2));
+    result.add(new Slide()
+            .withTitle("Some title")
+            .withDescription("Some description").
+            withColorResource(R.color.green)
+            .withImage(R.drawable.myImage)
+    );
 
-       return result;
-    }
+    result.add(new Slide()
+            .withTitle("Another title")
+            .withDescription("Another description")
+            .withColorResource(R.color.indigo)
+            .withImage(R.drawable.myImage2)
+    );
+
+    return result;
+}
 ```
 
 Finally introduce yourself!
@@ -89,8 +97,10 @@ You can let the user make decisions, which you can use like settings.
 To do that you add an Option to your slide:
 
 ```java
-new Slide().withTitle("Feature is doing something").withOption(new Option("Enable the feature"))
-          .withColorResource(R.color.orange).withImage(R.drawable.image));
+new Slide().withTitle("Feature is doing something")
+          .withOption(new Option("Enable the feature"))
+          .withColorResource(R.color.orange)
+          .withImage(R.drawable.image));
 ```
 
 When the user completes the intro, you will receive the selected Options in `onActivityResult`.
@@ -99,14 +109,11 @@ To read the result:
 ```java
 @Override
 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-     if (requestCode == IntroductionBuilder.INTRODUCTION_REQUEST_CODE &&
-            resultCode == RESULT_OK) {
+     if (requestCode == IntroductionBuilder.INTRODUCTION_REQUEST_CODE && resultCode == RESULT_OK) {
          String result = "User chose: ";
 
-         for (Option option : data.<Option>getParcelableArrayListExtra(IntroductionActivity.
-                 OPTION_RESULT)) {
-            result += option.getPosition() //The position of the Slide
-                       + (option.isActivated() ? " enabled" : " disabled");
+         for (Option option : data.<Option>getParcelableArrayListExtra(IntroductionActivity.OPTION_RESULT)) {
+            result += option.getPosition() + (option.isActivated() ? " enabled" : " disabled");
         }
      }
 }
@@ -120,17 +127,18 @@ It is possible that the user cancels the intro. If that happens, the resultCode 
 This library supports GIFs. You need to load them asynchronously as the loading may take a while:
 
 ```java
-new IntroductionBuilder(this).withSlides(slides)
-                .withOnSlideListener(new OnSlideListener() {
-                    @Override
-                    protected void onSlideInit(int position, TextView title,
-                                               ImageView image, TextView description) {
-                        if (position == 1) { //Assume we want to load the GIF at Slide 2 (index 1)
-                            Glide.with(image.getContext()).load(R.drawable.image3).into(image);
-                        }
-
-                    }
-                }).introduceMyself();
+new IntroductionBuilder(this)
+        .withSlides(slides)
+        .withOnSlideListener(new OnSlideListener() {
+            @Override
+            public void onSlideInit(int position, @NonNull TextView title, @NonNull ImageView image, @NonNull TextView description) {
+                if (position == 1) { // Assume we want to load the GIF at Slide 2 (index 1).
+                    Glide.with(image.getContext())
+                            .load(R.drawable.image3)
+                            .into(image);
+                }
+            }
+        }).introduceMyself();
 ```
 
 This will add the GIF, which will be automatically played when the users navigates to the Slide.
@@ -141,35 +149,32 @@ Android Marshmallow introduced Runtime Permissions, which can be requested easil
 To do that, you can add a global listener like the following:
 
 ```java
-new IntroductionBuilder(this).withSlides(slides)
-                .withOnSlideListener(new OnSlideListener() {
-                    @Override
-                    public void onSlideChanged(int from, int to) {
-                        if (from == 0 && to == 1) {
-                            if (ActivityCompat.checkSelfPermission(MainActivity.this,
-                                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                                    != PackageManager.PERMISSION_GRANTED) {
-                                ActivityCompat.requestPermissions(MainActivity.this,
-                                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                        12);
-                            }
-                        }
+new IntroductionBuilder(this)
+        .withSlides(slides)
+        .withOnSlideListener(new OnSlideListener() {
+            @Override
+            public void onSlideChanged(int from, int to) {
+                if (from == 0 && to == 1) {
+                    if (ActivityCompat.checkSelfPermission(MainActivity.this,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(MainActivity.this,
+                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 12);
                     }
-                }).introduceMyself();
+                }
+            }
+        }).introduceMyself();
 ```
 
 You can check if the permissions were granted like the following:
 
 ```java
 @Override
-public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                       @NonNull int[] grantResults) {
+public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-     if (requestCode == 12) {
-         if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "Permission was successfully granted!", Toast.LENGTH_LONG)
-                     .show();
+    if (requestCode == 12) {
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this, "Permission was successfully granted!", Toast.LENGTH_LONG).show();
         }
     }
 }
@@ -183,8 +188,10 @@ There are two available styles: `Translucent` and `Fullscreen`.
 To apply one of those styles, do the following:
 
 ```java
-new IntroductionBuilder(this).withSlides(generateSlides())
-                .withStyle(new FullscreenStyle()).introduceMyself();
+new IntroductionBuilder(this)
+                .withSlides(generateSlides())
+                .withStyle(new FullscreenStyle())
+                .introduceMyself();
 ```
 
 `Translucent` is the default style.
@@ -199,6 +206,7 @@ Create a class which implements CustomViewBuilder:
 
 ```java
 public class CustomViewBuilderImpl implements Slide.CustomViewBuilder {
+
     @NonNull
     @Override
     public View buildView(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
@@ -211,15 +219,17 @@ Then set it to your Slide:
 
 ```java
 new IntroductionBuilder(this)
-        .withSlides(new Slide().withCustomViewBuilder(new CustomViewBuilderImpl())
-                .withColorResource(R.color.cyan)).introduceMyself();
+        .withSlides(new Slide()
+                .withCustomViewBuilder(new CustomViewBuilderImpl())
+                .withColorResource(R.color.cyan)
+        ).introduceMyself();
 ```
 
 If you set a CustomViewBuilder to your Slide, all other values aside from the color are overridden. You have to manage all on your own.
 
 ##### Further reading
 
-A much more detailed explanation with all available APIs can be found in the [Wiki](https://github.com/RubenGees/Introduction/wiki).  
+A much more detailed explanation with all available APIs can be found in the [Wiki](https://github.com/RubenGees/Introduction/wiki).<br>
 Detailed Javadoc can be found [here](https://jitpack.io/com/github/rubengees/introduction/1.3.9/javadoc/).
 
 ### Upgrade Guide
@@ -236,7 +246,7 @@ Detailed Javadoc can be found [here](https://jitpack.io/com/github/rubengees/int
 
 ### Metrics
 
-<a href="http://www.methodscount.com/?lib=com.github.rubengees%3Aintroduction%3A1.3.9"><img src="https://img.shields.io/badge/Methods and size-core: 307 | deps: 16517 | 54 KB-e91e63.svg"/></a>
+<a href="http://www.methodscount.com/?lib=com.github.rubengees%3Aintroduction%3A1.3.9"><img src="https://img.shields.io/badge/Methods and size-core: 307 | deps: 16517 | 54 KB-e91e63.svg"/></a><br>
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2c56559b0732423eb976dc4aa56ab95a)](https://www.codacy.com/app/geesruben/introduction?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rubengees/introduction&amp;utm_campaign=Badge_Grade)
 
 ### Contributions and contributors
