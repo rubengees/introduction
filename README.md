@@ -131,7 +131,8 @@ new IntroductionBuilder(this)
         .withSlides(slides)
         .withOnSlideListener(new OnSlideListener() {
             @Override
-            public void onSlideInit(int position, @NonNull TextView title, @NonNull ImageView image, @NonNull TextView description) {
+            public void onSlideInit(int position, @NonNull TextView title, @NonNull ImageView image,
+                                    @NonNull TextView description) {
                 if (position == 1) { // Assume we want to load the GIF at Slide 2 (index 1).
                     Glide.with(image.getContext())
                             .load(R.drawable.image3)
@@ -169,7 +170,8 @@ You can check if the permissions were granted like the following:
 
 ```java
 @Override
-public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                       @NonNull int[] grantResults) {
     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
     if (requestCode == 12) {
@@ -198,10 +200,10 @@ new IntroductionBuilder(this)
 
 ##### Custom Views
 
-You can supply your own View to a Slide instead of just setting the title, image and description.  
+You can supply your own View to a Slide instead of just setting the title, image and description.<br>
 This is done like follows:
 
-Create a class which implements CustomViewBuilder:  
+Create a class which implements CustomViewBuilder:<br>
 (Note: This *must* be a class on its own. Don't anonymously implement this)
 
 ```java
