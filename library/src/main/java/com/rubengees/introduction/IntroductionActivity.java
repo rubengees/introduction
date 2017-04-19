@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RestrictTo;
 import android.support.v4.view.OnApplyWindowInsetsListener;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
@@ -35,8 +36,6 @@ import android.widget.FrameLayout;
 
 import com.rubengees.introduction.adapter.PagerAdapter;
 import com.rubengees.introduction.common.DotIndicatorManager;
-import com.rubengees.introduction.entity.Option;
-import com.rubengees.introduction.entity.Slide;
 import com.rubengees.introduction.interfaces.IndicatorManager;
 import com.rubengees.introduction.style.Style;
 import com.rubengees.introduction.util.ButtonManager;
@@ -62,6 +61,7 @@ import static com.rubengees.introduction.IntroductionBuilder.ORIENTATION_PORTRAI
  *
  * @author Ruben Gees
  */
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public class IntroductionActivity extends AppCompatActivity {
 
     public static final String OPTION_RESULT = "introduction_option_result";

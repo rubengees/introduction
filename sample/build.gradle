@@ -1,15 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "$build_tools_version"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.rubengees.introductionsample"
-        minSdkVersion 9
-        targetSdkVersion 25
-        versionCode 25
-        versionName "1.3.9"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.version
+
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -22,9 +23,10 @@ android {
 }
 
 dependencies {
-    compile "com.android.support:appcompat-v7:$support_version"
-    compile "com.android.support:design:$support_version"
+    compile deps.supportAppCompat
+    compile deps.supportDesign
 
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile deps.glide
+
     compile project(':library')
 }

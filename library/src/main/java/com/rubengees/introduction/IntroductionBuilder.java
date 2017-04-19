@@ -26,9 +26,9 @@ import android.support.annotation.Size;
 import android.support.annotation.StringRes;
 import android.support.v4.view.ViewPager;
 
-import com.rubengees.introduction.entity.Slide;
 import com.rubengees.introduction.exception.IntroductionConfigurationException;
 import com.rubengees.introduction.interfaces.IndicatorManager;
+import com.rubengees.introduction.interfaces.OnSlideListener;
 import com.rubengees.introduction.style.Style;
 import com.rubengees.introduction.style.TranslucentStyle;
 
@@ -234,15 +234,14 @@ public class IntroductionBuilder {
 
     /**
      * Assigns a
-     * {@link com.rubengees.introduction.IntroductionConfiguration.OnSlideListener} to the
+     * {@link com.rubengees.introduction.interfaces.OnSlideListener} to the
      * Activity.
      *
      * @param onSlideChangedListener The listener.
      * @return The current instance.
      */
     @NonNull
-    public IntroductionBuilder withOnSlideListener(@NonNull IntroductionConfiguration.OnSlideListener
-                                                           onSlideChangedListener) {
+    public IntroductionBuilder withOnSlideListener(@NonNull OnSlideListener onSlideChangedListener) {
         IntroductionConfiguration.getInstance().setOnSlideChangedListener(onSlideChangedListener);
 
         return this;

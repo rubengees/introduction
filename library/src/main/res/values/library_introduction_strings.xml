@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?><!-- Support for AboutLibraries by Mike Penz (https://github.com/mikepenz/AboutLibraries) -->
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="define_introduction" tools:ignore="UnusedResources"/>
+    <string name="define_introduction" tools:ignore="UnusedResources" />
     <!-- Author section -->
     <string name="library_introduction_author" tools:ignore="UnusedResources">Ruben Gees</string>
     <string name="library_introduction_authorWebsite" tools:ignore="UnusedResources">https://github.com/RubenGees</string>

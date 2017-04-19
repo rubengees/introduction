@@ -47,8 +47,7 @@ public class ButtonManager implements ViewPagerProcessor {
      * @param slideAmount        The amount of Slides.
      */
     public ButtonManager(@NonNull AppCompatImageButton previous, @NonNull AppCompatImageButton next,
-                         @NonNull Button skip, boolean showPreviousButton, boolean showSkipButton,
-                         int slideAmount) {
+                         @NonNull Button skip, boolean showPreviousButton, boolean showSkipButton, int slideAmount) {
         this.previous = previous;
         this.next = next;
         this.skip = skip;

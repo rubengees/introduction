@@ -16,11 +16,11 @@
 
 package com.rubengees.introduction;
 
-
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RestrictTo;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
@@ -34,14 +34,12 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.rubengees.introduction.entity.Slide;
-
-
 /**
  * A Fragment which displays a single Slide.
  *
  * @author Ruben Gees
  */
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public class IntroductionFragment extends Fragment {
 
     private static final String BUNDLE_SLIDE = "introduction_slide";

@@ -1,7 +1,25 @@
-buildscript {
-    ext.support_version = '25.3.0'
-    ext.build_tools_version = '25.0.2'
+ext {
+    preDexLibs = !project.hasProperty('disablePreDex')
 
+    version = '1.4.0'
+    versionCode = 26
+    minSdkVersion = 9
+    targetSdkVersion = 25
+    compileSdkVersion = 25
+    buildToolsVersion = '25.0.2'
+
+    supportLibraryVersion = '25.3.1'
+    glideVersion = '3.7.0'
+
+    deps = [
+            supportAppCompat: "com.android.support:appcompat-v7:$supportLibraryVersion",
+            supportDesign   : "com.android.support:design:$supportLibraryVersion",
+
+            glide           : "com.github.bumptech.glide:glide:$glideVersion",
+    ]
+}
+
+buildscript {
     repositories {
         jcenter()
     }
@@ -20,13 +38,12 @@ allprojects {
     }
 }
 
-project.ext.preDexLibs = !project.hasProperty('disablePreDex')
-
 subprojects {
+    def appPlugin = "com.android.build.gradle.AppPlugin"
+    def libraryPlugin = "com.android.build.gradle.LibraryPlugin"
+
     project.plugins.whenPluginAdded { plugin ->
-        if ("com.android.build.gradle.AppPlugin" == plugin.class.name) {
-            project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
-        } else if ("com.android.build.gradle.LibraryPlugin" == plugin.class.name) {
+        if (appPlugin == plugin.class.name || libraryPlugin == plugin.class.name) {
             project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
         }
     }
@@ -37,5 +54,5 @@ task clean(type: Delete) {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.4.1'
+    gradleVersion = '3.5'
 }

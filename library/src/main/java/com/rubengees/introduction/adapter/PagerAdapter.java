@@ -17,11 +17,12 @@
 package com.rubengees.introduction.adapter;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.RestrictTo;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.rubengees.introduction.entity.Slide;
+import com.rubengees.introduction.Slide;
 
 import java.util.List;
 
@@ -33,6 +34,7 @@ import static com.rubengees.introduction.IntroductionFragment.newInstance;
  *
  * @author Ruben Gees
  */
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public class PagerAdapter extends FragmentStatePagerAdapter {
 
     private List<Slide> slides;

@@ -16,6 +16,7 @@
 
 package com.rubengees.introductionsample;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +48,7 @@ public class NumberIndicatorManager extends IndicatorManager {
         return root;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void select(int position) {
         text.setText((position + 1) + "/" + slideAmount);

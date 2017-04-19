@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rubengees.introduction.interfaces.IndicatorManager;
+import com.rubengees.introduction.interfaces.OnSlideListener;
 
 /**
  * A helper-singleton to provide some data to the {@link IntroductionActivity}.
@@ -32,7 +33,8 @@ import com.rubengees.introduction.interfaces.IndicatorManager;
  *
  * @author Ruben Gees
  */
-public final class IntroductionConfiguration {
+final class IntroductionConfiguration {
+
     private static IntroductionConfiguration INSTANCE;
 
     private OnSlideListener onSlideListener;
@@ -42,7 +44,6 @@ public final class IntroductionConfiguration {
     private Typeface descriptionTypeface;
 
     private IntroductionConfiguration() {
-
     }
 
     @NonNull
@@ -115,20 +116,5 @@ public final class IntroductionConfiguration {
 
     void setDescriptionTypeface(Typeface typeface) {
         this.descriptionTypeface = typeface;
-    }
-
-    public static class OnSlideListener {
-
-        protected OnSlideListener() {
-        }
-
-        protected void onSlideChanged(int from, int to) {
-            // To be implemented by the user
-        }
-
-        protected void onSlideInit(int position, @NonNull TextView title, @NonNull ImageView image,
-                                   @NonNull TextView description) {
-            // To be implemented by the user
-        }
     }
 }

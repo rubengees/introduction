@@ -35,9 +35,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.rubengees.introduction.IntroductionActivity;
 import com.rubengees.introduction.IntroductionBuilder;
-import com.rubengees.introduction.IntroductionConfiguration;
-import com.rubengees.introduction.entity.Option;
-import com.rubengees.introduction.entity.Slide;
+import com.rubengees.introduction.Option;
+import com.rubengees.introduction.Slide;
+import com.rubengees.introduction.interfaces.OnSlideListener;
 import com.rubengees.introduction.style.FullscreenStyle;
 import com.rubengees.introductionsample.transformer.ColorPageTransformer;
 import com.rubengees.introductionsample.transformer.DepthPageTransformer;
@@ -51,17 +51,16 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String ERROR_API_LEVEL = "You need at least API 11 for this feature";
 
-    private IntroductionConfiguration.OnSlideListener defaultOnSlideListener =
-            new IntroductionConfiguration.OnSlideListener() {
-                @Override
-                protected void onSlideInit(int position, @NonNull TextView title,
-                                           @NonNull ImageView image, @NonNull TextView description) {
-                    if (position % 3 == 1) {
-                        Glide.with(image.getContext()).load(R.drawable.image3)
-                                .diskCacheStrategy(DiskCacheStrategy.NONE).into(image);
-                    }
-                }
-            };
+    private OnSlideListener defaultOnSlideListener = new OnSlideListener() {
+        @Override
+        public void onSlideInit(int position, @NonNull TextView title, @NonNull ImageView image,
+                                @NonNull TextView description) {
+            if (position % 3 == 1) {
+                Glide.with(image.getContext()).load(R.drawable.image3)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE).into(image);
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,29 +72,40 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == IntroductionBuilder.INTRODUCTION_REQUEST_CODE &&
-                resultCode == RESULT_OK) {
-            String result = "User chose: ";
+        if (requestCode == IntroductionBuilder.INTRODUCTION_REQUEST_CODE && resultCode == RESULT_OK) {
+            StringBuilder result = new StringBuilder("User chose: ");
 
-            for (Option option : data.<Option>getParcelableArrayListExtra(IntroductionActivity.
-                    OPTION_RESULT)) {
-                result += option.getPosition() + (option.isActivated() ? " enabled" : " disabled");
+            for (Option option : data.<Option>getParcelableArrayListExtra(IntroductionActivity.OPTION_RESULT)) {
+                result.append(option.getPosition()).append(option.isActivated() ? " enabled" : " disabled");
             }
 
             //noinspection ConstantConditions
-            Snackbar.make(findViewById(R.id.root), result, Snackbar.LENGTH_LONG).show();
+            Snackbar.make(findViewById(R.id.root), result.toString(), Snackbar.LENGTH_LONG).show();
         }
     }
 
     private List<Slide> generateSlides() {
         List<Slide> result = new ArrayList<>();
 
-        result.add(new Slide().withTitle("Title").withDescription("Description").
-                withColorResource(R.color.green).withImage(R.drawable.image1));
-        result.add(new Slide().withTitle("Gif").withDescription("This is a Gif")
-                .withColorResource(R.color.indigo));
-        result.add(new Slide().withTitle("Option").withOption(new Option("This is an option", true))
-                .withColorResource(R.color.orange).withImage(R.drawable.image2));
+        result.add(new Slide()
+                .withTitle("Title")
+                .withDescription("Description").
+                        withColorResource(R.color.green)
+                .withImage(R.drawable.image1)
+        );
+
+        result.add(new Slide()
+                .withTitle("Gif")
+                .withDescription("This is a Gif")
+                .withColorResource(R.color.indigo)
+        );
+
+        result.add(new Slide()
+                .withTitle("Option")
+                .withOption(new Option("This is an option", true))
+                .withColorResource(R.color.orange)
+                .withImage(R.drawable.image2)
+        );
 
         return result;
     }
@@ -103,15 +113,25 @@ public class MainActivity extends AppCompatActivity {
     private List<Slide> generateResourceSlides() {
         List<Slide> result = new ArrayList<>();
 
-        result.add(new Slide().withTitle(R.string.slide_title).
-                withDescription(R.string.slide_description).withColorResource(R.color.green)
-                .withImage(R.drawable.image1));
-        result.add(new Slide().withTitle(R.string.slide_gif)
+        result.add(new Slide()
+                .withTitle(R.string.slide_title)
+                .withDescription(R.string.slide_description)
+                .withColorResource(R.color.green)
+                .withImage(R.drawable.image1)
+        );
+
+        result.add(new Slide()
+                .withTitle(R.string.slide_gif)
                 .withDescription(R.string.slide_gif_description)
-                .withColorResource(R.color.indigo));
-        result.add(new Slide().withTitle(R.string.slide_option)
+                .withColorResource(R.color.indigo)
+        );
+
+        result.add(new Slide()
+                .withTitle(R.string.slide_option)
                 .withOption(new Option(R.string.slide_option_description, true))
-                .withColorResource(R.color.orange).withImage(R.drawable.image2));
+                .withColorResource(R.color.orange)
+                .withImage(R.drawable.image2)
+        );
 
         return result;
     }
@@ -119,25 +139,30 @@ public class MainActivity extends AppCompatActivity {
     private List<Slide> generateLongStringsSlides() {
         List<Slide> result = new ArrayList<>();
 
-        result.add(new Slide().withTitle("This is a veeeeeeeeeeeeeeeeeeeeeeeeeee" +
-                "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeery long title").
-                withDescription("This is an even looooooooooooooooooooooooooooooooooooooooooo" +
-                        "ooooooooooooooooooooooooooooooooooooooonger description")
+        result.add(new Slide()
+                .withTitle("This is a veeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeery " +
+                        "long title")
+                .withDescription("This is an even looooooooooooooooooooooooooooooooooooooooooooooooooooooooooo" +
+                        "oooooooooooooooonger description")
                 .withColorResource(R.color.green).withImage(R.drawable.image1));
 
         return result;
     }
 
     public void onDefaultClick(View view) {
-        new IntroductionBuilder(this).withSlides(generateSlides())
-                .withOnSlideListener(defaultOnSlideListener).introduceMyself();
+        new IntroductionBuilder(this)
+                .withSlides(generateSlides())
+                .withOnSlideListener(defaultOnSlideListener)
+                .introduceMyself();
     }
 
     public void onZoomOutClick(View view) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            new IntroductionBuilder(this).withSlides(generateSlides())
+            new IntroductionBuilder(this)
+                    .withSlides(generateSlides())
                     .withOnSlideListener(defaultOnSlideListener)
-                    .withPageTransformer(new ZoomOutPageTransformer()).introduceMyself();
+                    .withPageTransformer(new ZoomOutPageTransformer())
+                    .introduceMyself();
         } else {
             Snackbar.make(findViewById(R.id.root), ERROR_API_LEVEL, Snackbar.LENGTH_LONG).show();
         }
@@ -145,9 +170,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void onDepthClick(View view) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            new IntroductionBuilder(this).withSlides(generateSlides())
+            new IntroductionBuilder(this)
+                    .withSlides(generateSlides())
                     .withOnSlideListener(defaultOnSlideListener)
-                    .withPageTransformer(new DepthPageTransformer()).introduceMyself();
+                    .withPageTransformer(new DepthPageTransformer())
+                    .introduceMyself();
         } else {
             Snackbar.make(findViewById(R.id.root), ERROR_API_LEVEL, Snackbar.LENGTH_LONG).show();
         }
@@ -155,79 +182,97 @@ public class MainActivity extends AppCompatActivity {
 
     public void onColorTransformationClick(View view) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            new IntroductionBuilder(this).withSlides(generateSlides())
+            new IntroductionBuilder(this)
+                    .withSlides(generateSlides())
                     .withOnSlideListener(defaultOnSlideListener)
-                    .withPageTransformer(new ColorPageTransformer()).introduceMyself();
+                    .withPageTransformer(new ColorPageTransformer())
+                    .introduceMyself();
         } else {
             Snackbar.make(findViewById(R.id.root), ERROR_API_LEVEL, Snackbar.LENGTH_LONG).show();
         }
     }
 
     public void onCustomIndicatorClick(View view) {
-        new IntroductionBuilder(this).withSlides(generateSlides())
+        new IntroductionBuilder(this)
+                .withSlides(generateSlides())
                 .withOnSlideListener(defaultOnSlideListener)
-                .withIndicatorManager(new NumberIndicatorManager()).introduceMyself();
+                .withIndicatorManager(new NumberIndicatorManager())
+                .introduceMyself();
     }
 
     public void onCustomButtonsClick(View view) {
-        new IntroductionBuilder(this).withSlides(generateSlides())
+        new IntroductionBuilder(this)
+                .withSlides(generateSlides())
                 .withOnSlideListener(defaultOnSlideListener)
-                .withPreviousButtonEnabled(false).introduceMyself();
+                .withPreviousButtonEnabled(false)
+                .introduceMyself();
     }
 
     public void onNoIndicatorClick(View view) {
-        new IntroductionBuilder(this).withSlides(generateSlides())
-                .withOnSlideListener(defaultOnSlideListener).withIndicatorEnabled(false)
+        new IntroductionBuilder(this)
+                .withSlides(generateSlides())
+                .withOnSlideListener(defaultOnSlideListener)
+                .withIndicatorEnabled(false)
                 .introduceMyself();
     }
 
     public void onPortraitOnlyClick(View view) {
-        new IntroductionBuilder(this).withSlides(generateSlides())
+        new IntroductionBuilder(this)
+                .withSlides(generateSlides())
                 .withOnSlideListener(defaultOnSlideListener)
-                .withForcedOrientation(IntroductionBuilder.ORIENTATION_PORTRAIT).introduceMyself();
+                .withForcedOrientation(IntroductionBuilder.ORIENTATION_PORTRAIT)
+                .introduceMyself();
     }
 
     public void onFullscreenClick(View view) {
-        new IntroductionBuilder(this).withSlides(generateSlides())
+        new IntroductionBuilder(this)
+                .withSlides(generateSlides())
                 .withOnSlideListener(defaultOnSlideListener)
-                .withStyle(new FullscreenStyle()).introduceMyself();
+                .withStyle(new FullscreenStyle())
+                .introduceMyself();
     }
 
     public void onTextFromResourcesClick(View view) {
-        new IntroductionBuilder(this).withSlides(generateResourceSlides())
-                .withOnSlideListener(defaultOnSlideListener).withSkipEnabled(R.string.skip)
+        new IntroductionBuilder(this)
+                .withSlides(generateResourceSlides())
+                .withOnSlideListener(defaultOnSlideListener)
+                .withSkipEnabled(R.string.skip)
                 .introduceMyself();
     }
 
     public void onLongStringsClick(View view) {
-        new IntroductionBuilder(this).withSlides(generateLongStringsSlides())
-                .withOnSlideListener(defaultOnSlideListener).introduceMyself();
+        new IntroductionBuilder(this)
+                .withSlides(generateLongStringsSlides())
+                .withOnSlideListener(defaultOnSlideListener)
+                .introduceMyself();
     }
 
     public void onBackPressClick(View view) {
-        new IntroductionBuilder(this).withSlides(generateSlides())
-                .withOnSlideListener(defaultOnSlideListener).withAllowBackPress(true)
+        new IntroductionBuilder(this)
+                .withSlides(generateSlides())
+                .withOnSlideListener(defaultOnSlideListener)
+                .withAllowBackPress(true)
                 .introduceMyself();
     }
 
     public void onRequestPermissionClick(View view) {
         List<Slide> slides = generateSlides();
 
-        slides.add(0, new Slide().withTitle("Permission Request")
+        slides.add(0, new Slide()
+                .withTitle("Permission Request")
                 .withDescription("You can request permissions with the listener")
-                .withColorResource(R.color.purple));
+                .withColorResource(R.color.purple)
+        );
 
         new IntroductionBuilder(this).withSlides(slides)
-                .withOnSlideListener(new IntroductionConfiguration.OnSlideListener() {
+                .withOnSlideListener(new OnSlideListener() {
                     @Override
                     public void onSlideChanged(int from, int to) {
                         if (from == 0 && to == 1) {
                             if (ActivityCompat.checkSelfPermission(MainActivity.this,
-                                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                                    != PackageManager.PERMISSION_GRANTED) {
+                                    Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                                 ActivityCompat.requestPermissions(MainActivity.this,
-                                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                        12);
+                                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 12);
                             } else {
                                 Toast.makeText(MainActivity.this, "Permission is already granted",
                                         Toast.LENGTH_SHORT).show();
@@ -236,9 +281,9 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    protected void onSlideInit(int position, @NonNull TextView title,
-                                               @NonNull ImageView image,
-                                               @NonNull TextView description) {
+                    public void onSlideInit(int position, @NonNull TextView title,
+                                            @NonNull ImageView image,
+                                            @NonNull TextView description) {
                         if (position == 2) {
                             Glide.with(image.getContext()).load(R.drawable.image3).into(image);
                         }
@@ -249,21 +294,29 @@ public class MainActivity extends AppCompatActivity {
     public void onAsynchronousClick(View view) {
         List<Slide> slides = new ArrayList<>();
 
-        slides.add(0, new Slide().withTitle("Asynchronous")
+        slides.add(0, new Slide()
+                .withTitle("Asynchronous")
                 .withDescription("The next image will be loaded asynchronously")
-                .withColorResource(R.color.purple));
-        slides.add(1, new Slide().withTitle("Asynchronous").
-                withDescription("This image was loaded asynchronously")
-                .withColorResource(R.color.indigo));
+                .withColorResource(R.color.purple)
+        );
 
-        new IntroductionBuilder(this).withSlides(slides)
-                .withOnSlideListener(new IntroductionConfiguration.OnSlideListener() {
+        slides.add(1, new Slide()
+                .withTitle("Asynchronous").
+                        withDescription("This image was loaded asynchronously")
+                .withColorResource(R.color.indigo)
+        );
+
+        new IntroductionBuilder(this)
+                .withSlides(slides)
+                .withOnSlideListener(new OnSlideListener() {
                     @Override
-                    protected void onSlideInit(int position, @NonNull TextView title,
-                                               @NonNull ImageView image, @NonNull TextView description) {
+                    public void onSlideInit(int position, @NonNull TextView title, @NonNull ImageView image,
+                                            @NonNull TextView description) {
                         if (position == 1) {
-                            Glide.with(image.getContext()).load(R.drawable.image3)
-                                    .diskCacheStrategy(DiskCacheStrategy.NONE).into(image);
+                            Glide.with(image.getContext())
+                                    .load(R.drawable.image3)
+                                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                    .into(image);
                         }
                     }
                 }).introduceMyself();
@@ -276,18 +329,23 @@ public class MainActivity extends AppCompatActivity {
             slides.addAll(generateSlides());
         }
 
-        new IntroductionBuilder(this).withSlides(slides)
-                .withOnSlideListener(defaultOnSlideListener).introduceMyself();
+        new IntroductionBuilder(this)
+                .withSlides(slides)
+                .withOnSlideListener(defaultOnSlideListener)
+                .introduceMyself();
     }
 
     public void onSkipClick(View view) {
-        new IntroductionBuilder(this).withSlides(generateSlides())
-                .withOnSlideListener(defaultOnSlideListener).withSkipEnabled("Skip")
+        new IntroductionBuilder(this)
+                .withSlides(generateSlides())
+                .withOnSlideListener(defaultOnSlideListener)
+                .withSkipEnabled("Skip")
                 .introduceMyself();
     }
 
     public void onTypefaceClick(View view) {
-        new IntroductionBuilder(this).withSlides(generateSlides())
+        new IntroductionBuilder(this)
+                .withSlides(generateSlides())
                 .withOnSlideListener(defaultOnSlideListener)
                 .withTitleTypeface(Typeface.MONOSPACE)
                 .withDescriptionTypeface(Typeface.SERIF)
@@ -296,7 +354,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void onTextSizeClick(View view) {
         new IntroductionBuilder(this)
-                .withSlides(Collections.singletonList(new Slide().withTitle("small text")
+                .withSlides(Collections.singletonList(new Slide()
+                        .withTitle("small text")
                         .withDescription("BIG TEXT")
                         .withTitleSize(12f)
                         .withDescriptionSize(60f)
@@ -307,11 +366,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void onCustomViewClick(View view) {
         new IntroductionBuilder(this)
-                .withSlides(new Slide().withCustomViewBuilder(new CustomViewBuilderImpl1())
+                .withSlides(
+                        new Slide()
+                                .withCustomViewBuilder(new CustomViewBuilderImpl1())
                                 .withColorResource(R.color.cyan),
                         new Slide().withCustomViewBuilder(new CustomViewBuilderImpl2())
-                                .withColorResource(R.color.green))
-                .introduceMyself();
+                                .withColorResource(R.color.green)
+                ).introduceMyself();
     }
 
     @Override
@@ -319,8 +380,7 @@ public class MainActivity extends AppCompatActivity {
                                            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == 12 && grantResults.length > 0 &&
-                grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (requestCode == 12 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(MainActivity.this, "Permission was granted successfully",
                     Toast.LENGTH_SHORT).show();
         }

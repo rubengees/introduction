@@ -31,5 +31,4 @@ public interface ViewPagerProcessor {
      * @param position The position of the new Slide.
      */
     void select(@IntRange(from = 0) int position);
-
 }

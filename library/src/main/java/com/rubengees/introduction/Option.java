@@ -14,7 +14,7 @@
  *   limitations under the License.
  */
 
-package com.rubengees.introduction.entity;
+package com.rubengees.introduction;
 
 import android.content.Context;
 import android.os.Parcel;
@@ -119,6 +119,7 @@ public class Option implements Parcelable {
         return position;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -149,7 +150,7 @@ public class Option implements Parcelable {
      * @param context  The context.
      * @param position The position of the slide, this option is assigned to.
      */
-    public void init(@NonNull Context context, @IntRange(from = 0) int position) {
+    void init(@NonNull Context context, @IntRange(from = 0) int position) {
         this.position = position;
 
         if (titleResource != null) {

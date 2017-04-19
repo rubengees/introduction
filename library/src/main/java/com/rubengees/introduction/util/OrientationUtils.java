@@ -22,6 +22,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RestrictTo;
 import android.view.View;
 
 import static android.content.pm.ApplicationInfo.FLAG_SUPPORTS_RTL;
@@ -31,6 +32,7 @@ import static android.content.pm.ApplicationInfo.FLAG_SUPPORTS_RTL;
  *
  * @author Ruben Gees
  */
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public final class OrientationUtils {
 
     private OrientationUtils() {

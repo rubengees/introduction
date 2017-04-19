@@ -18,6 +18,7 @@ package com.rubengees.introduction.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.RestrictTo;
 import android.support.v7.widget.AppCompatImageButton;
 import android.util.AttributeSet;
 
@@ -29,6 +30,7 @@ import com.rubengees.introduction.R;
  *
  * @author Ruben Gees
  */
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public class HeightAspectImageButton extends AppCompatImageButton {
 
     private static final float DEFAULT_ASPECT = 1f;
@@ -44,8 +46,7 @@ public class HeightAspectImageButton extends AppCompatImageButton {
     public HeightAspectImageButton(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        TypedArray attributes = context.obtainStyledAttributes(attrs,
-                R.styleable.HeightAspectImageButton);
+        TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.HeightAspectImageButton);
         aspect = attributes.getFloat(R.styleable.HeightAspectImageButton_aspect, DEFAULT_ASPECT);
 
         attributes.recycle();
@@ -54,8 +55,7 @@ public class HeightAspectImageButton extends AppCompatImageButton {
     public HeightAspectImageButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        TypedArray attributes = context.obtainStyledAttributes(attrs,
-                R.styleable.HeightAspectImageButton);
+        TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.HeightAspectImageButton);
         aspect = attributes.getFloat(R.styleable.HeightAspectImageButton_aspect, DEFAULT_ASPECT);
 
         attributes.recycle();

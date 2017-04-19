@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.rubengees.introduction.entity.Slide;
+import com.rubengees.introduction.Slide;
 
 /**
  * An implementation of the CustomViewBuilder to return a very basic view.

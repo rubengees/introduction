@@ -38,12 +38,10 @@ public class DotIndicatorManager extends IndicatorManager {
     @NonNull
     @Override
     public View init(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent, int slideAmount) {
-        root = (ViewGroup) inflater.inflate(R.layout.introduction_indicator_layout_dot, parent,
-                false);
+        root = (ViewGroup) inflater.inflate(R.layout.introduction_indicator_layout_dot, parent, false);
 
         for (int i = 0; i < slideAmount; i++) {
-            ImageView dot = (ImageView) inflater.inflate(R.layout.introduction_indicator_item_dot,
-                    root, false);
+            ImageView dot = (ImageView) inflater.inflate(R.layout.introduction_indicator_item_dot, root, false);
 
             dot.setTag(i);
             dot.setOnClickListener(new View.OnClickListener() {

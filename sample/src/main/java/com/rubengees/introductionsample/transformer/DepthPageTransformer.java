@@ -50,8 +50,7 @@ public class DepthPageTransformer extends BasePageTransformer {
                 page.setTranslationX(pageWidth * -position);
 
                 // Scale the page down (between MIN_SCALE and 1)
-                float scaleFactor = MIN_SCALE
-                        + (1 - MIN_SCALE) * (1 - Math.abs(position));
+                float scaleFactor = MIN_SCALE + (1 - MIN_SCALE) * (1 - Math.abs(position));
                 page.setScaleX(scaleFactor);
                 page.setScaleY(scaleFactor);
             }

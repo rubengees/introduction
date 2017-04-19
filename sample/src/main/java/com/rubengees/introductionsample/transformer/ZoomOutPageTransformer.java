@@ -53,9 +53,7 @@ public class ZoomOutPageTransformer extends BasePageTransformer {
             page.setScaleY(scaleFactor);
 
             // Fade the page relative to its size.
-            page.setAlpha(MIN_ALPHA +
-                    (scaleFactor - MIN_SCALE) /
-                            (1 - MIN_SCALE) * (1 - MIN_ALPHA));
+            page.setAlpha(MIN_ALPHA + (scaleFactor - MIN_SCALE) / (1 - MIN_SCALE) * (1 - MIN_ALPHA));
         } else {
             page.setAlpha(0);
         }

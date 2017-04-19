@@ -14,7 +14,7 @@
  *   limitations under the License.
  */
 
-package com.rubengees.introduction.entity;
+package com.rubengees.introduction;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -340,7 +340,7 @@ public class Slide implements Parcelable {
      * @param context  The Context.
      * @param position The position of this slide.
      */
-    public void init(@NonNull Context context, @IntRange(from = 0) int position) {
+    void init(@NonNull Context context, @IntRange(from = 0) int position) {
         this.position = position;
         Resources resources = context.getResources();
 
