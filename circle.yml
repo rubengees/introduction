@@ -16,7 +16,7 @@ dependencies:
 
 test:
   override:
-    - ./gradlew build -PdisablePreDex --console=plain
+    - ./gradlew clean build publishToMavenLocal -PdisablePreDex --console=plain
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/lint/introduction
     - mkdir -p $CIRCLE_TEST_REPORTS/lint/sample
