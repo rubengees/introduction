@@ -254,7 +254,6 @@ Detailed Javadoc can be found [here](https://jitpack.io/com/github/rubengees/int
 ### Metrics
 
 <a href="http://www.methodscount.com/?lib=com.github.rubengees%3Aintroduction%3A1.4.0"><img src="https://img.shields.io/badge/Methods and size-core: 307 | deps: 16517 | 54 KB-e91e63.svg"/></a><br>
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2c56559b0732423eb976dc4aa56ab95a)](https://www.codacy.com/app/geesruben/introduction?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rubengees/introduction&amp;utm_campaign=Badge_Grade)
 
 ### Contributions and contributors
 
