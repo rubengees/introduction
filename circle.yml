@@ -2,27 +2,23 @@ machine:
   java:
     version: openjdk8
   environment:
-    GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
+    GRADLE_OPTS: '-Dorg.gradle.daemon=false -Xmx512m -Dorg.gradle.jvmargs="-Xmx1024m -XX:+HeapDumpOnOutOfMemoryError"'
 
 dependencies:
   pre:
-    - echo y | android update sdk --no-ui --all --filter "extra-android-m2repository"
-    - echo y | android update sdk --no-ui --all --filter "extra-google-m2repository"
-    - echo y | android update sdk --no-ui --all --filter "extra-android-support"
-    - echo y | android update sdk --no-ui --all --filter "android-25"
-    - echo y | android update sdk --no-ui --all --filter "build-tools-25.0.2"
-    - echo y | android update sdk --no-ui --all --filter "tools"
-    - echo y | android update sdk --no-ui --all --filter "platform-tools"
+    - echo y | android update sdk --no-ui --filter "tools"
+    - echo y | $ANDROID_HOME/tools/bin/sdkmanager "build-tools;25.0.2"
+    - echo y | $ANDROID_HOME/tools/bin/sdkmanager "extras;google;m2repository"
   override:
     - ./gradlew dependencies --console=plain
 
 test:
   override:
-    - ./gradlew lint install -PdisablePreDex --console=plain
+    - ./gradlew build -PdisablePreDex --console=plain
   post:
-    - mkdir -p $CIRCLE_TEST_REPORTS/lint/library
+    - mkdir -p $CIRCLE_TEST_REPORTS/lint/introduction
     - mkdir -p $CIRCLE_TEST_REPORTS/lint/sample
     - mkdir $CIRCLE_ARTIFACTS/javadoc
-    - cp -r library/build/reports/* $CIRCLE_TEST_REPORTS/lint/library
+    - cp -r introduction/build/reports/* $CIRCLE_TEST_REPORTS/lint/introduction
     - cp -r sample/build/reports/* $CIRCLE_TEST_REPORTS/lint/sample
-    - cp -r library/build/docs/javadoc/* $CIRCLE_ARTIFACTS/javadoc
+    - cp -r introduction/build/docs/javadoc/* $CIRCLE_ARTIFACTS/javadoc

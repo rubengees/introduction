@@ -28,5 +28,5 @@ dependencies {
 
     compile deps.glide
 
-    compile project(':library')
+    compile project(':introduction')
 }
