@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <!-- Don't care in sample about those. -->
+    <issue id="GifUsage" severity="ignore" />
+    <issue id="IconLocation" severity="ignore" />
+</lint>
