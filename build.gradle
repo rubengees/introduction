@@ -4,11 +4,11 @@ ext {
     version = '1.4.1'
     versionCode = 27
     minSdkVersion = 9
-    targetSdkVersion = 25
-    compileSdkVersion = 25
-    buildToolsVersion = '25.0.3'
+    targetSdkVersion = 26
+    compileSdkVersion = 26
+    buildToolsVersion = '26.0.0'
 
-    supportLibraryVersion = '25.3.1'
+    supportLibraryVersion = '25.4.0'
     glideVersion = '3.8.0'
 
     deps = [
@@ -25,7 +25,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.2'
+        classpath 'com.android.tools.build:gradle:2.3.3'
     }
 }
 
@@ -34,6 +34,7 @@ allprojects {
 
     repositories {
         jcenter()
+        maven { url "https://maven.google.com"}
         maven { url "https://jitpack.io" }
     }
 }
@@ -54,5 +55,5 @@ task clean(type: Delete) {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.5'
+    gradleVersion = '4.0'
 }
