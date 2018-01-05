@@ -118,6 +118,12 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="onFullscreenImageClick"
+                android:text="@string/button_fullscreen_image" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:onClick="onTypefaceClick"
                 android:text="@string/button_custom_typeface" />
 

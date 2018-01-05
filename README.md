@@ -131,8 +131,8 @@ new IntroductionBuilder(this)
         .withSlides(slides)
         .withOnSlideListener(new OnSlideListener() {
             @Override
-            public void onSlideInit(int position, @NonNull TextView title, @NonNull ImageView image,
-                                    @NonNull TextView description) {
+            public void onSlideInit(int position, @Nullable TextView title, @NonNull ImageView image,
+                                    @Nullable TextView description) {
                 if (position == 1) { // Assume we want to load the GIF at Slide 2 (index 1).
                     Glide.with(image.getContext())
                             .load(R.drawable.image3)

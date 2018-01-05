@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/introduction_fragment_default_content_title"
+        android:id="@+id/introduction_fragment_content_title"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="4dp"
@@ -22,7 +22,7 @@
         tools:text="Title" />
 
     <ImageView
-        android:id="@+id/introduction_fragment_default_content_image"
+        android:id="@+id/introduction_fragment_content_image"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="16dp"
@@ -32,7 +32,7 @@
         tools:ignore="ContentDescription" />
 
     <FrameLayout
-        android:id="@+id/introduction_fragment_default_content_description_container"
+        android:id="@+id/introduction_fragment_content_description_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"

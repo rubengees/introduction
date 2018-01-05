@@ -12,13 +12,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.rubengees.introduction.exception.IntroductionConfigurationException;
-
-import java.io.Serializable;
+import com.rubengees.introduction.interfaces.CustomViewBuilder;
 
 /**
  * A bean which contains the data of a slide.
@@ -287,14 +283,17 @@ public class Slide implements Parcelable {
         return position;
     }
 
+    @Nullable
     public String getTitle() {
         return title;
     }
 
+    @Nullable
     public Integer getImageResource() {
         return imageResource;
     }
 
+    @Nullable
     public String getDescription() {
         return description;
     }
@@ -303,18 +302,22 @@ public class Slide implements Parcelable {
         return color;
     }
 
+    @Nullable
     public Option getOption() {
         return option;
     }
 
+    @Nullable
     public Float getTitleSize() {
         return titleSize;
     }
 
+    @Nullable
     public Float getDescriptionSize() {
         return descriptionSize;
     }
 
+    @Nullable
     public CustomViewBuilder getCustomViewBuilder() {
         return customViewBuilder;
     }
@@ -327,6 +330,7 @@ public class Slide implements Parcelable {
      */
     void init(@NonNull Context context, @IntRange(from = 0) int position) {
         this.position = position;
+
         Resources resources = context.getResources();
 
         if (titleResource != null) {
@@ -412,24 +416,5 @@ public class Slide implements Parcelable {
         dest.writeValue(this.colorResource);
         dest.writeParcelable(this.option, flags);
         dest.writeSerializable(this.customViewBuilder);
-    }
-
-    /**
-     * The interface to define a custom View.
-     * Note: You cannot use a anonymous class to implement this. See the CustomViewBuilderImpl in
-     * the sample.
-     */
-    public interface CustomViewBuilder extends Serializable {
-
-        /**
-         * Returns the desired view for this slide.
-         *
-         * @param inflater The inflater.
-         * @param parent   The parent of the new view. Only for inflation purposes. Do not add your
-         *                 View to this.
-         * @return The new View.
-         */
-        @NonNull
-        View buildView(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent);
     }
 }

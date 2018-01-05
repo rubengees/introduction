@@ -289,10 +289,6 @@ public class IntroductionBuilder {
     }
 
     private void check() {
-        if (slides == null) {
-            throw new IntroductionConfigurationException(EXCEPTION_NO_SLIDES_MESSAGE);
-        }
-
         if (style == null) {
             style = new TranslucentStyle();
         }

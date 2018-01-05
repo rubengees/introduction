@@ -1,17 +1,21 @@
 package com.rubengees.introduction.interfaces;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * Listener for {@link com.rubengees.introduction.Slide} events.
+ *
+ * @author Ruben Gees
+ */
 public abstract class OnSlideListener {
 
     public void onSlideChanged(int from, int to) {
-        // To be optionally implemented by the user
     }
 
-    public void onSlideInit(int position, @NonNull TextView title, @NonNull ImageView image,
-                            @NonNull TextView description) {
-        // To be optionally implemented by the user
+    public void onSlideInit(int position, @Nullable TextView title, @NonNull ImageView image,
+                            @Nullable TextView description) {
     }
 }

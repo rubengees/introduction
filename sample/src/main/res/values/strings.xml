@@ -29,4 +29,5 @@
     <string name="layout_custom_2_text">This is another custom view</string>
     <string name="button_text_size">Custom text size</string>
     <string name="button_custom_typeface">Custom typeface</string>
+    <string name="button_fullscreen_image">Fullscreen image</string>
 </resources>

@@ -11,15 +11,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.CompoundButtonCompat;
-import android.support.v7.widget.AppCompatCheckBox;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static android.view.View.GONE;
 
 /**
  * A Fragment which displays a single Slide.
@@ -75,7 +76,7 @@ public class IntroductionFragment extends Fragment {
         if (slide.getCustomViewBuilder() == null) {
             contentContainer.addView(initDefaultViews(inflater, container));
         } else {
-            contentContainer.addView(initCustomViews(inflater, container));
+            contentContainer.addView(slide.getCustomViewBuilder().buildView(inflater, container));
         }
 
         root.setBackgroundColor(slide.getColor());
@@ -86,13 +87,12 @@ public class IntroductionFragment extends Fragment {
 
     @NonNull
     private View initDefaultViews(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.introduction_fragment_default_content, container, false);
-        TextView title = root.findViewById(R.id.introduction_fragment_default_content_title);
-        ImageView image = root.findViewById(R.id.introduction_fragment_default_content_image);
-        ViewGroup descriptionContainer =
-                root.findViewById(R.id.introduction_fragment_default_content_description_container);
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.introduction_fragment_content, container, false);
+        ViewGroup descriptionContainer = root.findViewById(R.id.introduction_fragment_content_description_container);
 
-        TextView description;
+        TextView title = root.findViewById(R.id.introduction_fragment_content_title);
+        ImageView image = root.findViewById(R.id.introduction_fragment_content_image);
+        TextView description = null;
 
         if (slide.getTitle() != null) {
             title.setText(slide.getTitle());
@@ -100,41 +100,43 @@ public class IntroductionFragment extends Fragment {
             title.setTypeface(IntroductionConfiguration.getInstance().getTitleTypeface());
 
             if (slide.getTitleSize() != null) {
-                title.setTextSize(TypedValue.COMPLEX_UNIT_DIP, slide.getTitleSize());
+                title.setTextSize(COMPLEX_UNIT_DIP, slide.getTitleSize());
             }
+        } else {
+            title.setVisibility(GONE);
+            title = null;
         }
 
         if (slide.getDescription() == null && slide.getOption() != null) {
-            AppCompatCheckBox option = (AppCompatCheckBox) inflater.inflate(R.layout.introduction_fragment_option,
+            ColorStateList buttonColors = ContextCompat.getColorStateList(getSafeContext(), android.R.color.white);
+            CheckBox option = (CheckBox) inflater.inflate(R.layout.introduction_fragment_option,
                     descriptionContainer, false);
 
             option.setText(slide.getOption().getTitle());
             option.setChecked(slide.getOption().isActivated());
-            option.setMaxLines(getLineCountForDescription());
             option.setOnCheckedChangeListener((buttonView, isChecked) -> slide.getOption().setActivated(isChecked));
-
-            ColorStateList buttonColors = ContextCompat.getColorStateList(getSafeContext(), android.R.color.white);
 
             CompoundButtonCompat.setButtonTintList(option, buttonColors);
 
             descriptionContainer.addView(option);
             description = option;
-        } else {
+        } else if (slide.getDescription() != null) {
             description = (TextView) inflater.inflate(R.layout.introduction_fragment_description,
                     descriptionContainer, false);
 
-            if (slide.getDescription() != null) {
-                description.setText(slide.getDescription());
-            }
-
-            description.setMaxLines(getLineCountForDescription());
+            description.setText(slide.getDescription());
             descriptionContainer.addView(description);
+        } else {
+            descriptionContainer.setVisibility(GONE);
         }
 
-        description.setTypeface(IntroductionConfiguration.getInstance().getDescriptionTypeface());
+        if (description != null) {
+            description.setMaxLines(getLineCountForDescription());
+            description.setTypeface(IntroductionConfiguration.getInstance().getDescriptionTypeface());
 
-        if (slide.getDescriptionSize() != null) {
-            description.setTextSize(TypedValue.COMPLEX_UNIT_DIP, slide.getDescriptionSize());
+            if (slide.getDescriptionSize() != null) {
+                description.setTextSize(COMPLEX_UNIT_DIP, slide.getDescriptionSize());
+            }
         }
 
         if (slide.getImageResource() != null) {
@@ -144,11 +146,6 @@ public class IntroductionFragment extends Fragment {
         IntroductionConfiguration.getInstance().callOnSlideInit(slide.getPosition(), title, image, description);
 
         return root;
-    }
-
-    @NonNull
-    private View initCustomViews(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
-        return slide.getCustomViewBuilder().buildView(inflater, container);
     }
 
     private int getLineCountForTitle() {

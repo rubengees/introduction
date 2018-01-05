@@ -77,8 +77,8 @@ final class IntroductionConfiguration {
         }
     }
 
-    void callOnSlideInit(@IntRange(from = 0) int position, @NonNull TextView title,
-                         @NonNull ImageView image, @NonNull TextView description) {
+    void callOnSlideInit(@IntRange(from = 0) int position, @Nullable TextView title,
+                         @NonNull ImageView image, @Nullable TextView description) {
         if (onSlideListener != null) {
             onSlideListener.onSlideInit(position, title, image, description);
         }
