@@ -235,6 +235,13 @@ Detailed Javadoc can be found [here](https://jitpack.io/com/github/rubengees/int
 
 ### Upgrade Guide
 
+#### 1.4.0+ to 2.0.0+
+
+- This library now requires Java 8 (available in the new `Android Studio 3` [toolchain](https://developer.android.com/studio/write/java8-support.html)).
+- Behaviour change: Not passing a `title`, `description` or `option` hides the respective views. This way you can show fullscreen images.
+  - The `title` and `description` parameters of the `onSlideInit` callback are now `@Nullable`
+- `CustomViewBuilder` is now in a different package and has been converted into an `interface`.
+
 #### 1.3.9 to 1.4.0+
 
 - `Slide` and `Option` have been moved into a different package. Just let Android Studio re-import them.
