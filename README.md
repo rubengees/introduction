@@ -17,6 +17,8 @@ You can download the latest sample app [here](https://github.com/rubengees/intro
   - [Custom Views](#custom-views)
   - [Further reading](#further-reading)
 - [Upgrade Guide](#upgrade-guide)
+  - [1.4.0+ to 2.0.0+](#140-to-200)
+  - [1.3.9 to 1.4.0+](#139-to-140)
   - [1.1.0 to 1.1.1+](#110-to-111)
   - [1.0.x to 1.1.0+](#10x-to-110)
 - [Metrics](#metrics)
