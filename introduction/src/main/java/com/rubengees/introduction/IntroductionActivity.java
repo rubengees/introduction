@@ -52,7 +52,9 @@ public class IntroductionActivity extends AppCompatActivity {
     private ArrayList<Slide> slides;
     private Style style;
 
+    private ViewGroup root;
     private ViewPager pager;
+    private ViewGroup bottomBarContainer;
     private AppCompatImageButton previous;
     private AppCompatImageButton next;
     private FrameLayout indicatorContainer;
@@ -65,8 +67,8 @@ public class IntroductionActivity extends AppCompatActivity {
 
     private boolean showPreviousButton;
     private boolean showIndicator;
-    private String skipText;
     private boolean allowBackPress;
+    private String skipText;
 
     private int orientation;
 
@@ -96,7 +98,19 @@ public class IntroductionActivity extends AppCompatActivity {
             select(previousPagerPosition);
         }
 
-        //Workaround for fitsSystemWindows in a ViewPager
+        // Workarounds for fitsSystemWindows in a ViewPager.
+        ViewCompat.setOnApplyWindowInsetsListener(root, (v, insets) -> {
+            WindowInsetsCompat newInsets = ViewCompat.onApplyWindowInsets(root, insets);
+
+            if (newInsets.isConsumed()) {
+                return newInsets;
+            }
+
+            ViewCompat.dispatchApplyWindowInsets(bottomBarContainer, newInsets);
+
+            return newInsets.isConsumed() ? newInsets.consumeSystemWindowInsets() : newInsets;
+        });
+
         ViewCompat.setOnApplyWindowInsetsListener(pager, (view, insets) -> {
             WindowInsetsCompat newInsets = ViewCompat.onApplyWindowInsets(view, insets);
 
@@ -176,9 +190,10 @@ public class IntroductionActivity extends AppCompatActivity {
     }
 
     private void findViews() {
-        ViewGroup root = findViewById(R.id.introduction_activity_root);
+        root = findViewById(R.id.introduction_activity_root);
         pager = findViewById(R.id.introduction_activity_pager);
         indicatorContainer = findViewById(R.id.introduction_activity_container_indicator);
+        bottomBarContainer = findViewById(R.id.introduction_activity_bottom_bar_container);
         skip = findViewById(R.id.introduction_activity_skip);
 
         if (OrientationUtils.isRTL(this)) {
