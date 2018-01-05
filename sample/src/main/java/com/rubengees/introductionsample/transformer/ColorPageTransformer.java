@@ -26,7 +26,6 @@ public class ColorPageTransformer extends BasePageTransformer {
     public void transformPage(final View page, final int pageIndex, final float position) {
         if (inRange(position)) {
             if (isRightPage(position)) {
-
                 final int leftIndex = pageIndex - 1;
                 final int rightIndex = pageIndex;
 
@@ -36,7 +35,6 @@ public class ColorPageTransformer extends BasePageTransformer {
                 final int composedColor = blendColors(leftColor, rightColor, position);
                 page.setBackgroundColor(composedColor);
             } else if (isLeftPage(position)) {
-
                 final int leftIndex = pageIndex;
                 final int rightIndex = leftIndex + 1;
 
