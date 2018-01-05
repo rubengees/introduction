@@ -16,11 +16,9 @@
 
 package com.rubengees.introductionsample;
 
-import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -47,17 +45,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+
 public class MainActivity extends AppCompatActivity {
 
-    private static final String ERROR_API_LEVEL = "You need at least API 11 for this feature";
+    private final OnSlideListener defaultOnSlideListener = new OnSlideListener() {
 
-    private OnSlideListener defaultOnSlideListener = new OnSlideListener() {
         @Override
         public void onSlideInit(int position, @NonNull TextView title, @NonNull ImageView image,
                                 @NonNull TextView description) {
             if (position % 3 == 1) {
-                Glide.with(image.getContext()).load(R.drawable.image3)
-                        .diskCacheStrategy(DiskCacheStrategy.NONE).into(image);
+                Glide.with(image.getContext())
+                        .load(R.drawable.image3)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .into(image);
             }
         }
     };
@@ -89,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
 
         result.add(new Slide()
                 .withTitle("Title")
-                .withDescription("Description").
-                        withColorResource(R.color.green)
+                .withDescription("Description")
+                .withColorResource(R.color.green)
                 .withImage(R.drawable.image1)
         );
 
@@ -167,39 +168,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onZoomOutClick(View view) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            new IntroductionBuilder(this)
-                    .withSlides(generateSlides())
-                    .withOnSlideListener(defaultOnSlideListener)
-                    .withPageTransformer(new ZoomOutPageTransformer())
-                    .introduceMyself();
-        } else {
-            Snackbar.make(findViewById(R.id.root), ERROR_API_LEVEL, Snackbar.LENGTH_LONG).show();
-        }
+        new IntroductionBuilder(this)
+                .withSlides(generateSlides())
+                .withOnSlideListener(defaultOnSlideListener)
+                .withPageTransformer(new ZoomOutPageTransformer())
+                .introduceMyself();
     }
 
     public void onDepthClick(View view) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            new IntroductionBuilder(this)
-                    .withSlides(generateSlides())
-                    .withOnSlideListener(defaultOnSlideListener)
-                    .withPageTransformer(new DepthPageTransformer())
-                    .introduceMyself();
-        } else {
-            Snackbar.make(findViewById(R.id.root), ERROR_API_LEVEL, Snackbar.LENGTH_LONG).show();
-        }
+        new IntroductionBuilder(this)
+                .withSlides(generateSlides())
+                .withOnSlideListener(defaultOnSlideListener)
+                .withPageTransformer(new DepthPageTransformer())
+                .introduceMyself();
     }
 
     public void onColorTransformationClick(View view) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            new IntroductionBuilder(this)
-                    .withSlides(generateSlides())
-                    .withOnSlideListener(defaultOnSlideListener)
-                    .withPageTransformer(new ColorPageTransformer())
-                    .introduceMyself();
-        } else {
-            Snackbar.make(findViewById(R.id.root), ERROR_API_LEVEL, Snackbar.LENGTH_LONG).show();
-        }
+        new IntroductionBuilder(this)
+                .withSlides(generateSlides())
+                .withOnSlideListener(defaultOnSlideListener)
+                .withPageTransformer(new ColorPageTransformer())
+                .introduceMyself();
     }
 
     public void onCustomIndicatorClick(View view) {
@@ -274,31 +263,32 @@ public class MainActivity extends AppCompatActivity {
                 .withColorResource(R.color.purple)
         );
 
-        new IntroductionBuilder(this).withSlides(slides)
-                .withOnSlideListener(new OnSlideListener() {
-                    @Override
-                    public void onSlideChanged(int from, int to) {
-                        if (from == 0 && to == 1) {
-                            if (ActivityCompat.checkSelfPermission(MainActivity.this,
-                                    Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                                ActivityCompat.requestPermissions(MainActivity.this,
-                                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 12);
-                            } else {
-                                Toast.makeText(MainActivity.this, "Permission is already granted",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }
+        new IntroductionBuilder(this).withSlides(slides).withOnSlideListener(new OnSlideListener() {
 
-                    @Override
-                    public void onSlideInit(int position, @NonNull TextView title,
-                                            @NonNull ImageView image,
-                                            @NonNull TextView description) {
-                        if (position == 2) {
-                            Glide.with(image.getContext()).load(R.drawable.image3).into(image);
-                        }
+            @Override
+            public void onSlideChanged(int from, int to) {
+                if (from == 0 && to == 1) {
+                    if (ActivityCompat.checkSelfPermission(MainActivity.this,
+                            WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(MainActivity.this,
+                                new String[]{WRITE_EXTERNAL_STORAGE}, 12);
+                    } else {
+                        Toast.makeText(MainActivity.this, "Permission is already granted",
+                                Toast.LENGTH_SHORT).show();
                     }
-                }).introduceMyself();
+                }
+            }
+
+            @Override
+            public void onSlideInit(int position, @NonNull TextView title, @NonNull ImageView image,
+                                    @NonNull TextView description) {
+                if (position == 2) {
+                    Glide.with(image.getContext())
+                            .load(R.drawable.image3)
+                            .into(image);
+                }
+            }
+        }).introduceMyself();
     }
 
     public void onAsynchronousClick(View view) {
@@ -311,14 +301,15 @@ public class MainActivity extends AppCompatActivity {
         );
 
         slides.add(1, new Slide()
-                .withTitle("Asynchronous").
-                        withDescription("This image was loaded asynchronously")
+                .withTitle("Asynchronous")
+                .withDescription("This image was loaded asynchronously")
                 .withColorResource(R.color.indigo)
         );
 
         new IntroductionBuilder(this)
                 .withSlides(slides)
                 .withOnSlideListener(new OnSlideListener() {
+
                     @Override
                     public void onSlideInit(int position, @NonNull TextView title, @NonNull ImageView image,
                                             @NonNull TextView description) {
@@ -378,9 +369,12 @@ public class MainActivity extends AppCompatActivity {
         new IntroductionBuilder(this)
                 .withSlides(
                         new Slide()
-                                .withCustomViewBuilder(new CustomViewBuilderImpl1())
+                                .withCustomViewBuilder((inflater, parent) -> inflater
+                                        .inflate(R.layout.layout_custom_1, parent, false))
                                 .withColorResource(R.color.cyan),
-                        new Slide().withCustomViewBuilder(new CustomViewBuilderImpl2())
+                        new Slide()
+                                .withCustomViewBuilder((inflater, parent) -> inflater
+                                        .inflate(R.layout.layout_custom_2, parent, false))
                                 .withColorResource(R.color.green)
                 ).introduceMyself();
     }

@@ -29,6 +29,7 @@ import android.view.View;
  */
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class ZoomOutPageTransformer extends BasePageTransformer {
+
     private static final float MIN_SCALE = 0.85f;
     private static final float MIN_ALPHA = 0.5f;
 
@@ -48,7 +49,7 @@ public class ZoomOutPageTransformer extends BasePageTransformer {
                 page.setTranslationX(-horizontalMargin + verticalMargin / 2);
             }
 
-            // Scale the page down (between MIN_SCALE and 1)
+            // Scale the page down (between MIN_SCALE and 1).
             page.setScaleX(scaleFactor);
             page.setScaleY(scaleFactor);
 

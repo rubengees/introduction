@@ -44,8 +44,9 @@ public abstract class Style implements Serializable {
      * @param activity The containing Activity.
      * @param root     The root of the Activity.
      */
+    @SuppressWarnings({"unused", "EmptyMethod"})
     public void applyStyleOnActivityView(@NonNull Activity activity, @NonNull View root) {
-        // To be implemented by the user
+        // To be implemented by the user.
     }
 
     /**
@@ -54,8 +55,8 @@ public abstract class Style implements Serializable {
      * @param fragment The fragment containing the slide.
      * @param root     The root view of the fragment.
      */
+    @SuppressWarnings({"unused", "EmptyMethod"})
     public void applyStyleOnFragmentView(@NonNull Fragment fragment, @NonNull View root) {
-        // To be implemented by the user
+        // To be implemented by the user.
     }
-
 }

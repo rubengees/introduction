@@ -16,7 +16,9 @@
 
 package com.rubengees.introduction;
 
-import android.content.res.Configuration;
+import android.app.Activity;
+import android.content.Context;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -30,9 +32,10 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 
 /**
  * A Fragment which displays a single Slide.
@@ -43,6 +46,7 @@ import android.widget.TextView;
 public class IntroductionFragment extends Fragment {
 
     private static final String BUNDLE_SLIDE = "introduction_slide";
+
     private Slide slide;
     private View root;
 
@@ -60,12 +64,11 @@ public class IntroductionFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        this.slide = getArguments().getParcelable(BUNDLE_SLIDE);
+        this.slide = getSafeArguments().getParcelable(BUNDLE_SLIDE);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = initViews(inflater, container);
 
         getIntroductionActivity().getStyle().applyStyleOnFragmentView(this, root);
@@ -74,7 +77,7 @@ public class IntroductionFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         ViewCompat.requestApplyInsets(root);
@@ -82,10 +85,8 @@ public class IntroductionFragment extends Fragment {
 
     @NonNull
     private View initViews(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
-        ViewGroup root =
-                (ViewGroup) inflater.inflate(R.layout.introduction_fragment, container, false);
-        ViewGroup contentContainer =
-                (ViewGroup) root.findViewById(R.id.introduction_fragment_content_container);
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.introduction_fragment, container, false);
+        ViewGroup contentContainer = root.findViewById(R.id.introduction_fragment_content_container);
 
         if (slide.getCustomViewBuilder() == null) {
             contentContainer.addView(initDefaultViews(inflater, container));
@@ -100,17 +101,13 @@ public class IntroductionFragment extends Fragment {
     }
 
     @NonNull
-    private View initDefaultViews(@NonNull LayoutInflater inflater,
-                                  @NonNull ViewGroup container) {
-        ViewGroup root =
-                (ViewGroup) inflater.inflate(R.layout.introduction_fragment_default_content,
-                        container, false);
-        TextView title =
-                (TextView) root.findViewById(R.id.introduction_fragment_default_content_title);
-        ImageView image =
-                (ImageView) root.findViewById(R.id.introduction_fragment_default_content_image);
+    private View initDefaultViews(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.introduction_fragment_default_content, container, false);
+        TextView title = root.findViewById(R.id.introduction_fragment_default_content_title);
+        ImageView image = root.findViewById(R.id.introduction_fragment_default_content_image);
         ViewGroup descriptionContainer =
-                (ViewGroup) root.findViewById(R.id.introduction_fragment_default_content_description_container);
+                root.findViewById(R.id.introduction_fragment_default_content_description_container);
+
         TextView description;
 
         if (slide.getTitle() != null) {
@@ -124,22 +121,17 @@ public class IntroductionFragment extends Fragment {
         }
 
         if (slide.getDescription() == null && slide.getOption() != null) {
-            AppCompatCheckBox option =
-                    (AppCompatCheckBox) inflater.inflate(R.layout.introduction_fragment_option,
-                            descriptionContainer, false);
+            AppCompatCheckBox option = (AppCompatCheckBox) inflater.inflate(R.layout.introduction_fragment_option,
+                    descriptionContainer, false);
 
             option.setText(slide.getOption().getTitle());
             option.setChecked(slide.getOption().isActivated());
             option.setMaxLines(getLineCountForDescription());
-            option.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    slide.getOption().setActivated(isChecked);
-                }
-            });
+            option.setOnCheckedChangeListener((buttonView, isChecked) -> slide.getOption().setActivated(isChecked));
 
-            CompoundButtonCompat.setButtonTintList(option,
-                    ContextCompat.getColorStateList(getContext(), android.R.color.white));
+            ColorStateList buttonColors = ContextCompat.getColorStateList(getSafeContext(), android.R.color.white);
+
+            CompoundButtonCompat.setButtonTintList(option, buttonColors);
 
             descriptionContainer.addView(option);
             description = option;
@@ -165,29 +157,58 @@ public class IntroductionFragment extends Fragment {
             image.setImageResource(slide.getImageResource());
         }
 
-        IntroductionConfiguration.getInstance().callOnSlideInit(slide.getPosition(), title,
-                image, description);
+        IntroductionConfiguration.getInstance().callOnSlideInit(slide.getPosition(), title, image, description);
 
         return root;
     }
 
     @NonNull
-    private View initCustomViews(@NonNull LayoutInflater inflater,
-                                 @NonNull ViewGroup container) {
+    private View initCustomViews(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
         return slide.getCustomViewBuilder().buildView(inflater, container);
     }
 
     private int getLineCountForTitle() {
-        return getActivity().getResources().getConfiguration().orientation ==
-                Configuration.ORIENTATION_LANDSCAPE ? 2 : 3;
+        return getSafeActivity().getResources().getConfiguration().orientation == ORIENTATION_LANDSCAPE ? 2 : 3;
     }
 
     private int getLineCountForDescription() {
-        return getActivity().getResources().getConfiguration().orientation ==
-                Configuration.ORIENTATION_LANDSCAPE ? 2 : 4;
+        return getSafeActivity().getResources().getConfiguration().orientation == ORIENTATION_LANDSCAPE ? 2 : 4;
     }
 
     public IntroductionActivity getIntroductionActivity() {
         return (IntroductionActivity) getActivity();
+    }
+
+    @NonNull
+    private Bundle getSafeArguments() {
+        Bundle result = getArguments();
+
+        if (result == null) {
+            throw new AssertionError("context is null");
+        }
+
+        return result;
+    }
+
+    @NonNull
+    private Context getSafeContext() {
+        Context result = getContext();
+
+        if (result == null) {
+            throw new AssertionError("context is null");
+        }
+
+        return result;
+    }
+
+    @NonNull
+    private Context getSafeActivity() {
+        Activity result = getActivity();
+
+        if (result == null) {
+            throw new AssertionError("activity is null");
+        }
+
+        return result;
     }
 }

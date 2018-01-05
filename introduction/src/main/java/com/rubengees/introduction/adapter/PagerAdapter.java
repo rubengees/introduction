@@ -29,7 +29,7 @@ import java.util.List;
 import static com.rubengees.introduction.IntroductionFragment.newInstance;
 
 /**
- * The Adapter for the Viewpager.
+ * The Adapter for the ViewPager.
  * It creates the Fragments for each position.
  *
  * @author Ruben Gees
@@ -37,7 +37,7 @@ import static com.rubengees.introduction.IntroductionFragment.newInstance;
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public class PagerAdapter extends FragmentStatePagerAdapter {
 
-    private List<Slide> slides;
+    private final List<Slide> slides;
 
     public PagerAdapter(FragmentManager fm, List<Slide> slides) {
         super(fm);

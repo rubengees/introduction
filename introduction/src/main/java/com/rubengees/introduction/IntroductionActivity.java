@@ -22,14 +22,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RestrictTo;
-import android.support.v4.view.OnApplyWindowInsetsListener;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.WindowInsetsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageButton;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -115,34 +113,29 @@ public class IntroductionActivity extends AppCompatActivity {
         }
 
         //Workaround for fitsSystemWindows in a ViewPager
-        ViewCompat.setOnApplyWindowInsetsListener(pager,
-                new OnApplyWindowInsetsListener() {
-                    @Override
-                    public WindowInsetsCompat onApplyWindowInsets(View v,
-                                                                  WindowInsetsCompat insets) {
-                        WindowInsetsCompat newInsets = ViewCompat.onApplyWindowInsets(v, insets);
+        ViewCompat.setOnApplyWindowInsetsListener(pager, (view, insets) -> {
+            WindowInsetsCompat newInsets = ViewCompat.onApplyWindowInsets(view, insets);
 
-                        if (newInsets.isConsumed()) {
-                            return newInsets;
-                        }
+            if (newInsets.isConsumed()) {
+                return newInsets;
+            }
 
-                        boolean consumed = false;
+            boolean consumed = false;
 
-                        if (newInsets.isConsumed()) {
-                            consumed = true;
-                        }
+            if (newInsets.isConsumed()) {
+                consumed = true;
+            }
 
-                        for (int i = 0; i < pager.getChildCount(); i++) {
-                            ViewCompat.dispatchApplyWindowInsets(pager.getChildAt(i), newInsets);
+            for (int i = 0; i < pager.getChildCount(); i++) {
+                ViewCompat.dispatchApplyWindowInsets(pager.getChildAt(i), newInsets);
 
-                            if (newInsets.isConsumed()) {
-                                consumed = true;
-                            }
-                        }
+                if (newInsets.isConsumed()) {
+                    consumed = true;
+                }
+            }
 
-                        return consumed ? newInsets.consumeSystemWindowInsets() : newInsets;
-                    }
-                });
+            return consumed ? newInsets.consumeSystemWindowInsets() : newInsets;
+        });
     }
 
     @Override
@@ -199,17 +192,17 @@ public class IntroductionActivity extends AppCompatActivity {
     }
 
     private void findViews() {
-        ViewGroup root = (ViewGroup) findViewById(R.id.introduction_activity_root);
-        pager = (ViewPager) findViewById(R.id.introduction_activity_pager);
-        indicatorContainer = (FrameLayout) findViewById(R.id.introduction_activity_container_indicator);
-        skip = (Button) findViewById(R.id.introduction_activity_skip);
+        ViewGroup root = findViewById(R.id.introduction_activity_root);
+        pager = findViewById(R.id.introduction_activity_pager);
+        indicatorContainer = findViewById(R.id.introduction_activity_container_indicator);
+        skip = findViewById(R.id.introduction_activity_skip);
 
         if (OrientationUtils.isRTL(this)) {
-            previous = (AppCompatImageButton) findViewById(R.id.introduction_activity_button_next);
-            next = (AppCompatImageButton) findViewById(R.id.introduction_activity_button_previous);
+            previous = findViewById(R.id.introduction_activity_button_next);
+            next = findViewById(R.id.introduction_activity_button_previous);
         } else {
-            previous = (AppCompatImageButton) findViewById(R.id.introduction_activity_button_previous);
-            next = (AppCompatImageButton) findViewById(R.id.introduction_activity_button_next);
+            previous = findViewById(R.id.introduction_activity_button_previous);
+            next = findViewById(R.id.introduction_activity_button_next);
         }
 
         if (style != null) {
@@ -241,41 +234,28 @@ public class IntroductionActivity extends AppCompatActivity {
             indicatorContainer.addView(indicatorManager.init(LayoutInflater.from(this),
                     indicatorContainer, slides.size()));
 
-            indicatorManager.setListener(new IndicatorManager.OnUserSelectionListener() {
-                @Override
-                public void onSelection(int position) {
-                    pager.setCurrentItem(position);
-                }
-            });
+            indicatorManager.setListener(position -> pager.setCurrentItem(position));
         }
     }
 
     private void initViews() {
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final int currentIndex = pager.getCurrentItem();
+        next.setOnClickListener(view -> {
+            final int currentIndex = pager.getCurrentItem();
 
-                if (currentIndex == rtlAwarePosition(slides.size() - 1)) {
-                    handleFinish();
-                } else {
-                    pager.setCurrentItem(nextPosition(currentIndex), true);
-                }
+            if (currentIndex == rtlAwarePosition(slides.size() - 1)) {
+                handleFinish();
+            } else {
+                pager.setCurrentItem(nextPosition(currentIndex), true);
             }
         });
 
-        previous.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pager.setCurrentItem(previousPosition(pager.getCurrentItem()), true);
-            }
-        });
+        previous.setOnClickListener(view -> pager.setCurrentItem(previousPosition(pager.getCurrentItem()), true));
 
         pager.setAdapter(new PagerAdapter(getSupportFragmentManager(), slides));
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
             @Override
-            public void onPageScrolled(int position, float positionOffset,
-                                       int positionOffsetPixels) {
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 // Not needed
             }
 
@@ -305,12 +285,7 @@ public class IntroductionActivity extends AppCompatActivity {
 
         if (skipText != null) {
             skip.setText(skipText);
-            skip.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    handleFinish();
-                }
-            });
+            skip.setOnClickListener(view -> handleFinish());
         }
     }
 

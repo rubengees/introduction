@@ -44,12 +44,9 @@ public class DotIndicatorManager extends IndicatorManager {
             ImageView dot = (ImageView) inflater.inflate(R.layout.introduction_indicator_item_dot, root, false);
 
             dot.setTag(i);
-            dot.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (onUserSelectionListener != null) {
-                        onUserSelectionListener.onSelection((Integer) v.getTag());
-                    }
+            dot.setOnClickListener(view -> {
+                if (onUserSelectionListener != null) {
+                    onUserSelectionListener.onSelection((Integer) view.getTag());
                 }
             });
 

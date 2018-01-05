@@ -21,6 +21,7 @@ public class ColorPageTransformer extends BasePageTransformer {
         return Color.rgb((int) r, (int) g, (int) b);
     }
 
+    @SuppressWarnings("UnnecessaryLocalVariable")
     @Override
     public void transformPage(final View page, final int pageIndex, final float position) {
         if (inRange(position)) {
@@ -29,10 +30,8 @@ public class ColorPageTransformer extends BasePageTransformer {
                 final int leftIndex = pageIndex - 1;
                 final int rightIndex = pageIndex;
 
-                final int leftColor = ColorSupplier.getColorForPosition(page.getContext(),
-                        leftIndex);
-                final int rightColor = ColorSupplier.getColorForPosition(page.getContext(),
-                        rightIndex);
+                final int leftColor = ColorSupplier.getColorForPosition(page.getContext(), leftIndex);
+                final int rightColor = ColorSupplier.getColorForPosition(page.getContext(), rightIndex);
 
                 final int composedColor = blendColors(leftColor, rightColor, position);
                 page.setBackgroundColor(composedColor);
@@ -41,20 +40,16 @@ public class ColorPageTransformer extends BasePageTransformer {
                 final int leftIndex = pageIndex;
                 final int rightIndex = leftIndex + 1;
 
-                final int leftColor = ColorSupplier.getColorForPosition(page.getContext(),
-                        leftIndex);
-                final int rightColor = ColorSupplier.getColorForPosition(page.getContext(),
-                        rightIndex);
+                final int leftColor = ColorSupplier.getColorForPosition(page.getContext(), leftIndex);
+                final int rightColor = ColorSupplier.getColorForPosition(page.getContext(), rightIndex);
 
                 final int composedColor = blendColors(leftColor, rightColor, 1 - Math.abs(position));
                 page.setBackgroundColor(composedColor);
             } else {
-                page.setBackgroundColor(ColorSupplier.getColorForPosition(page.getContext(),
-                        pageIndex));
+                page.setBackgroundColor(ColorSupplier.getColorForPosition(page.getContext(), pageIndex));
             }
         } else {
-            page.setBackgroundColor(ColorSupplier.getColorForPosition(page.getContext(),
-                    pageIndex));
+            page.setBackgroundColor(ColorSupplier.getColorForPosition(page.getContext(), pageIndex));
         }
     }
 }

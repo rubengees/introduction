@@ -16,9 +16,9 @@ import com.rubengees.introductionsample.transformer.ColorPageTransformer;
  */
 public final class ColorSupplier {
 
+    private static final Integer[] colors = new Integer[]{R.color.green, R.color.indigo, R.color.orange};
     private static final String ILLEGAL_ARGUMENT_POSITION_MESSAGE = "The position cannot be " +
             "larger than the amount of colors";
-    private static Integer[] colors = new Integer[]{R.color.green, R.color.indigo, R.color.orange};
 
     private ColorSupplier() {
     }
@@ -40,5 +40,4 @@ public final class ColorSupplier {
 
         return ContextCompat.getColor(context, colors[position]);
     }
-
 }

@@ -39,7 +39,7 @@ public final class OrientationUtils {
     /**
      * Sets the orientation to landscape.
      *
-     * @param activity The Activity
+     * @param activity The Activity.
      */
     public static void setOrientationLandscape(@NonNull Activity activity) {
         activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -48,23 +48,22 @@ public final class OrientationUtils {
     /**
      * Sets the orientation to portrait.
      *
-     * @param activity The Activity
+     * @param activity The Activity.
      */
     public static void setOrientationPortrait(@NonNull Activity activity) {
         activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     /**
-     * Let the Activity handle the Orientation itself.
+     * Let the Activity handle the orientation itself.
      *
-     * @param activity The Activity
+     * @param activity The Activity.
      */
     @SuppressWarnings("unused")
     public static void unlockOrientation(@NonNull Activity activity) {
         activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
 
-    @SuppressWarnings("SimplifiableIfStatement")
     public static boolean isRTL(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             final int flag = context.getApplicationInfo().flags & ApplicationInfo.FLAG_SUPPORTS_RTL;

@@ -63,8 +63,9 @@ public class IntroductionBuilder {
     private static final String EXCEPTION_SLIDE_AMOUNT_MESSAGE = "You must add at least one slide.";
     private static final String EXCEPTION_NO_SLIDES_MESSAGE = "You need to add slides.";
 
+    private final ArrayList<Slide> slides;
+
     private Activity context;
-    private ArrayList<Slide> slides;
     private Style style;
     private Boolean showPreviousButton;
     private Boolean showIndicator;
@@ -364,6 +365,5 @@ public class IntroductionBuilder {
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({ORIENTATION_PORTRAIT, ORIENTATION_LANDSCAPE, ORIENTATION_BOTH})
     public @interface Orientation {
-
     }
 }

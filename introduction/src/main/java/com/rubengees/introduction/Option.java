@@ -33,10 +33,13 @@ import com.rubengees.introduction.exception.IntroductionConfigurationException;
 public class Option implements Parcelable {
 
     public static final Parcelable.Creator<Option> CREATOR = new Parcelable.Creator<Option>() {
+
+        @Override
         public Option createFromParcel(Parcel source) {
             return new Option(source);
         }
 
+        @Override
         public Option[] newArray(int size) {
             return new Option[size];
         }
@@ -88,6 +91,7 @@ public class Option implements Parcelable {
         this.activated = activated;
     }
 
+    @SuppressWarnings("WeakerAccess")
     protected Option(Parcel in) {
         this.title = in.readString();
         this.titleResource = (Integer) in.readValue(Integer.class.getClassLoader());

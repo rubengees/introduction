@@ -44,6 +44,7 @@ import java.io.Serializable;
 public class Slide implements Parcelable {
 
     public static final Creator<Slide> CREATOR = new Creator<Slide>() {
+
         @Override
         public Slide createFromParcel(Parcel source) {
             return new Slide(source);
@@ -56,6 +57,7 @@ public class Slide implements Parcelable {
     };
 
     private static final String EXCEPTION_COLOR_MESSAGE = "You must add a color to each slide";
+
     private int position;
     private String title;
     private Integer titleResource;
@@ -70,7 +72,6 @@ public class Slide implements Parcelable {
     private CustomViewBuilder customViewBuilder;
 
     public Slide() {
-
     }
 
     protected Slide(Parcel in) {

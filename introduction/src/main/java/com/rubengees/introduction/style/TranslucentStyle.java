@@ -21,10 +21,11 @@ import android.app.Activity;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.view.Window;
-import android.view.WindowManager;
+
+import static android.view.WindowManager.LayoutParams;
 
 /**
- * Todo: Describe Class
+ * Style for showing the {@link com.rubengees.introduction.IntroductionActivity} in translucent mode.
  *
  * @author Ruben Gees
  */
@@ -35,9 +36,7 @@ public class TranslucentStyle extends Style {
     public void applyStyle(@NonNull Activity activity) {
         Window w = activity.getWindow();
 
-        w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION,
-                WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
-                WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        w.setFlags(LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        w.setFlags(LayoutParams.FLAG_TRANSLUCENT_STATUS, LayoutParams.FLAG_TRANSLUCENT_STATUS);
     }
 }

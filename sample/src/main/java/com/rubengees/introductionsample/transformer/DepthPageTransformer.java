@@ -29,6 +29,7 @@ import android.view.View;
  */
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class DepthPageTransformer extends BasePageTransformer {
+
     private static final float MIN_SCALE = 0.75f;
 
     @Override
@@ -37,7 +38,7 @@ public class DepthPageTransformer extends BasePageTransformer {
 
         if (inRange(position)) {
             if (isLeftPage(position)) {
-                // Use the default slide transition when moving to the left page
+                // Use the default slide transition when moving to the left page.
                 page.setAlpha(1);
                 page.setTranslationX(0);
                 page.setScaleX(1);
@@ -46,7 +47,7 @@ public class DepthPageTransformer extends BasePageTransformer {
                 // Fade the page out.
                 page.setAlpha(1 - position);
 
-                // Counteract the default slide transition
+                // Counteract the default slide transition.
                 page.setTranslationX(pageWidth * -position);
 
                 // Scale the page down (between MIN_SCALE and 1)

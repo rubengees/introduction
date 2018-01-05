@@ -35,7 +35,7 @@ public class HeightAspectImageButton extends AppCompatImageButton {
 
     private static final float DEFAULT_ASPECT = 1f;
 
-    private float aspect;
+    private final float aspect;
 
     public HeightAspectImageButton(Context context) {
         super(context);

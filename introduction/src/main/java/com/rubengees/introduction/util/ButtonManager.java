@@ -33,11 +33,11 @@ import com.rubengees.introduction.interfaces.ViewPagerProcessor;
 public class ButtonManager implements ViewPagerProcessor {
 
     private final int slideAmount;
-    private AppCompatImageButton previous;
-    private AppCompatImageButton next;
-    private Button skip;
-    private boolean showPreviousButton;
-    private boolean showSkipButton;
+    private final AppCompatImageButton previous;
+    private final AppCompatImageButton next;
+    private final Button skip;
+    private final boolean showPreviousButton;
+    private final boolean showSkipButton;
 
     /**
      * @param previous           The Button to navigate one slide back.

@@ -38,11 +38,9 @@ public class NumberIndicatorManager extends IndicatorManager {
 
     @NonNull
     @Override
-    public View init(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent,
-                     int slideAmount) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.indicator_layout_number,
-                parent, false);
-        text = (TextView) root.findViewById(R.id.indicator_number_text);
+    public View init(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent, int slideAmount) {
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.indicator_layout_number, parent, false);
+        text = root.findViewById(R.id.indicator_number_text);
         this.slideAmount = slideAmount;
 
         return root;

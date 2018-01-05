@@ -1,5 +1,6 @@
 package com.rubengees.introductionsample.transformer;
 
+import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
@@ -23,7 +24,7 @@ public abstract class BasePageTransformer implements ViewPager.PageTransformer {
     }
 
     @Override
-    public void transformPage(final View page, final float position) {
+    public void transformPage(@NonNull final View page, final float position) {
         final int pageIndex = (Integer) page.getTag();
 
         transformPage(page, pageIndex, position);
