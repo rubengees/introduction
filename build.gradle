@@ -1,52 +1,50 @@
-ext {
-    preDexLibs = !project.hasProperty('disablePreDex')
-
-    version = '1.4.1'
-    versionCode = 27
-    minSdkVersion = 9
-    targetSdkVersion = 26
-    compileSdkVersion = 26
-    buildToolsVersion = '26.0.0'
-
-    supportLibraryVersion = '25.4.0'
-    glideVersion = '3.8.0'
-
-    deps = [
-            supportAppCompat: "com.android.support:appcompat-v7:$supportLibraryVersion",
-            supportDesign   : "com.android.support:design:$supportLibraryVersion",
-
-            glide           : "com.github.bumptech.glide:glide:$glideVersion",
-    ]
-}
-
 buildscript {
+    ext {
+        version = '1.5.0'
+        versionCode = 28
+        minSdkVersion = 14
+        targetSdkVersion = 27
+        compileSdkVersion = 27
+
+        gradleVersion = '4.4.1'
+
+        androidPluginVersion = '3.0.1'
+        gradleVersionsPluginVersion = '0.17.0'
+
+        supportLibraryVersion = '27.0.2'
+        glideVersion = '3.8.0'
+
+        deps = [
+                androidPlugin       : "com.android.tools.build:gradle:$androidPluginVersion",
+                gradleVersionsPlugin: "com.github.ben-manes:gradle-versions-plugin:$gradleVersionsPluginVersion",
+
+                supportAppCompat    : "com.android.support:appcompat-v7:$supportLibraryVersion",
+                supportDesign       : "com.android.support:design:$supportLibraryVersion",
+
+                glide               : "com.github.bumptech.glide:glide:$glideVersion",
+        ]
+    }
+
     repositories {
         jcenter()
+        google()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath deps.androidPlugin
+        classpath deps.gradleVersionsPlugin
     }
 }
+
+apply plugin: 'com.github.ben-manes.versions'
 
 allprojects {
     version = rootProject.ext.version
 
     repositories {
         jcenter()
-        maven { url "https://maven.google.com"}
+        google()
         maven { url "https://jitpack.io" }
-    }
-}
-
-subprojects {
-    def appPlugin = "com.android.build.gradle.AppPlugin"
-    def libraryPlugin = "com.android.build.gradle.LibraryPlugin"
-
-    project.plugins.whenPluginAdded { plugin ->
-        if (appPlugin == plugin.class.name || libraryPlugin == plugin.class.name) {
-            project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
-        }
     }
 }
 
@@ -55,5 +53,12 @@ task clean(type: Delete) {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '4.0'
+    gradleVersion = project.ext.gradleVersion
+}
+
+@SuppressWarnings("GroovyUnusedDeclaration")
+static boolean isCI() {
+    Object isCI = System.getenv('CI')
+
+    return isCI != null && isCI.toBoolean()
 }

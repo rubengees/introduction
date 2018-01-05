@@ -5,7 +5,15 @@ group = 'com.github.rubengees'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    dexOptions {
+        preDexLibraries !isCI()
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
@@ -19,7 +27,7 @@ android {
 }
 
 dependencies {
-    compile deps.supportAppCompat
+    api deps.supportAppCompat
 }
 
 task javadoc(type: Javadoc) {

@@ -2,7 +2,15 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    dexOptions {
+        preDexLibraries !isCI()
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
     defaultConfig {
         applicationId "com.rubengees.introductionsample"
@@ -16,17 +24,22 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            postprocessing {
+                removeUnusedCode true
+                removeUnusedResources true
+                obfuscate true
+                optimizeCode true
+                proguardFile 'proguard-rules.pro'
+            }
         }
     }
 }
 
 dependencies {
-    compile deps.supportAppCompat
-    compile deps.supportDesign
+    implementation deps.supportAppCompat
+    implementation deps.supportDesign
 
-    compile deps.glide
+    implementation deps.glide
 
-    compile project(':introduction')
+    implementation project(':introduction')
 }
