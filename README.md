@@ -4,7 +4,7 @@ Show a beautiful Intro to your users with ease.
 
 ![](art/screenshot_gallery.png)
 
-You can download the latest sample app [here](https://github.com/rubengees/introduction/releases/download/1.4.1/sample-release.apk).
+You can download the latest sample app [here](https://github.com/rubengees/introduction/releases/download/2.0.0/sample-release.apk).
 
 ### Table of contents
 
@@ -37,7 +37,7 @@ And this to your module `build.gradle` (usually in the `app` directory):
 
 ```groovy
 dependencies {
-    compile 'com.github.rubengees:introduction:1.4.1'
+    implementation 'com.github.rubengees:introduction:2.0.0'
 }
 ```
 
@@ -232,7 +232,7 @@ If you set a CustomViewBuilder to your Slide, all other values aside from the co
 ##### Further reading
 
 A much more detailed explanation with all available APIs can be found in the [Wiki](https://github.com/RubenGees/Introduction/wiki).<br>
-Detailed Javadoc can be found [here](https://jitpack.io/com/github/rubengees/introduction/1.4.1/javadoc/).
+Detailed Javadoc can be found [here](https://jitpack.io/com/github/rubengees/introduction/2.0.0/javadoc/).
 
 ### Upgrade Guide
 
@@ -253,7 +253,7 @@ Detailed Javadoc can be found [here](https://jitpack.io/com/github/rubengees/int
 
 ### Metrics
 
-<a href="http://www.methodscount.com/?lib=com.github.rubengees%3Aintroduction%3A1.4.1"><img src="https://img.shields.io/badge/Methods and size-core: 307 | deps: 16517 | 54 KB-e91e63.svg"/></a><br>
+<a href="http://www.methodscount.com/?lib=com.github.rubengees%3Aintroduction%3A2.0.0"><img src="https://img.shields.io/badge/Methods and size-core: 307 | deps: 16517 | 54 KB-e91e63.svg"/></a><br>
 
 ### Contributions and contributors
 
