@@ -204,7 +204,6 @@ You can supply your own View to a Slide instead of just setting the title, image
 This is done like follows:
 
 Create a class which implements CustomViewBuilder:<br>
-(Note: This *must* be a class on its own. Don't anonymously implement this)
 
 ```java
 public class CustomViewBuilderImpl implements Slide.CustomViewBuilder {
@@ -259,8 +258,8 @@ Detailed Javadoc can be found [here](https://jitpack.io/com/github/rubengees/int
 
 A guide for contribution can be found [here](.github/CONTRIBUTING.md).
 
-- @Akeshihiro for proper licencing and a small `Gradle` related adjustment.
-- @cafedeaqua for a small code improvement
+- [@Akeshihiro](https://github.com/Akeshihiro) for proper licencing and a small `Gradle` related adjustment.
+- [@cafedeaqua](https://github.com/cafedeaqua) for a small code improvement
 
 ### Acknowledgments
 
