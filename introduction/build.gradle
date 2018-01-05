@@ -1,3 +1,5 @@
+import org.gradle.internal.jvm.Jvm
+
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 
@@ -32,10 +34,19 @@ dependencies {
 
 task javadoc(type: Javadoc) {
     failOnError false
-    options.memberLevel = JavadocMemberLevel.PUBLIC
+
     source = android.sourceSets.main.java.sourceFiles
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    classpath += configurations.compile
+    classpath = files(android.bootClasspath)
+
+    android.libraryVariants.all { variant ->
+        classpath += variant.javaCompiler.classpath
+    }
+
+    options.memberLevel = JavadocMemberLevel.PUBLIC
+    options.links("http://docs.oracle.com/javase/${Jvm.current().javaVersion.majorVersion ?: '7'}/docs/api/")
+    options.linksOffline("http://d.android.com/reference/", "${android.getSdkDirectory()}/docs/reference")
+
+    exclude '**/R.java'
 }
 
 task sourceJar(type: Jar) {
@@ -44,6 +55,10 @@ task sourceJar(type: Jar) {
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
     from javadoc.getDestinationDir()
+}
+
+afterEvaluate {
+    generateReleaseBuildConfig.enabled = false
 }
 
 publishing {
@@ -60,9 +75,37 @@ publishing {
             }
 
             pom.withXml {
+                asNode().children().last() + {
+                    resolveStrategy = DELEGATE_FIRST
+
+                    name 'Introduction'
+                    description 'An Android library to show an intro to your users.'
+                    url 'https://github.com/rubengees/introduction'
+
+                    scm {
+                        url 'https://github.com/rubengees/introduction'
+                        connection 'scm:git:https://github.com/rubengees/introduction'
+                        developerConnection 'scm:git:git@github.com/rubengees/introduction'
+                        tag 'HEAD'
+                    }
+
+                    issueManagement {
+                        system 'GitHub Issues'
+                        url 'https://github.com/rubengees/introduction/issues'
+                    }
+
+                    licenses {
+                        license {
+                            name 'MIT'
+                            url 'https://opensource.org/licenses/MIT'
+                            distribution 'repo'
+                        }
+                    }
+                }
+
                 def dependenciesNode = asNode().appendNode('dependencies')
 
-                configurations.compile.allDependencies.each {
+                configurations.api.allDependencies.each {
                     if (it.group != null && (it.name != null || it.name == "unspecified") && it.version != null) {
                         def dependencyNode = dependenciesNode.appendNode('dependency')
 

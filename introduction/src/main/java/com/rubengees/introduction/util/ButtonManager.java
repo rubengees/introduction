@@ -27,7 +27,9 @@ public class ButtonManager implements ViewPagerProcessor {
      * @param previous           The Button to navigate one slide back.
      * @param next               The Button to navigate one slide forth. Also used to show the done icon, if the
      *                           current Slide is the last Slide.
+     * @param skip               The Button to skip the introduction.
      * @param showPreviousButton If the Button to navigate back should not be shown, pass false.
+     * @param showSkipButton     If the Button for skipping should not be shown, pass false.
      * @param slideAmount        The amount of Slides.
      */
     public ButtonManager(@NonNull AppCompatImageButton previous, @NonNull AppCompatImageButton next,
