@@ -1,4 +1,4 @@
-# Introduction [![Download](https://img.shields.io/github/release/rubengees/introduction.svg?label=JitPack)](https://jitpack.io/#rubengees/introduction/) ![API](https://img.shields.io/badge/API-9%2B-blue.svg) [![CircleCI](https://circleci.com/gh/rubengees/introduction.svg?style=shield)](https://circleci.com/gh/rubengees/introduction)
+# Introduction [![Download](https://img.shields.io/github/release/rubengees/introduction.svg?label=JitPack)](https://jitpack.io/#rubengees/introduction/) ![API](https://img.shields.io/badge/API-14%2B-blue.svg) [![CircleCI](https://circleci.com/gh/rubengees/introduction.svg?style=shield)](https://circleci.com/gh/rubengees/introduction)
 
 Show a beautiful Intro to your users with ease.
 
