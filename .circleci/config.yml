@@ -18,7 +18,7 @@ jobs:
                    echo "84831b9409646a918e30573bab4c9c91346d8abd" > $ANDROID_HOME/licenses/android-sdk-preview-license
       - run:
           name: Run Build
-          command: ./gradlew build -Dorg.gradle.parallel=false -Dorg.gradle.daemon=false--max-workers 1 --console=plain
+          command: ./gradlew build -Dorg.gradle.parallel=false -Dorg.gradle.daemon=false --max-workers 1 --console=plain
       - store_artifacts:
           path: introduction/build/reports
           destination: reports/introduction
