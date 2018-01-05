@@ -65,8 +65,8 @@ private List<Slide> generateSlides() {
 
     result.add(new Slide()
             .withTitle("Some title")
-            .withDescription("Some description").
-            withColorResource(R.color.green)
+            .withDescription("Some description")
+            .withColorResource(R.color.green)
             .withImage(R.drawable.myImage)
     );
 
