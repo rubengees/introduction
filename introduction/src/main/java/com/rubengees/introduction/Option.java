@@ -17,7 +17,6 @@ import com.rubengees.introduction.exception.IntroductionConfigurationException;
 public class Option implements Parcelable {
 
     public static final Parcelable.Creator<Option> CREATOR = new Parcelable.Creator<Option>() {
-
         @Override
         public Option createFromParcel(Parcel source) {
             return new Option(source);

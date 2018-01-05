@@ -24,7 +24,6 @@ import com.rubengees.introduction.interfaces.CustomViewBuilder;
 public class Slide implements Parcelable {
 
     public static final Creator<Slide> CREATOR = new Creator<Slide>() {
-
         @Override
         public Slide createFromParcel(Parcel source) {
             return new Slide(source);
@@ -102,25 +101,6 @@ public class Slide implements Parcelable {
     }
 
     /**
-     * Sets the title resource for this Slide.
-     * If a title was given before, it will be overridden.
-     *
-     * @param titleResource The title resource.
-     * @return The current instance.
-     * @deprecated Use {@link #withTitle(int)} instead.
-     */
-    @SuppressWarnings("unused")
-    @Deprecated
-    @NonNull
-    public Slide withTitleResource(@StringRes int titleResource) {
-        this.titleResource = titleResource;
-        this.title = null;
-        this.customViewBuilder = null;
-
-        return this;
-    }
-
-    /**
      * Sets the description of this slide.
      * If a description resource was given before, it will be overridden.
      *
@@ -154,26 +134,6 @@ public class Slide implements Parcelable {
         return this;
     }
 
-    /**
-     * Sets the description resource of this slide.
-     * If a description was given before, it will be overridden.
-     *
-     * @param descriptionResource The description resource.
-     * @return The current instance.
-     * @deprecated Use {@link #withDescription(int)} instead.
-     */
-    @SuppressWarnings("unused")
-    @Deprecated
-    @NonNull
-    public Slide withDescriptionResource(@StringRes int descriptionResource) {
-        this.descriptionResource = descriptionResource;
-        this.description = null;
-        this.option = null;
-        this.customViewBuilder = null;
-
-        return this;
-    }
-
     @NonNull
     public Slide withTitleSize(@Nullable Float size) {
         this.titleSize = size;
@@ -196,23 +156,6 @@ public class Slide implements Parcelable {
      */
     @NonNull
     public Slide withImage(@DrawableRes int imageResource) {
-        this.imageResource = imageResource;
-        this.customViewBuilder = null;
-
-        return this;
-    }
-
-    /**
-     * Sets the image resource of this slide.
-     *
-     * @param imageResource The image resource.
-     * @return The current instance.
-     * @deprecated Use {@link #withImage(int)} instead.
-     */
-    @SuppressWarnings("unused")
-    @Deprecated
-    @NonNull
-    public Slide withImageResource(@DrawableRes int imageResource) {
         this.imageResource = imageResource;
         this.customViewBuilder = null;
 
